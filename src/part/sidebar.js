@@ -11,16 +11,16 @@ function Sidebar({ isOpen }) {
   return (
     <>
       <div
-        className={`fixed inset-y-0 left-0 w-28 sm:w-64 h-screen bg-blue-100 transition-transform duration-300 ease-in-out transform ${
+        className={`fixed inset-y-0 left-0 w-28 sm:w-64 h-screen bg-glasses backdrop-blur-12 transition-transform duration-300 ease-in-out transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{ zIndex: 10, marginTop: "42px" }}
       >
-        <div class="flex flex-col items-start w-full h-full overflow-hidden text-blue-500 bg-glasses backdrop-blur-12 rounded">
+        <div class="flex flex-col items-start w-full h-full overflow-hidden text-blue-500 rounded">
           <div class="flex flex-col items-center w-full mt-3  border-gray-300">
             <a
               class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-              href="#"
+              
             >
               <svg
                 class="w-3 h-3 stroke-current"
@@ -36,12 +36,12 @@ function Sidebar({ isOpen }) {
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
               </svg>
-              <span class="ml-2 text-sm font-medium text-gray-700">Dasboard</span>
+              <span class="ml-2 text-sm font-medium text-gray-700">Home</span>
             </a>
 
             <a
               class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-              href="#"
+              
             >
               <svg
                 class="w-3 h-3 stroke-current"
@@ -57,12 +57,12 @@ function Sidebar({ isOpen }) {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-              <span class="ml-2 text-sm font-medium text-gray-700">Search</span>
+              <span class="ml-2 text-sm font-medium text-gray-700">MyTask</span>
             </a>
 
             <a
               class="flex items-center w-full h-8 px-3 mt-1 bg-gray-300 rounded"
-              href="#"
+              
             >
               <svg
                 class="w-3 h-3 stroke-current"
@@ -78,34 +78,15 @@ function Sidebar({ isOpen }) {
                   d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <span class="ml-2 text-sm font-medium text-gray-700">Insights</span>
+              <span class="ml-2 text-sm font-medium text-gray-700">Inbox</span>
             </a>
 
-            <a
-              class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-              href="#"
-            >
-              <svg
-                class="w-3 h-3 stroke-current"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
-                />
-              </svg>
-              <span class="ml-2 text-sm font-medium text-gray-700">Docs</span>
-            </a>
+
           </div>
           <div class="flex flex-col items-center w-full mt-1 border-t border-gray-300">
             <a
               class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-              href="#"
+              
             >
               <svg
                 class="w-3 h-3 stroke-current"
@@ -125,7 +106,7 @@ function Sidebar({ isOpen }) {
             </a>
             <a
               class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-              href="#"
+              
             >
               <svg
                 class="w-3 h-3 stroke-current"
@@ -145,7 +126,7 @@ function Sidebar({ isOpen }) {
             </a>
             <a
               class="relative flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-              href="#"
+              
             >
               <svg
                 class="w-3 h-3 stroke-current"
@@ -207,14 +188,14 @@ function Sidebar({ isOpen }) {
                 {/* Dropdown content */}
                 <a
                   className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-                  href="#"
+                  
                 >
                   {/* ...dropdown item icon... */}
                   <span className="ml-2 text-sm font-medium text-gray-700">Product 1</span>
                 </a>
                 <a
                   className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-                  href="#"
+                  
                 >
                   {/* ...dropdown item icon... */}
                   <span className="ml-2 text-sm font-medium text-gray-700">Product 2</span>
@@ -225,7 +206,7 @@ function Sidebar({ isOpen }) {
           </div>
           <a
             class="flex items-center justify-center w-full h-16 mt-auto mb-10 bg-gray-200 hover:bg-gray-300"
-            href="#"
+            
           >
             <svg
               class="w-3 h-3 stroke-current"

@@ -1,12 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
+import { FaPlus } from "react-icons/fa";
+
 import TaskList from "../components/taskList";
 import TaskCalender from "../components/taskCalender";
 import TaskBoard from "../components/taskBoard";
 
 const MyTask = () => {
-  const [activeTab, setActiveTab] = useState("notification");
+  const [activeTab, setActiveTab] = useState("List");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -40,42 +42,42 @@ const MyTask = () => {
                 <a
                   href="#"
                   className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
-                    activeTab === "activity"
+                    activeTab === "List"
                       ? "text-blue-600 border-blue-600"
                       : ""
                   }`}
-                  onClick={() => handleTabClick("activity")}
+                  onClick={() => handleTabClick("List")}
                 >
-                  Activity
+                  List
                 </a>
               </li>
               <li className="me-2">
                 <a
                   href="#"
                   className={`inline-block px-3  py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
-                    activeTab === "notification"
+                    activeTab === "Calender"
                       ? "text-blue-600 border-blue-600"
                       : ""
                   }`}
-                  onClick={() => handleTabClick("notification")}
+                  onClick={() => handleTabClick("Calender")}
                   aria-current={
-                    activeTab === "notification" ? "page" : undefined
+                    activeTab === "Calender" 
                   }
                 >
-                  Notification
+                  Calendar
                 </a>
               </li>
               <li className="me-2">
                 <a
                   href="#"
                   className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
-                    activeTab === "messages"
+                    activeTab === "Board"
                       ? "text-blue-600 border-blue-600"
                       : ""
                   }`}
-                  onClick={() => handleTabClick("messages")}
+                  onClick={() => handleTabClick("Board")}
                 >
-                  Messages
+                  Board
                 </a>
               </li>
             </ul>
@@ -85,16 +87,21 @@ const MyTask = () => {
 
       {/* Body content */}
       <div>
-        <div className="flex items-center m-4">
+        <div className="flex items-center justify-end m-4">
           <button
             type="button"
-            className="px-3 py-0 mr-3 h-8 text-white border-1 bg-blue-500 border-blue-600 rounded-lg"
+            className="px-3 py-0 mr-3 h-8 text-white border-1 bg-blue-500 border-blue-600 rounded-lg hover:bg-blue-600 flex items-center"
           >
-            Create Task
+            <FaPlus className="w-3 h-3" />
+            <div className="ml-2">Create Task</div>
+            
           </button>
         </div>
 
-        <TaskList />
+        
+        {activeTab === "List" && <TaskList />}
+        {activeTab === "Calender" && <TaskCalender />}
+        {activeTab === "Board" && <TaskBoard />}
       </div>
     </div>
   );

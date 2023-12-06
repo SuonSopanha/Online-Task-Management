@@ -17,7 +17,7 @@ const Inbox = () => {
           <ul className="flex flex-wrap -mb-px">
             <li className="me-2">
               <a
-                href="#"
+                
                 className={`inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
                   activeTab === "activity"
                     ? "text-blue-600 border-blue-600"
@@ -30,7 +30,7 @@ const Inbox = () => {
             </li>
             <li className="me-2">
               <a
-                href="#"
+                
                 className={`inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
                   activeTab === "notification"
                     ? "text-blue-600 border-blue-600"
@@ -44,7 +44,7 @@ const Inbox = () => {
             </li>
             <li className="me-2">
               <a
-                href="#"
+                
                 className={`inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
                   activeTab === "messages"
                     ? "text-blue-600 border-blue-600"
@@ -74,7 +74,7 @@ const Inbox = () => {
             <div>
               <a
                 class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-                href="#"
+                
               >
                 <svg
                   class="w-3 h-3 stroke-current"
@@ -108,7 +108,7 @@ const Inbox = () => {
             <div>
               <a
                 class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-                href="#"
+                
               >
                 <svg
                   class="w-3 h-3 stroke-current"
@@ -142,7 +142,7 @@ const Inbox = () => {
             <div>
               <a
                 class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-                href="#"
+                
               >
                 <svg
                   class="w-3 h-3 stroke-current"
@@ -176,7 +176,7 @@ const Inbox = () => {
             <div>
               <a
                 class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-                href="#"
+                
               >
                 <svg
                   class="w-3 h-3 stroke-current"
