@@ -9,6 +9,8 @@ import {
   eachDayOfInterval,
 } from "date-fns";
 
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 const TaskCalender = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
@@ -27,35 +29,39 @@ const TaskCalender = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10">
-      <div className="flex justify-between items-center mb-4">
+    <div className="container mx-auto mt-2">
+      <div className="flex justify-start items-center mb-4 ml-4 space-x-3">
         <button
           onClick={prevMonth}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="flex items-center px-1 py-1 bg-blue-500 text-white rounded"
         >
-          Previous Month
+          <FaChevronLeft/>
         </button>
-        <h2 className="text-lg font-semibold">
-          {format(currentMonth, "MMMM yyyy")}
-        </h2>
+        
         <button
           onClick={nextMonth}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="flex items-center px-1 py-1 bg-blue-500 text-white rounded"
         >
-          Next Month
+          <FaChevronRight/>
         </button>
+        <h2 className="text-sm font-semibold text-gray-500">
+          {format(currentMonth, "MMMM yyyy")}
+        </h2>
       </div>
       <div className="grid grid-cols-7">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-          <div key={day} className="text-center font-semibold mb-2">
+          <div key={day} className="text-center text-sm text-gray-500 font-semibold mb-2">
             {day}
           </div>
         ))}
         {getDaysInMonth().map((date) => (
-          <div key={date} className="text-center border w-42 h-32">
+          <div key={date} className="text-center border w-42 h-32 w-5/7 sm:w-1/7 overflow-hidden">
             <div className="flex flex-col items-start p-2">
               <span className="text-sm font-semibold">{format(date, "d")}</span>
-              {/* Additional content or styling as needed */}
+              <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                  Acceptable
+              </span>
+              
             </div>
           </div>
         ))}

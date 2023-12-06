@@ -14,26 +14,26 @@ const Main = () => {
   };
 
   return (
-    <div className="relative bg-blue-100">
+    <div className="relative bg-gradient-to-r from-[#65A0FD] via-[#E8CCCC] to-[#FFA9F1B5] ">
       {/* Header */}
       <Navbar toggleSidebar={toggleSidebar} isOpen={isOpen} />
 
       {/* Body content */}
-      <div className="flex bg-blue-100">
+      <div className="flex bg-gradient-to-r from-[#65A0FD] via-[#E8CCCC] to-[#FFA9F1B5] ">
         {/* Sidebar */}
         <Sidebar isOpen={isOpen} />
 
         {/* Main content */}
         <div
-          className={`w-full transition-all duration-300 ease-in-out mt-[82px] ${
-            isOpen ? " pl-40 md:pl-72 pr-4" : "pr-4"
+          className={`w-full h-full transition-all duration-300 ease-in-out mt-[82px] ${
+            isOpen ? " pl-32 md:pl-72 sm:pl-4 pr-4" : "pl-4"
           }`}
         >
           {/* Your page content goes here */}
 
           {/*<Inbox /> */}
 
-          <HomeTab/>
+          <MyTask/>
 
         </div>
       </div>
@@ -42,3 +42,6 @@ const Main = () => {
 };
 
 export default Main;
+
+
+
