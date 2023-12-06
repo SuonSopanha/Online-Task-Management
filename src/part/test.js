@@ -3,6 +3,7 @@ import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import Inbox from "../pages/inbox";
 import MyTask from "../pages/myTask";
+import HomeTab from "../components/homeTab";
 
 
 const Main = () => {
@@ -32,7 +33,7 @@ const Main = () => {
 
           {/*<Inbox /> */}
 
-          <MyTask />
+          <HomeTab/>
 
         </div>
       </div>
