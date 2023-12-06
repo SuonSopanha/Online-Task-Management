@@ -33,7 +33,7 @@ const Main = () => {
 
           {/*<Inbox /> */}
 
-          <MyTask/>
+          <HomeTab />
 
         </div>
       </div>
