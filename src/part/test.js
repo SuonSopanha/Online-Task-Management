@@ -8,20 +8,25 @@ import HomeTab from "../components/homeTab";
 
 const Main = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [tab, setTab] = useState("HomeTab")
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  const setActiveTab = (tab) => {
+      setTab(tab);
+  }
+
   return (
     <div className="relative bg-gradient-to-r from-[#65A0FD] via-[#E8CCCC] to-[#FFA9F1B5] ">
       {/* Header */}
-      <Navbar toggleSidebar={toggleSidebar} isOpen={isOpen} />
+      <Navbar toggleSidebar={toggleSidebar} />
 
       {/* Body content */}
       <div className="flex bg-gradient-to-r from-[#65A0FD] via-[#E8CCCC] to-[#FFA9F1B5] ">
         {/* Sidebar */}
-        <Sidebar isOpen={isOpen} />
+        <Sidebar isOpen={isOpen} TabNavigate={setActiveTab}  />
 
         {/* Main content */}
         <div
@@ -32,8 +37,12 @@ const Main = () => {
           {/* Your page content goes here */}
 
           {/*<Inbox /> */}
+          
+          
+          {tab === "HomeTab" && <HomeTab/>}
+          {tab === "Inbox" && <Inbox/>}
+          {tab === "MyTask" && <MyTask/>}
 
-          <HomeTab />
 
         </div>
       </div>
