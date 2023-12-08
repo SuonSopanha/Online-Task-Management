@@ -6,6 +6,7 @@ import { FaPlus } from "react-icons/fa";
 import TaskList from "../components/taskList";
 import TaskCalender from "../components/taskCalender";
 import TaskBoard from "../components/taskBoard";
+import Dropdown from "../components/dropDown";
 
 const MyTask = () => {
   const [activeTab, setActiveTab] = useState("List");
@@ -87,10 +88,16 @@ const MyTask = () => {
 
       {/* Body content */}
       <div>
-        <div className="flex items-center justify-end m-4">
+        <div className="flex items-center justify-between m-4">
+          
+          <div className="flex items-center space-x-2">
+            <Dropdown parent={"Filter"} children={["Today", "This Week", "This Month", "Default"]}/>
+            <Dropdown parent={"Sort By"} children={["Name", "Date", "Priority", "Status", "Assignee","Default"]}/>
+          </div>
+                  
           <button
             type="button"
-            className="px-3 py-0 mr-3 h-8 text-white border-1 bg-blue-500 border-blue-600 rounded-lg hover:bg-blue-600 flex items-center"
+            className="px-3 py-2 mr-3 gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
           >
             <FaPlus className="w-3 h-3" />
             <div className="ml-2">Create Task</div>

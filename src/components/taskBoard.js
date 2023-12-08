@@ -201,7 +201,7 @@ const TaskBoard = () => {
           </div>
         </div>
 
-        <div className="w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
+        <div className="w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3"> 
           <h2 className="text-lg font-semibold mb-4">Done</h2>
           <div className="flex flex-col space-y-2">
             {tasks
@@ -249,7 +249,9 @@ const TaskBoard = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.dueDate}</div>
+                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.dueDate} </div>
+
+
                   </div>
                 </div>
               ))}

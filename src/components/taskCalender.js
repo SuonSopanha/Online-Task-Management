@@ -33,14 +33,14 @@ const TaskCalender = () => {
       <div className="flex justify-start items-center mb-4 ml-4 space-x-3">
         <button
           onClick={prevMonth}
-          className="flex items-center px-1 py-1 bg-blue-500 text-white rounded"
+          className="flex items-center px-1 py-1 bg-blue-500 bg-opacity-80 text-white rounded"
         >
           <FaChevronLeft/>
         </button>
         
         <button
           onClick={nextMonth}
-          className="flex items-center px-1 py-1 bg-blue-500 text-white rounded"
+          className="flex items-center px-1 py-1 bg-blue-500 bg-opacity-80 text-white rounded"
         >
           <FaChevronRight/>
         </button>
