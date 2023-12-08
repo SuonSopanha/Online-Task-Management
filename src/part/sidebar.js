@@ -1,7 +1,17 @@
 import React from "react";
 import { useState } from "react";
 
-import { FaInbox , FaClipboardList , FaHome, FaChartBar, FaProjectDiagram,FaUser,FaUsers, FaChartLine, FaChartPie, FaChartArea} from "react-icons/fa";
+import {
+  FaInbox,
+  FaClipboardList,
+  FaHome,
+  FaChartBar,
+  FaProjectDiagram,
+  FaUser,
+  FaUsers,
+  FaChartPie,
+  FaChartArea,
+} from "react-icons/fa";
 
 function Sidebar({ isOpen, TabNavigate }) {
   const [isOpendrop, setIsOpendrop] = useState(false);
@@ -99,7 +109,7 @@ function Sidebar({ isOpen, TabNavigate }) {
                   </span>
                 </a>
                 <a className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm">
-                <FaChartPie className="w-3 h-3 stroke-current text-blue-900" />
+                  <FaChartPie className="w-3 h-3 stroke-current text-blue-900" />
                   <span className="ml-2 text-sm font-medium text-gray-700">
                     Dashboard
                   </span>
@@ -158,7 +168,6 @@ function Sidebar({ isOpen, TabNavigate }) {
               onClick={toggleDropdownTeam}
             >
               <div className="flex items-center">
-                
                 <FaUsers className="w-3 h-3 stroke-current" />
                 <span className="ml-2 text-sm font-medium text-gray-700">
                   Team
