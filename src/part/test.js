@@ -4,6 +4,8 @@ import Sidebar from "./sidebar";
 import Inbox from "../pages/inbox";
 import MyTask from "../pages/myTask";
 import HomeTab from "../components/homeTab";
+import ProjectList from "../components/projectList";
+import TeamOverview from "../components/teamOverview";
 
 
 const Main = () => {
@@ -19,7 +21,7 @@ const Main = () => {
   }
 
   return (
-    <div className="relative bg-gradient-to-r from-[#65A0FD] via-[#E8CCCC] to-[#FFA9F1B5] ">
+    <div className="relative  ">
       {/* Header */}
       <Navbar toggleSidebar={toggleSidebar} />
 
