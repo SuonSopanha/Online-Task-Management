@@ -6,6 +6,7 @@ import MyTask from "../pages/myTask";
 import HomeTab from "../components/homeTab";
 import ProjectList from "../components/projectList";
 import TeamOverview from "../components/teamOverview";
+import TeamMessage from "../pages/teamMessage";
 
 
 const Main = () => {
@@ -41,7 +42,7 @@ const Main = () => {
           {/*<Inbox /> */}
           
           
-          {tab === "HomeTab" && <HomeTab/>}
+          {tab === "HomeTab" && <TeamMessage/>}
           {tab === "Inbox" && <Inbox/>}
           {tab === "MyTask" && <MyTask/>}
 
