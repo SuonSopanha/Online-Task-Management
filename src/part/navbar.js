@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Navbar = ({ toggleSidebar , isOpen }) => {
+const Navbar = ({ toggleSidebar}) => {
   const handleClick = () => {
     toggleSidebar(true);
   };
