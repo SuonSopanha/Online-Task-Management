@@ -1,17 +1,16 @@
 import React from "react";
 
-import InputBox from "../components/inputBox";
+import ChatBox from "../components/chatBox";
+import TeamHeader from "../components/teamHeader";
 
 const TeamMessage = () => {
-
-    return (
-        <>
-                <InputBox />
-        </>
-    )
-
-}
+  return (
+    <>
+        <TeamHeader />
+ 
+      
+    </>
+  );
+};
 
 export default TeamMessage;
-
-

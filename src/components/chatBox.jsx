@@ -2,14 +2,14 @@ import React from "react";
 
 import { FaPlus } from "react-icons/fa";
 
-const InputBox = () => {
+const ChatBox = () => {
   return (
-    <div className="flex flex-col justify-center item-center mt-[-30px]">
+    <div className="flex flex-col justify-center item-center mt-[-16px]">
       <div class="flex justify-center h-full antialiased text-gray-800">
-        <div class="flex flex-row h-[500px] w-[680px] overflow-x-hidden">
+        <div class="flex flex-row h-[460px] w-[680px] overflow-x-hidden">
           <div class="flex flex-col flex-auto h-full p-6">
-            <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
-              <div className="sticky top-0 bg-gray-100 pb-2 border-b border-gray-400 z-10">
+            <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-glasses backdrop-blur-12 h-full px-3 pt-3 pb-1">
+              <div className="sticky top-0 pb-2 border-b border-gray-400 z-10">
                 <h1 className="text-lg font-bold">Chart Header</h1>
               </div>
               <div class="flex flex-col h-full overflow-x-auto mb-4">
@@ -95,7 +95,7 @@ const InputBox = () => {
                   </div>
                 </div>
               </div>
-              <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+              <div class="flex flex-row items-center h-16 rounded-xl bg-glasses backdrop-blur-12 w-full px-4">
                 <div>
                   <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
                     <svg
@@ -161,8 +161,8 @@ const InputBox = () => {
                 </div>
               </div>
 
-              <div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
-                <div className="flex flex-row justify-between border-b border-gray-700 w-full items-center">
+              <div class="flex flex-row items-center h-16 rounded-xl px-4 mt-1">
+                <div className="flex flex-row justify-between w-full items-center">
                   <div class="flex items-center text-sm  px-1 pb-2">
                     <button
                       type="button"
@@ -200,4 +200,4 @@ const InputBox = () => {
   );
 };
 
-export default InputBox;
+export default ChatBox;
