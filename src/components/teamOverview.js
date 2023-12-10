@@ -5,7 +5,7 @@ import EditableBox from "./editableBox";
 const TeamOverview = () => {
   return (
     <>
-      <div className="container w-full h-fit flex flex-row space-x-4">
+      <div className="container w-full h-fit flex flex-row space-x-4 mt-3">
         <div className="w-8/12 flex flex-col">
           <div className="w-full h-fit  bg-glasses backdrop-blur-12 px-4 py-2 space-y-5 rounded-xl mb-4">
             <h1 className="text-2xl font-semibold text-gray-700 pt-2">Member</h1>
