@@ -3,7 +3,7 @@ import React from "react";
 import ChatBox from "../components/chatBox";
 import TeamHeader from "../components/teamHeader";
 
-const TeamMessage = () => {
+const TeamPage = () => {
   return (
     <>
         <TeamHeader />
@@ -13,4 +13,4 @@ const TeamMessage = () => {
   );
 };
 
-export default TeamMessage;
+export default TeamPage;

@@ -16,9 +16,6 @@ const TeamDashboard = () => {
   
     return (
     <div className="flex flex-col">
-      <div className="text-2xl bg-glasses backdrop-blur-12 font-semibold p-4 m-2 rounded-lg">
-        MyTask
-      </div>
 
       <div className=" m-1 p-1 rounded">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-2">

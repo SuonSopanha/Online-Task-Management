@@ -102,18 +102,18 @@ function Sidebar({ isOpen, TabNavigate }) {
             {isOpendropInsight && (
               <div className="flex flex-col items-center w-full">
                 {/* Dropdown content */}
-                <a className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm">
+                <button className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTab("Reporting")}>
                   <FaChartArea className="w-3 h-3 stroke-current text-blue-900" />
                   <span className="ml-2 text-sm font-medium text-gray-700">
                     Reporting
                   </span>
-                </a>
-                <a className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm">
+                </button>
+                <button className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTab("Dashboard")}>
                   <FaChartPie className="w-3 h-3 stroke-current text-blue-900" />
                   <span className="ml-2 text-sm font-medium text-gray-700">
                     Dashboard
                   </span>
-                </a>
+                </button>
                 {/* Add more dropdown items as needed */}
               </div>
             )}
@@ -147,18 +147,12 @@ function Sidebar({ isOpen, TabNavigate }) {
             {isOpendropProject && (
               <div className="flex flex-col items-center w-full">
                 {/* Dropdown content */}
-                <a className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm">
-                  {/* ...dropdown item icon... */}
+                <button className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTab("Project")}>
+                  <FaClipboardList className="w-3 h-3 stroke-current text-blue-900" />
                   <span className="ml-2 text-sm font-medium text-gray-700">
-                    Product 1
+                    Project 1
                   </span>
-                </a>
-                <a className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm">
-                  {/* ...dropdown item icon... */}
-                  <span className="ml-2 text-sm font-medium text-gray-700">
-                    Product 2
-                  </span>
-                </a>
+                </button>
                 {/* Add more dropdown items as needed */}
               </div>
             )}
@@ -193,18 +187,12 @@ function Sidebar({ isOpen, TabNavigate }) {
             {isOpendropTeam && (
               <div className="flex flex-col items-center w-full">
                 {/* Dropdown content */}
-                <a className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm">
-                  {/* ...dropdown item icon... */}
+                <button className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTab("Team")}>
+                  <FaUsers className="w-3 h-3 stroke-current text-blue-900" />
                   <span className="ml-2 text-sm font-medium text-gray-700">
                     Product 1
                   </span>
-                </a>
-                <a className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm">
-                  {/* ...dropdown item icon... */}
-                  <span className="ml-2 text-sm font-medium text-gray-700">
-                    Product 2
-                  </span>
-                </a>
+                </button>
                 {/* Add more dropdown items as needed */}
               </div>
             )}
