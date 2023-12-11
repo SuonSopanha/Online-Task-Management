@@ -6,7 +6,11 @@ import MyTask from "../pages/myTask";
 import HomeTab from "../components/homeTab";
 import ProjectList from "../components/projectList";
 import TeamOverview from "../components/teamOverview";
-import TeamMessage from "../pages/teamMessage";
+import TeamPage from "../pages/teamPage";
+import Project from "../pages/project";
+import TeamHeader from "../components/teamHeader";
+import TeamDashboard from "../components/teamDashboard";
+import MyDashboard from "../components/myDashboard";
 
 
 const Main = () => {
@@ -42,9 +46,12 @@ const Main = () => {
           {/*<Inbox /> */}
           
           
-          {tab === "HomeTab" && <TeamMessage/>}
+          {tab === "HomeTab" && <TeamPage/>}
           {tab === "Inbox" && <Inbox/>}
           {tab === "MyTask" && <MyTask/>}
+          {tab === "Project" && <Project/>}
+          {tab === "Team" && <TeamHeader/>}
+          {tab == "Dashboard" && <MyDashboard/>}
 
 
         </div>

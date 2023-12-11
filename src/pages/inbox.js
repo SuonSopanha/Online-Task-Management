@@ -8,7 +8,7 @@ const Inbox = () => {
   };
 
   return (
-    <div className="w-full h-fit bg-glasses backdrop-blur-12 rounded-sm">
+    <div className="w-full h-fit bg-glasses backdrop-blur-12 rounded-sm mt-[-30px] pb-4">
       <div>
         <p className="text-2xl font-bold text-gray-500 ml-6 mt-4 pt-2">Inbox</p>
       </div>
@@ -70,40 +70,6 @@ const Inbox = () => {
       {/* Your inbox content goes here */}
       <div class="pt-1 pl-4">
         <ul class="space-y-1">
-          <li class="relative border-b border-gray-500">
-            <div>
-              <a
-                class="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-gray-300"
-                
-              >
-                <svg
-                  class="w-3 h-3 stroke-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  />
-                </svg>
-                <span class="ml-2 text-sm font-medium text-gray-700">
-                  Group
-                </span>
-              </a>
-            </div>
-            <div class="text-sm font-medium text-gray-700 pl-3 py-1" >
-                <p>Panha</p>
-                <p>Group work is going to be hard please do it properly</p>
-            </div>
-
-            <div className="flex justify-end text-xs font-medium text-gray-700 px-3 py-1 ">
-              <p>2 hours ago</p>
-            </div>
-          </li>
           <li class="relative border-b border-gray-500">
             <div>
               <a
