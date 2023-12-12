@@ -11,15 +11,7 @@ const HomeTab = () => {
                 Hello world
                 worllll
             </div>
-            <div>
-                Hello world
-                worllll
-            </div>
-            <div>
-                Hello world
-                worllll
-                Tish is test
-            </div>
+
     
 
             
