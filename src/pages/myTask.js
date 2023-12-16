@@ -92,15 +92,15 @@ const MyTask = () => {
           
           <div className="flex items-center space-x-2">
             <Dropdown parent={"Filter"} children={["Today", "This Week", "This Month", "Default"]}/>
-            <Dropdown parent={"Sort By"} children={["Name", "Date", "Priority", "Status", "Assignee","Default"]}/>
+            <Dropdown parent={"Sort"} children={["Name", "Date", "Priority", "Status", "Assignee","Default"]}/>
           </div>
                   
           <button
             type="button"
-            className="px-3 py-2 mr-3 gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
+            className="px-2 py-2 gap-x-1 md:px-3 md:py-2 md:mr-3 md:gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
           >
             <FaPlus className="w-3 h-3" />
-            <div className="ml-2">Create Task</div>
+            <div className="ml-1 text-sm">Create</div>
             
           </button>
         </div>
