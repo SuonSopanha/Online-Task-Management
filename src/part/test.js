@@ -70,7 +70,7 @@ const Main = () => {
 
           
           <div className="w-full h-full flex justify-center items-center m-8">
-            <SendMessageModal isOpen={isModalOpen} onClose={closeModal} />
+            <TaskModal isOpen={isModalOpen} isClose={closeModal} children={"Homework"}/>
           </div>
             
 

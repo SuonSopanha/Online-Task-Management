@@ -2,12 +2,21 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import { FaCheckCircle, FaClock } from "react-icons/fa";
+import { FaCheckCircle, FaClock, FaSortDown, FaTimesCircle } from "react-icons/fa";
 
 import EditableBox from "./editableBox";
+import DropdownButton from "./dropdownState";
+import CompleteBox from "./modalComponents/completebox";
+import TaskName from "./modalComponents/taskName";
+import TaskAssignee from "./modalComponents/taskAssignee";
 
 const TaskModal = ({ isOpen, isClose, children }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
+  const [taskName, setTaskName] = useState(children);
+  
+  const handleTaskNameChange = (newName) => {
+    setTaskName(newName);
+  };
 
   useEffect(() => {
     setIsModalOpen(isOpen);
@@ -27,35 +36,21 @@ const TaskModal = ({ isOpen, isClose, children }) => {
             <div className="relative flex flex-col w-full bg-blue-300 bg-opacity-75 backdrop-blur-12 border-0 rounded-lg outline-none focus:outline-none">
               {/* Header */}
               <div className="flex items-center justify-between p-2 border-b border-solid border-gray-500 rounded-t">
-                <span class="flex flex-row items-center px-2 py-1 font-semibold leading-tight text-sm sm:text-base text-green-700 bg-green-100 border border-green-900 rounded-xl">
-                  <FaCheckCircle className="mr-2" />
-                  Acceptable
-                </span>
+                <CompleteBox className="ml-2"/>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-gray-600 text-lg leading-none font-semibold items-center"
                   onClick={handleClose}
                 >
-                  x
+                  <FaTimesCircle className="w-6 h-6" />
                 </button>
               </div>
               <div className="flex items-center justify-start p-2 border-b border-solid border-gray-500 rounded-t">
-                <h3 className="pl-4 text-2xl sm:text-3xl font-semibold">{children}</h3>
+                <TaskName name={taskName} onNameChange={handleTaskNameChange} />
               </div>
               {/* Body */}
               <div className="flex flex-row justify-start space-x-5 border-b border-gray-500 p-3 items-cente text-sm sm:text-base">
                 <div className="w-24">Assignee</div>
-                <div className="flex flex-row items-center justify-between space-x-2">
-                  <img
-                    className="w-6 h-6 rounded-full"
-                    src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                  ></img>
-
-                  <span>Oliver Aguilerra</span>
-                </div>
-                <span class="flex flex-row items-center px-1.5 py-0.5 text-sm sm:text-base font-normal leading-tight text-green-700 bg-green-100 border border-green-900 rounded-xl">
-                  <FaCheckCircle className="mr-2" />
-                  Acceptable
-                </span>
+                <TaskAssignee Assignee={null}/>
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">DueDate</div>
@@ -66,18 +61,13 @@ const TaskModal = ({ isOpen, isClose, children }) => {
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">Status</div>
-                <span class="flex flex-row items-center px-1.5 py-0.5 text-sm font-normal leading-tight text-green-700 bg-green-100 border border-green-900 rounded-xl">
-                  <FaCheckCircle className="mr-2" />
-                  Acceptable
-                </span>
+                <DropdownButton></DropdownButton>
+
                 <div className="w-16">Priority</div>
-                <span class="flex flex-row items-center px-1.5 py-0.5 text-sm font-normal leading-tight text-green-700 bg-green-100 border border-green-900 rounded-xl">
-                  <FaCheckCircle className="mr-2" />
-                  Acceptable
-                </span>
+                <DropdownButton></DropdownButton>
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
-                <div className="w-24">Assignee</div>
+                <div className="w-24">Project</div>
                 <div className="flex flex-row items-center justify-between space-x-2">
                   <img
                     className="w-6 h-6 rounded-lg"
