@@ -3,6 +3,7 @@ import Sidebar from "./part/sidebar"
 import Main from "./part/test";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import HomePage from "./pages/HomePage";
 
 
 function App() {
@@ -11,7 +12,6 @@ function App() {
       
       
       <Main/>
- 
     
     </div>
   );
