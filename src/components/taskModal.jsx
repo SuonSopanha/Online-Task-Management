@@ -9,6 +9,8 @@ import DropdownButton from "./dropdownState";
 import CompleteBox from "./modalComponents/completebox";
 import TaskName from "./modalComponents/taskName";
 import TaskAssignee from "./modalComponents/taskAssignee";
+import TaskDueDate from "./modalComponents/taskDueDate";
+import TaskStatus from "./modalComponents/taskStatus";
 
 const TaskModal = ({ isOpen, isClose, children }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
@@ -54,17 +56,10 @@ const TaskModal = ({ isOpen, isClose, children }) => {
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">DueDate</div>
-                <div className="flex flex-row items-center justify-between space-x-2">
-                  <FaClock></FaClock>
-                  <span>December 23</span>
-                </div>
+                <TaskDueDate DueDate={null}/>
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
-                <div className="w-24">Status</div>
-                <DropdownButton></DropdownButton>
-
-                <div className="w-16">Priority</div>
-                <DropdownButton></DropdownButton>
+                  <TaskStatus StatusState={"On Track"} PriorityState={"Medium"}/>
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">Project</div>
