@@ -5,10 +5,12 @@ import EditableBox from "./editableBox";
 const TeamOverview = () => {
   return (
     <>
-      <div className="container w-full h-fit flex flex-row space-x-4 mt-3">
-        <div className="w-8/12 flex flex-col">
+      <div class="container mx-auto flex flex-col lg:flex-row lg:space-x-4 mt-3">
+        <div class="w-full lg:w-8/12 flex flex-col">
           <div className="w-full h-fit  bg-glasses backdrop-blur-12 px-4 py-2 space-y-5 rounded-xl mb-4">
-            <h1 className="text-2xl font-semibold text-gray-700 pt-2">Member</h1>
+            <h1 className="text-2xl font-semibold text-gray-700 pt-2">
+              Member
+            </h1>
 
             <div className="grid gap-10 row-gap-8 mx-auto sm:row-gap-10 lg:max-w-screen-lg sm:grid-cols-2 lg:grid-cols-3 pb-2">
               <div className="flex items-center">
@@ -18,7 +20,9 @@ const TeamOverview = () => {
                   alt="Person"
                 />
                 <div className="flex flex-col justify-center">
-                  <p className="text-sm text-gray-700 font-bold">Oliver Aguilerra</p>
+                  <p className="text-sm text-gray-700 font-bold">
+                    Oliver Aguilerra
+                  </p>
                   <p className="text-xs text-gray-500">Product Manager</p>
                 </div>
               </div>
@@ -29,7 +33,9 @@ const TeamOverview = () => {
                   alt="Person"
                 />
                 <div className="flex flex-col justify-center">
-                  <p className="text-sm text-gray-700 font-bold">Oliver Aguilerra</p>
+                  <p className="text-sm text-gray-700 font-bold">
+                    Oliver Aguilerra
+                  </p>
                   <p className="text-xs text-gray-500">Product Manager</p>
                 </div>
               </div>
@@ -40,7 +46,9 @@ const TeamOverview = () => {
                   alt="Person"
                 />
                 <div className="flex flex-col justify-center">
-                  <p className="text-sm text-gray-700 font-bold">Oliver Aguilerra</p>
+                  <p className="text-sm text-gray-700 font-bold">
+                    Oliver Aguilerra
+                  </p>
                   <p className="text-xs text-gray-500">Product Manager</p>
                 </div>
               </div>
@@ -51,7 +59,9 @@ const TeamOverview = () => {
                   alt="Person"
                 />
                 <div className="flex flex-col justify-center">
-                  <p className="text-sm text-gray-700 font-bold">Oliver Aguilerra</p>
+                  <p className="text-sm text-gray-700 font-bold">
+                    Oliver Aguilerra
+                  </p>
                   <p className="text-xs text-gray-500">Product Manager</p>
                 </div>
               </div>
@@ -62,7 +72,9 @@ const TeamOverview = () => {
                   alt="Person"
                 />
                 <div className="flex flex-col justify-center">
-                  <p className="text-sm text-gray-700 font-bold">Oliver Aguilerra</p>
+                  <p className="text-sm text-gray-700 font-bold">
+                    Oliver Aguilerra
+                  </p>
                   <p className="text-xs text-gray-500">Product Manager</p>
                 </div>
               </div>
@@ -70,7 +82,9 @@ const TeamOverview = () => {
           </div>
 
           <div className="w-full h-fit bg-glasses backdrop-blur-12 px-4 py-2 space-y-5 rounded-xl mb-4">
-            <h1 className="text-2xl font-semibold text-gray-700 pt-2">Project</h1>
+            <h1 className="text-2xl font-semibold text-gray-700 pt-2">
+              Project
+            </h1>
 
             <ul className="flex flex-col space-y-4 ">
               <li>
@@ -208,7 +222,7 @@ const TeamOverview = () => {
           </div>
         </div>
 
-        <div className="w-4/12 flex flex-col">
+        <div class="w-full lg:w-4/12 flex flex-col mt-0 mb-2 lg:mt-0">
           <div className="w-full bg-glasses backdrop-blur-12 p-4 rounded-xl text-gray-700 mb-4">
             <div className="text-2xl font-bold">About Us</div>
 
@@ -228,7 +242,7 @@ const TeamOverview = () => {
             <div>
               <p class="text-xs">How to be cool and Make them good</p>
               <div class="px-2 py-1 text-xs my-1 font-semibold leading-tight w-fit text-green-700 bg-green-100 rounded-lg">
-                    Acceptable
+                Acceptable
               </div>
             </div>
 

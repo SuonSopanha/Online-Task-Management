@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import Inbox from "../pages/inbox";
@@ -11,19 +11,32 @@ import Project from "../pages/project";
 import TeamHeader from "../components/teamHeader";
 import TeamDashboard from "../components/teamDashboard";
 import MyDashboard from "../components/myDashboard";
+import TaskModal from "../components/taskModal";
+import SendMessageModal from "../components/sendMessageModal";
 
+export const modalContext = createContext(null);
 
 const Main = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [tab, setTab] = useState("HomeTab")
+  const [tab, setTab] = useState("HomeTab");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
   const setActiveTab = (tab) => {
-      setTab(tab);
-  }
+    setTab(tab);
+  };
 
   return (
     <div className="relative  ">
@@ -33,7 +46,7 @@ const Main = () => {
       {/* Body content */}
       <div className="flex bg-gradient-to-r from-[#65A0FD] via-[#E8CCCC] to-[#FFA9F1B5] ">
         {/* Sidebar */}
-        <Sidebar isOpen={isOpen} TabNavigate={setActiveTab}  />
+        <Sidebar isOpen={isOpen} TabNavigate={setActiveTab} />
 
         {/* Main content */}
         <div
@@ -44,7 +57,18 @@ const Main = () => {
           {/* Your page content goes here */}
 
           {/*<Inbox /> */}
-          
+
+          <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal}}>
+            {tab === "HomeTab" && <TeamPage />}
+            {tab === "Inbox" && <Inbox />}
+            {tab === "MyTask" && <MyTask />}
+            {tab === "Project" && <Project />}
+            {tab === "Team" && <TeamHeader />}
+            {tab === "Dashboard" && <MyDashboard />}
+            
+          </modalContext.Provider>
+
+
           
           {tab === "HomeTab" && <HomeTab/>}
           {tab === "Inbox" && <Inbox/>}
@@ -53,6 +77,10 @@ const Main = () => {
           {tab === "Team" && <TeamHeader/>}
           {tab == "Dashboard" && <MyDashboard/>}
 
+          <div className="w-full h-full flex justify-center items-center m-8">
+            <TaskModal isOpen={isModalOpen} isClose={closeModal} children={"Homework"}/>
+          </div>
+            
 
         </div>
       </div>
@@ -61,6 +89,3 @@ const Main = () => {
 };
 
 export default Main;
-
-
-
