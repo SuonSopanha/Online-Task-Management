@@ -46,7 +46,7 @@ const Main = () => {
           {/*<Inbox /> */}
           
           
-          {tab === "HomeTab" && <TeamPage/>}
+          {tab === "HomeTab" && <HomeTab/>}
           {tab === "Inbox" && <Inbox/>}
           {tab === "MyTask" && <MyTask/>}
           {tab === "Project" && <Project/>}
