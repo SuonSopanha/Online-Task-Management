@@ -35,24 +35,6 @@ const TaskAssignee = ({ Assignee }) => {
             <span>{assigneeObj.name}</span>
           </button>
 
-          {showDropdown && (
-            <div className="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-md">
-              {/* Render dropdown options here */}
-              {/* Example: */}
-              <div
-                className="py-2 px-4 cursor-pointer hover:bg-gray-200"
-                onClick={() =>
-                  handleSelectAssignee({
-                    name: "John Doe",
-                    imageUrl: "URL_TO_IMAGE",
-                  })
-                }
-              >
-                John Doe
-              </div>
-              {/* Add more options as needed */}
-            </div>
-          )}
         </div>
       );
     } else {
@@ -68,7 +50,7 @@ const TaskAssignee = ({ Assignee }) => {
           <span>Assignee</span>
 
           {showDropdown && (
-            <div className="absolute mt-2 bg-white border border-gray-300 rounded-lg shadow-md">
+            <div className="absolute mt-2 z-10 bg-white border border-gray-300 rounded-lg shadow-md">
               {/* Render dropdown options here */}
               {/* Example: */}
               <div

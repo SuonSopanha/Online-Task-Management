@@ -59,7 +59,7 @@ const Main = () => {
           {/*<Inbox /> */}
 
           <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal}}>
-            {tab === "HomeTab" && <TeamPage />}
+            {tab === "HomeTab" && <HomeTab />}
             {tab === "Inbox" && <Inbox />}
             {tab === "MyTask" && <MyTask />}
             {tab === "Project" && <Project />}
