@@ -69,14 +69,6 @@ const Main = () => {
           </modalContext.Provider>
 
 
-          
-          {tab === "HomeTab" && <HomeTab/>}
-          {tab === "Inbox" && <Inbox/>}
-          {tab === "MyTask" && <MyTask/>}
-          {tab === "Project" && <Project/>}
-          {tab === "Team" && <TeamHeader/>}
-          {tab == "Dashboard" && <MyDashboard/>}
-
           <div className="w-full h-full flex justify-center items-center m-8">
             <TaskModal isOpen={isModalOpen} isClose={closeModal} children={"Homework"}/>
           </div>

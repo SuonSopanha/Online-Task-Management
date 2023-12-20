@@ -1,13 +1,15 @@
 import React from "react";
 import { useState } from "react";
 
+import { FaTimesCircle } from "react-icons/fa";
+
 const TaskProjectbox = ({ Project }) => {
   const [projectObj, setProjectObj] = useState(Project);
   const [isDropdown, setIsDropdwon] = useState(false);
 
   const handleSelectProject = (selectedProject) => {
     setIsDropdwon(false);
-    setProjectObj(Project);
+    setProjectObj(selectedProject);
   };
 
   const handleRemoveProject = () => {
@@ -23,12 +25,12 @@ const TaskProjectbox = ({ Project }) => {
             src="https://source.unsplash.com/ILip77SbmOE/900x900"
           ></img>
 
-          <span>Oliver Aguilerra</span>
+          <span>{projectObj.name}</span>
         </div>
       );
     } else {
       return (
-        <button className="flex flex-row items-center justify-between space-x-2">
+        <button className="flex flex-row items-center justify-between space-x-2" onClick={() => setIsDropdwon(!isDropdown)}>
           <img
             className="w-6 h-6 rounded-lg"
             src="https://source.unsplash.com/ILip77SbmOE/900x900"
@@ -89,7 +91,7 @@ const TaskProjectbox = ({ Project }) => {
           className="remove-assignee flex flex-row items-center text-sm sm:text-base font-normal leading-tight text-gray-700"
           onClick={handleRemoveProject}
         >
-          <FaTimesCircle className="" />
+          <FaTimesCircle className="ml-2" />
         </button>
       )}
     </div>

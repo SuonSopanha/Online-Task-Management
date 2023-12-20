@@ -11,6 +11,7 @@ import TaskName from "./modalComponents/taskName";
 import TaskAssignee from "./modalComponents/taskAssignee";
 import TaskDueDate from "./modalComponents/taskDueDate";
 import TaskStatus from "./modalComponents/taskStatus";
+import TaskProjectbox from "./modalComponents/taskProjectbox";
 
 const TaskModal = ({ isOpen, isClose, children }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
@@ -63,14 +64,7 @@ const TaskModal = ({ isOpen, isClose, children }) => {
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">Project</div>
-                <div className="flex flex-row items-center justify-between space-x-2">
-                  <img
-                    className="w-6 h-6 rounded-lg"
-                    src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                  ></img>
-
-                  <span>Oliver Aguilerra</span>
-                </div>
+                <TaskProjectbox Project={null}/>
               </div>
               <div className="flex flex-col justify-start space-y-3 border-b text-sm sm:text-base border-gray-500 p-3 items-start">
                 <div className="w-24">Description</div>

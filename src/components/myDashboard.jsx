@@ -2,12 +2,12 @@ import React from "react";
 
 import { FaCheckCircle, FaClipboard, FaClipboardList } from "react-icons/fa";
 
-import BarChart from "./barChart";
-import BarChartCompare from "./barChartCompare";
-import PieChart from "./pieChart";
-import LineChart from "./lineChart";
-import LineChartCompare from "./lineChartCompare";
-import RadarChart from "./radarChart";
+import BarChart from "./chartComponents/barChart";
+import BarChartCompare from "./chartComponents/barChartCompare";
+import PieChart from "./chartComponents/pieChart";
+import LineChart from "./chartComponents/lineChart";
+import LineChartCompare from "./chartComponents/lineChartCompare";
+import RadarChart from "./chartComponents/radarChart";
 
 const MyDashboard = () => {
 
