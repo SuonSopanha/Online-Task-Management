@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
 
+import { FaCheckCircle, FaMinusCircle } from "react-icons/fa";
 import TaskModal from "./taskModal";
 import SendMessageModal from "./sendMessageModal";
 
@@ -279,6 +280,18 @@ const TaskList = () => {
     },
   ];
 
+  const priorityColor = (priority) =>{
+
+    if(priority === 'high'){
+      return 'red';
+    }else if(priority === 'medium'){
+      return 'yellow';
+    }else if(priority === 'low'){
+      return 'green';
+    }
+
+  }
+
   const { openModal, isModalOpen } = useContext(modalContext);
   return (
     <>
@@ -300,18 +313,10 @@ const TaskList = () => {
                     <td class="px-4 py-2 border">
                       <button onClick={() => openModal()}>
                         <div class="flex justify-center items-center text-sm">
-                          <div class="relative w-6 h-6 mr-3 rounded-full md:block">
-                            <img
-                              class="object-cover w-full h-full rounded-full"
-                              src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                              alt=""
-                              loading="lazy"
-                            />
-                            <div
-                              class="absolute inset-0 rounded-full shadow-inner"
-                              aria-hidden="true"
-                            ></div>
-                          </div>
+                        {task.complete ? <FaCheckCircle className="text-emerald-500 mr-2" /> : <FaMinusCircle className=" text-violet-600 mr-2" />}
+                        
+
+
                           <div className="flex flex-col justify-center items-center">
                             <p class="font-semibold text-black whitespace-nowrap">
                               {task.task_name}
@@ -339,11 +344,13 @@ const TaskList = () => {
                       </div>
                     </td>
                     <td class="px-4 py-2 text-xs border">
-                      <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                      <span class={`px-2 py-1 font-semibold leading-tight text-${priorityColor(task.priority)}-700 rounded-sm bg-${priorityColor(task.priority)}-100`}>
                         {task.priority}
                       </span>
                     </td>
-                    <td class="px-4 py-2 text-sm border">{task.assignee_dates}</td>
+                    <td class="px-4 py-2 text-sm border">
+                      {task.assignee_dates}
+                    </td>
                   </tr>
                 ))}
 
