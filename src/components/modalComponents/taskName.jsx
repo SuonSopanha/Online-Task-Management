@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 const EditableTaskName = ({ initialName, onNameChange }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedName, setEditedName] = useState(initialName);
+  const [editedName, setEditedName] = useState(initialName == undefined ? "Name" : initialName);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -23,6 +23,11 @@ const EditableTaskName = ({ initialName, onNameChange }) => {
     }
   };
 
+  useEffect(() => {
+    // Call onNameChange after the component has re-rendered
+    onNameChange(editedName);
+  }, [initialName]);
+
   return (
     <>
       {isEditing ? (
@@ -30,7 +35,7 @@ const EditableTaskName = ({ initialName, onNameChange }) => {
           <input
             type="text"
             value={editedName}
-            onChange={handleInputChange}
+            onChange={handleInputChange} 
             onBlur={handleSave}
             onKeyDown={handleKeyDown}
             autoFocus
@@ -42,7 +47,7 @@ const EditableTaskName = ({ initialName, onNameChange }) => {
           className="w-full pl-4 text-2xl sm:text-3xl font-semibold cursor-pointer"
           onClick={handleEditClick}
         >
-          {initialName}
+          {editedName}
         </h3>
       )}
     </>
