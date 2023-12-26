@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import { FaTimesCircle } from "react-icons/fa";
 
-const TaskProjectbox = ({ Project }) => {
-  const [projectObj, setProjectObj] = useState(Project);
+const TaskProjectbox = ({ Project,OnChange }) => {
+  const [projectObj, setProjectObj] = useState(Project === undefined ? null : Project);
   const [isDropdown, setIsDropdwon] = useState(false);
 
   const handleSelectProject = (selectedProject) => {
     setIsDropdwon(false);
     setProjectObj(selectedProject);
+    OnChange(selectedProject);
   };
 
   const handleRemoveProject = () => {
     setProjectObj(null);
+    OnChange(null);
   };
+
+
+  useEffect(() => {
+    OnChange(projectObj);
+  }, [Project]);
 
   const renderProject = () => {
     if (projectObj !== null) {

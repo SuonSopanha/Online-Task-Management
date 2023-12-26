@@ -16,7 +16,7 @@ const TaskList = () => {
       description: "Balkan nephropathy",
       work_hour_required: 70,
       status: "Complete",
-      priority: "medium",
+      priority: "Medium",
       assignee_id: "3eeaee38-b78c-4c19-b0a1-b04cae64f84d",
       complete: false,
       assignee_dates: "1/10/2023",
@@ -30,7 +30,7 @@ const TaskList = () => {
         "Legal intervnt w injury by rubr bulet, bystand inj, sequela",
       work_hour_required: 77,
       status: "Working",
-      priority: "high",
+      priority: "High",
       assignee_id: "e652c4a4-1abf-4ec3-9f64-4dd17b18f9b3",
       complete: true,
       assignee_dates: "6/2/2023",
@@ -44,7 +44,7 @@ const TaskList = () => {
         "Unsp open wound of abd wall, periumb rgn w/o penet perit cav",
       work_hour_required: 77,
       status: "On track",
-      priority: "medium",
+      priority: "Medium",
       assignee_id: "621c419e-ee60-4a02-8e25-b8cd8ba00321",
       complete: true,
       assignee_dates: "8/10/2023",
@@ -57,7 +57,7 @@ const TaskList = () => {
       description: "Nondisp commnt fx shaft of humer, r arm, 7thK",
       work_hour_required: 5,
       status: "Pending",
-      priority: "medium",
+      priority: "Medium",
       assignee_id: "04c7a81d-bc20-47b5-861e-c64ff50f0492",
       complete: false,
       assignee_dates: "5/23/2023",
@@ -70,7 +70,7 @@ const TaskList = () => {
       description: "Nondisp oblique fx shaft of humerus, left arm, sequela",
       work_hour_required: 91,
       status: "Off track",
-      priority: "medium",
+      priority: "Medium",
       assignee_id: "804e5683-176f-45ff-8ec2-03ea24d52587",
       complete: true,
       assignee_dates: "11/11/2023",
@@ -84,7 +84,7 @@ const TaskList = () => {
         "Age-rel osteopor w current path fracture, l humerus, sequela",
       work_hour_required: 9,
       status: "Off track",
-      priority: "low",
+      priority: "Low",
       assignee_id: "8bb2cf1d-8b02-423e-839a-4fb73d64f231",
       complete: true,
       assignee_dates: "11/6/2023",
@@ -97,7 +97,7 @@ const TaskList = () => {
       description: "Leptospirosis, unspecified",
       work_hour_required: 88,
       status: "Off track",
-      priority: "low",
+      priority: "Low",
       assignee_id: "989d0a0d-b787-4a4e-a548-95881ae22ccd",
       complete: false,
       assignee_dates: "12/19/2022",
@@ -110,7 +110,7 @@ const TaskList = () => {
       description: "Poisn by oth agents aff the cardiovasc sys, undet, sequela",
       work_hour_required: 63,
       status: "Complete",
-      priority: "low",
+      priority: "Low",
       assignee_id: "dc1b4d96-e711-46d5-9c4a-dadea765a5ee",
       complete: false,
       assignee_dates: "6/11/2023",
@@ -124,7 +124,7 @@ const TaskList = () => {
         "Non-pressure chronic ulcer of left calf w fat layer exposed",
       work_hour_required: 82,
       status: "Working",
-      priority: "medium",
+      priority: "Medium",
       assignee_id: "aeba570f-d70a-41b9-bd95-e16187b36f24",
       complete: false,
       assignee_dates: "10/11/2023",
@@ -138,7 +138,7 @@ const TaskList = () => {
         "Asphyxiation due to plastic bag, assault, initial encounter",
       work_hour_required: 56,
       status: "Pending",
-      priority: "medium",
+      priority: "Medium",
       assignee_id: "b6cc46b9-cbe9-4516-9f9b-733847bb7ccd",
       complete: true,
       assignee_dates: "8/29/2023",
@@ -152,7 +152,7 @@ const TaskList = () => {
         "Sublux of proximal interphaln joint of l mid finger, sequela",
       work_hour_required: 62,
       status: "Pending",
-      priority: "high",
+      priority: "High",
       assignee_id: "fd91f367-82c5-440b-b569-4910f8def17f",
       complete: true,
       assignee_dates: "11/12/2023",
@@ -165,7 +165,7 @@ const TaskList = () => {
       description: "Insect bite (nonvenomous) of breast, right breast, subs",
       work_hour_required: 10,
       status: "Complete",
-      priority: "high",
+      priority: "High",
       assignee_id: "6630152f-8503-4781-a4db-0119446b74f3",
       complete: true,
       assignee_dates: "5/21/2023",
@@ -178,7 +178,7 @@ const TaskList = () => {
       description: "Other congenital malformations of vulva",
       work_hour_required: 75,
       status: "On track",
-      priority: "low",
+      priority: "Low",
       assignee_id: "760d7892-a529-47fb-a38a-e1a5d0cab0ca",
       complete: false,
       assignee_dates: "8/21/2023",
@@ -191,7 +191,7 @@ const TaskList = () => {
       description: "Ped on foot injured in clsn w rail trn/veh in traf, subs",
       work_hour_required: 33,
       status: "Working",
-      priority: "low",
+      priority: "Low",
       assignee_id: "d7d276b1-732d-46fa-b151-c836febfeff0",
       complete: false,
       assignee_dates: "4/28/2023",
@@ -204,7 +204,7 @@ const TaskList = () => {
       description: "Oth enterovirus as the cause of diseases classd elswhr",
       work_hour_required: 2,
       status: "On track",
-      priority: "low",
+      priority: "Low",
       assignee_id: "728463ac-af8c-4726-91e8-03a5a8d5ddf4",
       complete: true,
       assignee_dates: "2/17/2023",
@@ -218,7 +218,7 @@ const TaskList = () => {
         "Drown due to being washed overboard from inflatbl crft, init",
       work_hour_required: 94,
       status: "Complete",
-      priority: "medium",
+      priority: "Medium",
       assignee_id: "0e33cc80-5d60-409a-9813-4fcc14360ed2",
       complete: true,
       assignee_dates: "1/17/2023",
@@ -231,7 +231,7 @@ const TaskList = () => {
       description: "Disp fx of greater tuberosity of l humer, 7thG",
       work_hour_required: 99,
       status: "Pending",
-      priority: "high",
+      priority: "High",
       assignee_id: "05ee9d8a-0e03-4df4-997a-e895349a9810",
       complete: false,
       assignee_dates: "8/22/2023",
@@ -244,7 +244,7 @@ const TaskList = () => {
       description: "Other specified inflammatory liver diseases",
       work_hour_required: 68,
       status: "On track",
-      priority: "medium",
+      priority: "Medium",
       assignee_id: "27f4c957-2766-40b8-a2e1-7ed7eec93516",
       complete: true,
       assignee_dates: "5/23/2023",
@@ -258,7 +258,7 @@ const TaskList = () => {
         "Disp fx of med phalanx of l lit fngr, subs for fx w nonunion",
       work_hour_required: 59,
       status: "Pending",
-      priority: "high",
+      priority: "High",
       assignee_id: "3679ecef-65ea-424c-a1e8-6d18bf4a4768",
       complete: false,
       assignee_dates: "1/1/2023",
@@ -272,7 +272,7 @@ const TaskList = () => {
         "Strain extensor musc/fasc/tend and unsp finger at wrs/hnd lv",
       work_hour_required: 39,
       status: "On track",
-      priority: "low",
+      priority: "Low",
       assignee_id: "9f00bcd8-0458-4dd5-9201-9a5380f6a8fd",
       complete: true,
       assignee_dates: "10/11/2023",
@@ -280,19 +280,17 @@ const TaskList = () => {
     },
   ];
 
-  const priorityColor = (priority) =>{
-
-    if(priority === 'high'){
-      return 'red';
-    }else if(priority === 'medium'){
-      return 'yellow';
-    }else if(priority === 'low'){
-      return 'green';
+  const priorityColor = (priority) => {
+    if (priority === "High") {
+      return "red";
+    } else if (priority === "Medium") {
+      return "yellow";
+    } else if (priority === "Low") {
+      return "green";
     }
+  };
 
-  }
-
-  const { openModal, isModalOpen } = useContext(modalContext);
+  const { openModal, isModalOpen, setModalTask } = useContext(modalContext);
   return (
     <>
       <section class="container mx-auto px-6 pb-2 font-mono">
@@ -311,11 +309,18 @@ const TaskList = () => {
                 {task.map((task) => (
                   <tr class="text-gray-700">
                     <td class="px-4 py-2 border">
-                      <button onClick={() => openModal()}>
+                      <button
+                        onClick={() => {
+                          openModal();
+                          setModalTask(task);
+                        }}
+                      >
                         <div class="flex justify-center items-center text-sm">
-                        {task.complete ? <FaCheckCircle className="text-emerald-500 mr-2" /> : <FaMinusCircle className=" text-violet-600 mr-2" />}
-                        
-
+                          {task.complete ? (
+                            <FaCheckCircle className="text-emerald-500 mr-2" />
+                          ) : (
+                            <FaMinusCircle className=" text-violet-600 mr-2" />
+                          )}
 
                           <div className="flex flex-col justify-center items-center">
                             <p class="font-semibold text-black whitespace-nowrap">
@@ -344,7 +349,13 @@ const TaskList = () => {
                       </div>
                     </td>
                     <td class="px-4 py-2 text-xs border">
-                      <span class={`px-2 py-1 font-semibold leading-tight text-${priorityColor(task.priority)}-700 rounded-sm bg-${priorityColor(task.priority)}-100`}>
+                      <span
+                        class={`px-2 py-1 font-semibold leading-tight text-${priorityColor(
+                          task.priority
+                        )}-700 rounded-sm bg-${priorityColor(
+                          task.priority
+                        )}-100`}
+                      >
                         {task.priority}
                       </span>
                     </td>
@@ -353,156 +364,6 @@ const TaskList = () => {
                     </td>
                   </tr>
                 ))}
-
-                <tr class="text-gray-700">
-                  <td class="px-4 py-2 border">
-                    <button onClick={() => openModal()}>
-                      <div class="flex items-center text-sm">
-                        <div class="relative w-6 h-6 mr-3 rounded-full md:block">
-                          <img
-                            class="object-cover w-full h-full rounded-full"
-                            src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <div
-                            class="absolute inset-0 rounded-full shadow-inner"
-                            aria-hidden="true"
-                          ></div>
-                        </div>
-                        <div className="flex flex-col justify-start items-start">
-                          <p class="font-semibold text-black">Sufyan Handry</p>
-                          <p class="text-xs text-gray-600">Developer</p>
-                        </div>
-                      </div>
-                    </button>
-                  </td>
-
-                  <td class="px-4 py-2 text-ms font-semibold border">
-                    <div class="flex items-center text-sm">
-                      <div class="relative w-4 h-4 mr-3 rounded-full md:block">
-                        <img
-                          class="object-cover w-full h-full rounded-full"
-                          src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                          alt=""
-                          loading="lazy"
-                        />
-                        <div
-                          class="absolute inset-0 rounded-full shadow-inner"
-                          aria-hidden="true"
-                        ></div>
-                      </div>
-                      Only Me
-                    </div>
-                  </td>
-                  <td class="px-4 py-2 text-xs border">
-                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                      {" "}
-                      Acceptable{" "}
-                    </span>
-                  </td>
-                  <td class="px-4 py-2 text-sm border">6/4/2000</td>
-                </tr>
-
-                <tr class="text-gray-700">
-                  <td class="px-4 py-2 border">
-                    <button onClick={() => openModal()}>
-                      <div class="flex items-center text-sm">
-                        <div class="relative w-6 h-6 mr-3 rounded-full md:block">
-                          <img
-                            class="object-cover w-full h-full rounded-full"
-                            src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <div
-                            class="absolute inset-0 rounded-full shadow-inner"
-                            aria-hidden="true"
-                          ></div>
-                        </div>
-                        <div className="flex flex-col justify-start items-start">
-                          <p class="font-semibold text-black">Sufyan Handry</p>
-                          <p class="text-xs text-gray-600">Developer</p>
-                        </div>
-                      </div>
-                    </button>
-                  </td>
-
-                  <td class="px-4 py-2 text-ms font-semibold border">
-                    <div class="flex items-center text-sm">
-                      <div class="relative w-4 h-4 mr-3 rounded-full md:block">
-                        <img
-                          class="object-cover w-full h-full rounded-full"
-                          src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                          alt=""
-                          loading="lazy"
-                        />
-                        <div
-                          class="absolute inset-0 rounded-full shadow-inner"
-                          aria-hidden="true"
-                        ></div>
-                      </div>
-                      Only Me
-                    </div>
-                  </td>
-                  <td class="px-4 py-2 text-xs border">
-                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                      {" "}
-                      Acceptable{" "}
-                    </span>
-                  </td>
-                  <td class="px-4 py-2 text-sm border">6/4/2000</td>
-                </tr>
-
-                <tr class="text-gray-700">
-                  <td class="px-4 py-2 border">
-                    <button onClick={() => openModal()}>
-                      <div class="flex items-center text-sm">
-                        <div class="relative w-6 h-6 mr-3 rounded-full md:block">
-                          <img
-                            class="object-cover w-full h-full rounded-full"
-                            src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            alt=""
-                            loading="lazy"
-                          />
-                          <div
-                            class="absolute inset-0 rounded-full shadow-inner"
-                            aria-hidden="true"
-                          ></div>
-                        </div>
-                        <div className="flex flex-col justify-start items-start">
-                          <p class="font-semibold text-black">Sufyan Handry</p>
-                          <p class="text-xs text-gray-600">Developer</p>
-                        </div>
-                      </div>
-                    </button>
-                  </td>
-
-                  <td class="px-4 py-2 text-ms font-semibold border">
-                    <div class="flex items-center text-sm">
-                      <div class="relative w-4 h-4 mr-3 rounded-full md:block">
-                        <img
-                          class="object-cover w-full h-full rounded-full"
-                          src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                          alt=""
-                          loading="lazy"
-                        />
-                        <div
-                          class="absolute inset-0 rounded-full shadow-inner"
-                          aria-hidden="true"
-                        ></div>
-                      </div>
-                      Only Me
-                    </div>
-                  </td>
-                  <td class="px-4 py-2 text-xs border">
-                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                      {" "}
-                      Acceptable{" "}
-                    </span>
-                  </td>
-                  <td class="px-4 py-2 text-sm border">6/4/2000</td>
-                </tr>
               </tbody>
             </table>
           </div>

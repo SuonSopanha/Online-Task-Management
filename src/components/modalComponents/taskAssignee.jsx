@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSortDown, FaTimesCircle, FaUserCircle } from "react-icons/fa";
 
-const TaskAssignee = ({ Assignee }) => {
+const TaskAssignee = ({ Assignee,OnChange }) => {
   const [assigneeObj, setAssigneeObj] = useState(Assignee);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleSelectAssignee = (selectedAssignee) => {
     setAssigneeObj(selectedAssignee);
+    OnChange(selectedAssignee)
     setShowDropdown(false);
   };
 
   const handleRemoveAssignee = () => {
     setAssigneeObj(null);
+    OnChange(null);
+
   };
+
+  useEffect(() => {
+    setAssigneeObj(Assignee);
+  }, [Assignee]);
+
+
 
   const renderAssignee = () => {
     if (assigneeObj !== null) {
@@ -22,7 +31,6 @@ const TaskAssignee = ({ Assignee }) => {
             className="select-assignee flex flex-row space-x-2 rounded-lg px-2 hover:border hover:bg-gray-500 hover:border-black"
             onClick={() => {
               setShowDropdown(!showDropdown);
-              console.log("click");
             }}
           >
             <img

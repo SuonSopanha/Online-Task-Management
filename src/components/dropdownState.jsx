@@ -3,7 +3,7 @@ import { FaCheckCircle } from "react-icons/fa";
 
 const DropdownButton = ({type,initState,handleChange}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Acceptable");
+  const [selectedOption, setSelectedOption] = useState(initState);
 
 
   const options = type === "status" ? ["On Track", "On Hold", "Complete", "Off Track"] : ["Low", "Medium", "High", "Very High"];

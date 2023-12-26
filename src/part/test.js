@@ -21,6 +21,7 @@ const Main = () => {
   const [tab, setTab] = useState("HomeTab");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalTask, setModalTask] = useState({});
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -58,7 +59,7 @@ const Main = () => {
 
           {/*<Inbox /> */}
 
-          <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal}}>
+          <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal,modalTask,setModalTask}}>
             {tab === "HomeTab" && <HomeTab />}
             {tab === "Inbox" && <Inbox />}
             {tab === "MyTask" && <MyTask />}
@@ -68,9 +69,8 @@ const Main = () => {
             
           </modalContext.Provider>
 
-
           <div className="w-full h-full flex justify-center items-center m-8">
-            <TaskModal isOpen={isModalOpen} isClose={closeModal} children={"Homework"}/>
+            <TaskModal isOpen={isModalOpen} isClose={closeModal} taskData={modalTask}/>
           </div>
             
 
