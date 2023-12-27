@@ -12,6 +12,9 @@ module.exports = {
         'glasses' :  'rgba(255, 255, 255, 0.40)',
         
       },
+      fontFamily:{
+       
+      }
     },
   },
   plugins: [
