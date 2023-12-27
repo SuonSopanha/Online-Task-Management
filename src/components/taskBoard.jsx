@@ -282,8 +282,8 @@ const TaskBoard = () => {
     <div className="container mx-auto mt-10">
       <h1 className="text-2xl font-semibold mb-8">Task Board</h1>
 
-      <div className="flex space-x-2">
-        <div className="w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
+      <div className="flex space-x-2 flex-col space-y-2 lg:flex-row lg:space-x-2">
+        <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
           <h2 className="text-lg font-semibold mb-4">To Do</h2>
           <div className="flex flex-col space-y-2">
             {task
@@ -338,7 +338,7 @@ const TaskBoard = () => {
           </div>
         </div>
 
-        <div className="w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
+        <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
           <h2 className="text-lg font-semibold mb-4">Pending</h2>
           <div className="flex flex-col space-y-2">
             {task
@@ -393,7 +393,7 @@ const TaskBoard = () => {
           </div>
         </div>
 
-        <div className="w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3"> 
+        <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3"> 
           <h2 className="text-lg font-semibold mb-4">Done</h2>
           <div className="flex flex-col space-y-2">
             {task

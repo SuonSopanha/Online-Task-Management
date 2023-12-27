@@ -15,19 +15,19 @@ const HomeTab = () => {
         <div class="ml-6 mr-2 mt-8 mx-auto flex flex-col lg:flex-row lg:space-x-4 ">
           <div className="w-full lg:w-4/12 flex flex-col mt-0 mb-2 lg:mt-0">
             <div class="col-span-2 row-span-2 flex  flex-col items-center justify-center rounded-2xl bg-glasses backdrop-blur-12 bg-opacity-50 py-4">
-              <button class="flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-slate-300 p-1">
+              <button class="flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
                 <div class="ml-2 h-4 w-4 rounded-full bg-slate-500"></div>
                 <span class="ml-2 text-sm font-medium text-gray-500">
                   Create new project
                 </span>
               </button>
-              <button class="mt-4 flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-slate-300 p-1">
+              <button class="mt-4 flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
                 <div class="ml-2 h-4 w-4 rounded-full bg-slate-500"></div>
                 <span class="ml-2 text-sm font-medium text-gray-500">
                   Complete your profile
                 </span>
               </button>
-              <button class="mt-4 flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-slate-300 p-1">
+              <button class="mt-4 flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
                 <div class="ml-2 h-4 w-4 rounded-full bg-slate-500"></div>
                 <span class="ml-2 text-sm font-medium text-gray-500">
                   Continue project
@@ -111,35 +111,8 @@ const HomeTab = () => {
                 </div>
               </div>
             </div>
-            <div>
-              <div class="ml-12 mt-4 flex items-center">
-                <div class="flex h-4 w-4">
-                  <img
-                    width="35"
-                    height="35"
-                    src="https://img.icons8.com/ios-filled/50/plus-math.png"
-                    alt="plus-math"
-                  />
-                </div>
-                <span class="text-sm font-medium"> Upcoming</span>
-              </div>
-
-              <div class="ml-14 mr-8 mt-4 flex items-center space-x-10 border-t-2 border-neutral-500 pl-6 pt-2">
-                <div>
-                  <img
-                    width="25"
-                    height="25"
-                    src="https://img.icons8.com/fluency/48/checked.png"
-                    alt="checked"
-                  />
-                </div>
-                <span class="ml-2 text-sm font-medium">Design</span>
-                <button class="ml-2 w-32  text-sm rounded-xl bg-cyan-400 font-medium">
-                  Group work
-                </button>
-                <span class="ml-2 text-sm">Today-Dec 13</span>
-              </div>
-            </div>
+            
+            
           </div>
         </div>
       </div>

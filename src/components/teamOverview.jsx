@@ -227,7 +227,7 @@ const TeamOverview = () => {
             <div className="text-2xl font-bold">About Us</div>
 
             <div className="p-2">
-              <EditableBox />
+              <EditableBox init={""} OnChange={() => {}} />
             </div>
           </div>
 
