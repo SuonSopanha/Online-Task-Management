@@ -3,16 +3,16 @@ import React from "react";
 const Primaryrole = () => {
   return (
     <>
-      <div class="m-10 w-auto h-auto">
+      <div class="p-10 w-auto h-auto">
         <div>
           <p class="mb-4 text-3xl font-medium">What's your primary role?</p>
         </div>
         <div class="mt-5">
-          <p class="font-medium dark:text-gray-400">
+          <p class="font-medium ">
             These will help us tailor PAS for you. We may also reach out to help
             you find the right PAS
           </p>
-          <p class="font-medium dark:text-gray-400">products for your team.</p>
+          <p class="font-medium ">products for your team.</p>
         </div>
         <div class="mt-10">
           <button
@@ -91,3 +91,5 @@ const Primaryrole = () => {
     </>
   );
 };
+
+export default Primaryrole;

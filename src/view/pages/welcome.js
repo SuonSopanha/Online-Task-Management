@@ -3,7 +3,7 @@ import React from "react";
 const Welcome = () => {
   return (
     <>
-      <div class="m-10">
+      <div class="p-10">
         <div>
           <p class="mb-4 text-3xl font-medium">Welcome to PAS!</p>
           <p>You're signing up as sounsopanha168@gmail.com.</p>
@@ -38,3 +38,6 @@ const Welcome = () => {
     </>
   );
 };
+
+
+export default Welcome;

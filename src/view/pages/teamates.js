@@ -3,9 +3,9 @@ import React from "react";
 const Teamates = () => {
   return (
     <>
-      <div class="m-10">
+      <div class="p-10">
         <div>
-          <p class="mb-4 text-lg font-medium">
+          <p class="mb-4 text-3xl font-medium">
             Invite a teamate to try PAS together
           </p>
           <p>You can start small by inviting a trusted teamate to</p>
@@ -52,3 +52,5 @@ const Teamates = () => {
     </>
   );
 };
+
+export default Teamates;

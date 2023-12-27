@@ -11,16 +11,16 @@ const Navbar = ({ toggleSidebar}) => {
         <div className="flex flex-row sm:space-x-3 px-5 xl:px-10 py-3 justify-between items-center">
           <button
             type="button"
-            className="sidebar-btn flex px-2 py-1 items-center justify-center rounded-lg bg-gray-300 text-blue-500 border-1 border-blue-500 hover:bg-blue-600 sm:w-1/2 sm:px-2 sm:py-1 sm:text-base"
+            className="flex px-2 py-1 items-center justify-center rounded-lg bg-gray-100 text-blue-500 border-1 border-blue-500 hover:bg-blue-600 sm:w-1/2 sm:px-2 sm:py-1 sm:text-base"
             onClick={handleClick}
           >
             <i className="fa-solid fa-bars"></i>
           </button>
           <button
             type="button"
-            className="sidebar-btn flex px-3 py-1 mx-3 items-center justify-center rounded-2xl bg-gray-300 font-semibold text-blue-500 border-1 border-blue-500 hover:bg-blue-600 sm:mx-0 sm:w-1/2 sm:px-2 sm:py-1 sm:text-sm"
+            className="flex py-1 mx-3 items-center justify-center rounded-2xl bg-gray-100 font-semibold text-blue-500 border-1 border-blue-500 hover:bg-blue-600 sm:mx-0 sm:w-1/2 sm:px-2 sm:py-1 sm:text-sm"
           >
-            Create
+            <span className="px-1">Create</span>
           </button>
         </div>
         <div className="px-5 xl:px-12 py-3 flex w-full items-center ">

@@ -2,8 +2,8 @@ import React from "react";
 
 const HomeTab = () => {
   return (
-    <>
-      <div className="container">
+    <div className="w-full flex items-center justify-center">
+      <div className="container w-full">
         <div class="mt-8 text-center">
           <p class="font-medium">Tuesday, December 12</p>
           <p class="text-3xl font-medium">Good morning, Sky Defender</p>
@@ -116,7 +116,7 @@ const HomeTab = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

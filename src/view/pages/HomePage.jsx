@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { FaBars, FaSearch, FaUser } from "react-icons/fa";
 
@@ -82,10 +83,10 @@ export default function HomePage() {
             </p>
             <div className="flex justify-center space-x-3">
               <button className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 round-sm border-3 border-black">
-                Get Started
+                <Link to="/login">Get Started</Link>
               </button>
               <button className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-2 px-4 round-sm border-3 border-black">
-                Continue Work
+              <Link to="/app">Continue Work</Link>
               </button>
             </div>
           </div>

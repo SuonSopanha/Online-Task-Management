@@ -3,18 +3,18 @@ import React from "react";
 const Mainobj = () => {
   return (
     <>
-      <div class="m-10">
+      <div class="p-10">
         <div>
           <p class="mb-4 text-3xl font-medium">What's your main objective</p>
           <p class="mb-4 text-3xl font-medium">in PAS?</p>
         </div>
         <div class="mt-10">
-          <p class="font-medium dark:text-gray-400">
+          <p class="font-medium">
             Your choice here won't limit what you can do in PAS
           </p>
         </div>
-        <div class="group relative mt-4 max-w-md">
-          <div class="flex items-start rounded-xl border-2 border-zinc-700 p-4 transition-all group-hover:bg-gray-100">
+        <div class="group relative mt-4 max-w-md ">
+          <div class="flex items-start rounded-xl border-2 border-blue-400 p-4 transition-all bg-glasses backdrop-blur-12 bg-opacity-50 group-hover:bg-gray-100">
             <div class="w-8">
               <img
                 width="96"
@@ -33,8 +33,8 @@ const Mainobj = () => {
           </div>
         </div>
 
-        <div class="relative mt-4 max-w-md">
-          <div class="flex items-start rounded-xl border-2 border-zinc-700 p-4">
+        <div class="relative mt-4 max-w-md ">
+          <div class="flex items-start rounded-xl border-2 border-blue-400 p-4 bg-glasses backdrop-blur-12 bg-opacity-50">
             <div class="w-8">
               <img
                 width="48"
@@ -50,8 +50,8 @@ const Mainobj = () => {
           </div>
         </div>
 
-        <div class="relative mt-4 max-w-md">
-          <div class="flex items-start rounded-xl border-2 border-zinc-700 p-4">
+        <div class="relative mt-4 max-w-md ">
+          <div class="flex items-start rounded-xl border-2 border-blue-400 p-4 bg-glasses backdrop-blur-12 bg-opacity-50">
             <div class="w-10">
               <img
                 width="48"
@@ -71,3 +71,5 @@ const Mainobj = () => {
     </>
   );
 };
+
+export default Mainobj;
