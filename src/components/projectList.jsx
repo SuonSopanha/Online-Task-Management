@@ -424,14 +424,14 @@ const ProjectList = () => {
                   </td>
                   <td class="px-4 py-2 text-xs border">
                     <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                      {" "}
-                      Acceptable{" "}
+                  
+                      Acceptable
                     </span>
                   </td>
                   <td class="px-4 py-2 text-xs border">
                     <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                      {" "}
-                      High{" "}
+                     
+                      High
                     </span>
                   </td>
                   <td class="px-4 py-2 text-sm border">6/4/2000</td>
