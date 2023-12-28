@@ -1,6 +1,23 @@
 import React from "react";
+import { useState } from "react";
+
+import { userSignup } from "../../firebase/appAuth";
 
 const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+
+
+  const onSignup = (e) =>{
+    e.preventDefault();
+    if(password === confirm){
+      userSignup(email,password);
+    }else{
+      alert("Passwords don't match");
+    }
+  } 
+
   return (
     <div class="max-w-[280px] mx-auto h-screen">
       <div class="flex flex-col items-center pt-10">
@@ -72,23 +89,29 @@ const Signup = () => {
           <span class="text-gray-700 font-medium">Continue with Google</span>
         </button>
         <span class="mb-2 text-gray-900">Or</span>
-        <form>
+        <form onSubmit={onSignup}>
           <input
-            type="text"
+            type="email"
             class="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium "
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             class="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium "
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <input
             type="password"
             class="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium "
             placeholder="Confirm password"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
           />
-          <button class="bg-slate-500 hover:bg-slate-700 text-white text-base rounded-lg py-2.5 px-5 transition-colors w-full text-[19px]">
+          <button type="submit" class="bg-slate-500 hover:bg-slate-700 text-white text-base rounded-lg py-2.5 px-5 transition-colors w-full text-[19px]">
             Log In
           </button>
         </form>

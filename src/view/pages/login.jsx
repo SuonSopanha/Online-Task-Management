@@ -1,11 +1,29 @@
 import React from "react";
+import { useState } from "react";
+
+
+import { userSignin, providerLogin } from "../../firebase/appAuth";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onlogin = (e) =>{
+    e.preventDefault();
+    userSignin(email,password);
+  }
+
+const googleLogin = (e) =>{
+  e.preventDefault();
+  providerLogin();
+}
+
+
   return (
     <div class="max-w-[280px] mx-auto h-screen">
       <div class="flex flex-col items-center pt-10">
         <h2 class="mb-5 text-gray-900 font-mono font-bold text-xl">Login</h2>
-        <button class="flex items-center mb-2 justify-center transition ease-in-out delay-50 px-3 py-2.5 space-x-2 bg-white border border-slate-600 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 focus:ring-opacity-50">
+        <button onClick={googleLogin} class="flex items-center mb-2 justify-center transition ease-in-out delay-50 px-3 py-2.5 space-x-2 bg-white border border-slate-600 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 focus:ring-opacity-50">
           <svg
             viewBox="0 0 48 48"
             width="24"
@@ -72,18 +90,22 @@ const Login = () => {
           <span class="text-gray-700 font-medium">Continue with Google</span>
         </button>
         <span class="mb-2 text-gray-900">Or</span>
-        <form>
+        <form onSubmit={onlogin}>
           <input
-            type="text"
+            type="email"
             class="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium "
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             class="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium "
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <button class="bg-slate-500 hover:bg-slate-700 text-white text-base rounded-lg py-2.5 px-5 transition-colors w-full text-[19px]">
+          <button type="submit" class="bg-slate-500 hover:bg-slate-700 text-white text-base rounded-lg py-2.5 px-5 transition-colors w-full text-[19px]">
             Log In
           </button>
         </form>
