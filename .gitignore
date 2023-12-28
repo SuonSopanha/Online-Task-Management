@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+#credentail
+/src/firebase/credentail.js
+
 # testing
 /coverage
 
