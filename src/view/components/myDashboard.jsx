@@ -9,17 +9,9 @@ import LineChart from "./chartComponents/lineChart";
 import LineChartCompare from "./chartComponents/lineChartCompare";
 import RadarChart from "./chartComponents/radarChart";
 
+import {formattedDate} from "../../utils/formatDate";
+
 const MyDashboard = () => {
-
-  const currentDate = new Date();
-  const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
-
-  const formattedDate = currentDate.toLocaleDateString('en-KH', options);
 
   return (
     <div className="flex flex-col">

@@ -20,8 +20,8 @@ const UserProfilePic = ({ name}) => {
   return (
     <div
       style={{
-        width: '100px',
-        height: '100px',
+        width: '24px',
+        height: '24px',
         borderRadius: '50%',
         backgroundColor: generateRandomColor(),
         display: 'flex',
@@ -29,7 +29,7 @@ const UserProfilePic = ({ name}) => {
         justifyContent: 'center',
         color: 'white',
         fontWeight: 'bold',
-        fontSize: '24px',
+        fontSize: '12px',
       }}
     >
       {getInitials(name)}

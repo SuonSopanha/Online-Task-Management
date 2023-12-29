@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 import {
   FaCheckCircle,
   FaClock,
+  FaSave,
   FaSortDown,
   FaTimesCircle,
+  FaTrash,
+  FaTrashRestore,
 } from "react-icons/fa";
 
 import EditableBox from "./editableBox";
@@ -17,6 +20,7 @@ import TaskAssignee from "./modalComponents/taskAssignee";
 import TaskDueDate from "./modalComponents/taskDueDate";
 import TaskStatus from "./modalComponents/taskStatus";
 import TaskProjectbox from "./modalComponents/taskProjectbox";
+import NumberInput from "./modalComponents/numberInput";
 
 const TaskModal = ({ isOpen, isClose, taskData }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
@@ -60,6 +64,16 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
     console.log(task.project_id);
   };
 
+  const onHourRequiredChange = (newHourRequired) => {
+    setTask({ ...taskData, work_hour_required: newHourRequired });
+    console.log(task.work_hour_required);
+  };
+
+  const onCategoryChange = (newCategory) => {
+    setTask({ ...taskData, task_category: newCategory });
+    console.log(task.task_category);
+  };
+
   const onChangeStatusAndPrority = (number, state) => {
     if (number === 1) {
       setTask({ ...task, status: state });
@@ -76,14 +90,14 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
     handleClose();
   };
 
-  console.log(taskData.priority,"THIS");
+  console.log(taskData.priority, "THIS");
   return (
     <>
       {isModalOpen && (
         <div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
           <div className="w-full sm:w-screen max-h-3xl max-w-3xl mx-auto my-6 mt-48">
             {/* Content */}
-            <div className="relative flex flex-col w-full bg-blue-300 bg-opacity-75 backdrop-blur-12 border-0 rounded-lg outline-none focus:outline-none">
+            <div className="relative flex flex-col w-full bg-sky-200 bg-opacity-75 backdrop-blur-12 border-0 rounded-lg outline-none focus:outline-none">
               {/* Header */}
               <div className="flex items-center justify-between p-2 border-b border-solid border-gray-500 rounded-t">
                 <CompleteBox
@@ -98,10 +112,16 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
                   <FaTimesCircle className="w-6 h-6" />
                 </button>
               </div>
-              <div className="flex items-center justify-start p-2 border-b border-solid border-gray-500 rounded-t">
+              <div className="flex items-center justify-start px-2 py-3 border-b border-solid border-gray-500 rounded-t">
                 <TaskName
                   name={taskData.task_name}
                   onNameChange={handleTaskNameChange}
+                />
+
+                <DropdownButton
+                  type={"category"}
+                  initState={taskData.task_category}
+                  handleChange={onCategoryChange}
                 />
               </div>
               {/* Body */}
@@ -114,6 +134,11 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
                 <TaskDueDate
                   DueDate={taskData.assignee_dates}
                   OnChange={onDueDateChange}
+                />
+                <div className="w-28">Hour Required</div>
+                <NumberInput
+                  init={taskData.work_hour_required}
+                  OnChange={onHourRequiredChange}
                 />
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
@@ -136,14 +161,27 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
                 ></EditableBox>
               </div>
               {/* Footer */}
-              <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">
-                <button
-                  className="text-blue-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={onSaveButton}
-                >
-                  Save
-                </button>
+              <div className="flex items-center justify-end space-x-2 p-6 border-t border-solid border-gray-300 rounded-b">
+                <div className="flex flex-row px-2 py-1 justify-center items-center bg-rose-600 rounded-lg">
+                  <FaTrash className="w-3 h-3 text-white" />
+                  <button
+                    className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={onSaveButton}
+                  >
+                    Delete
+                  </button>
+                </div>
+                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 rounded-lg">
+                  <FaSave className="w-3 h-3 text-white" />
+                  <button
+                    className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={onSaveButton}
+                  >
+                    Save
+                  </button>
+                </div>
               </div>
             </div>
           </div>
