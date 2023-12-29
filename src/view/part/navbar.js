@@ -1,9 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 
-const Navbar = ({ toggleSidebar}) => {
+import { auth } from "../../firebase/config";
+import UserProfilePic from "../../utils/photoGenerator";
+
+const Navbar = ({ toggleSidebar }) => {
+  const [loading, setLoading] = useState(true);
   const handleClick = () => {
     toggleSidebar(true);
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, you can update the component state or perform other actions.
+        console.log("User is signed in:", user);
+      } else {
+        // User is signed out.
+        console.log("User is signed out");
+      }
+
+      setLoading(false);
+    });
+
+    return () => {
+      // Unsubscribe the listener when the component unmounts
+      unsubscribe();
+    };
+  }, []); // Empty dependency array to run the effect only once on component mount
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -38,20 +62,34 @@ const Navbar = ({ toggleSidebar}) => {
 
           <div className="hidden xl:flex space-x-5 items-center">
             <a className="flex items-center hover:text-gray-200" href="#">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 hover:text-gray-200"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+              {loading === true ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 hover:text-gray-200"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              ) : (
+                <div>
+                  {auth.currentUser?.photoURL != null ? (
+                    <img
+                      className="h-6 w-6 rounded-full"
+                      src={auth.currentUser?.photoURL}
+                      alt="User Profile"
+                    />
+                  ) : (
+                    <UserProfilePic name={auth.currentUser?.email} />
+                  )}
+                </div>
+              )}
             </a>
           </div>
         </div>

@@ -5,6 +5,7 @@ import {
   signInWithPopup
 } from "firebase/auth";
 
+
 import { auth } from "./config";
 import {   getUserByID,
   createUser,
@@ -23,9 +24,8 @@ const providerLogin = () => {
       const token = credential.accessToken;
       const user = result.user;
 
-      //create user by custom id by passing email and photo url
-      createUser(user.uid, user.email, user.photoURL);
-      console.log(auth.currentUser.uid);
+      createUser(user.uid,user.email,user.photoURL)
+
 
     })
     .catch((error) => {
@@ -44,7 +44,8 @@ const userSignup = async (email, password) => {
       const user = userCredential.user;
       console.log(user);
 
-      //create user by custom id by passing email and photo url
+      createUser(user.uid,user.email,user.photoURL)
+
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -58,6 +59,7 @@ const userSignin = (email, password) => {
     .then((userCredential) => {
       const user = userCredential.user;
       console.log(user);
+
     })
     .catch((error) => {
       const errorCode = error.code;

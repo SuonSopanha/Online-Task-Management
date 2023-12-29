@@ -1,21 +1,40 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import {auth} from "../../firebase/config";
+import { getUserByID } from "../../firebase/usersCRUD";
 
 import { userSignin, providerLogin } from "../../firebase/appAuth";
+
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onlogin = (e) =>{
+  const navigate = useNavigate();
+
+   const onlogin = async (e) =>{
     e.preventDefault();
-    userSignin(email,password);
+    await userSignin(email,password);
+    const user = await getUserByID(auth.currentUser.uid)
+
+
+    if(user.fullname){
+      navigate('/app')
+    }else{
+      navigate('/welcome')
+    }
+
   }
 
-const googleLogin = (e) =>{
+const googleLogin = async (e) =>{
   e.preventDefault();
-  providerLogin();
+  await providerLogin();
+  navigate('/app')
+
+  
 }
 
 

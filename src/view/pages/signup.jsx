@@ -1,18 +1,23 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { userSignup } from "../../firebase/appAuth";
+
+
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
+  const navigate = useNavigate();
 
-  const onSignup = (e) =>{
+  const onSignup = async (e) =>{
     e.preventDefault();
     if(password === confirm){
-      userSignup(email,password);
+      await userSignup(email,password);
+      navigate('/login')
     }else{
       alert("Passwords don't match");
     }

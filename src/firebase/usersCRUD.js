@@ -16,11 +16,7 @@ const createUser = async (id, email, photoUrl) => {
     const newField = {
       email: email,
       photoUrl: photoUrl,
-      fullName: "",
-      work: "",
-      objective: "",
     };
-
     // Create a DocumentReference using doc() with the custom ID
     const customIdDocRef = doc(usersCollectionRef, id);
 

@@ -1,12 +1,48 @@
 import React from "react";
+import { useState, useEffect } from "react";
+
+import { auth } from "../../firebase/config";
+
+import { getTaskByUserID, getTaskByAsigneeID } from "../../firebase/taskCRUD";
+import {formattedDate} from "../../utils/formatDate";
+
+import LoadingBalls from "../../utils/loading";
 
 const HomeTab = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, you can update the component state or perform other actions.
+        console.log("User is signed in:", user);
+        setLoading(false);
+        getTaskByUserID(auth.currentUser.uid);
+        getTaskByAsigneeID(auth.currentUser.uid);
+      } else {
+        // User is signed out.
+        console.log("User is signed out");
+      }
+    });
+
+    return () => {
+      // Unsubscribe the listener when the component unmounts
+      unsubscribe();
+    };
+  }, []); // Empty dependency array to run the effect only once on component mount
+
+  if (loading) {
+    return <LoadingBalls />;
+  }
+
   return (
     <div className="w-full flex items-center justify-center">
       <div className="container w-full">
         <div class="mt-8 text-center">
-          <p class="font-medium">Tuesday, December 12</p>
-          <p class="text-3xl font-medium">Good morning, Sky Defender</p>
+          <p class="font-medium">{formattedDate}</p>
+          <p class="text-3xl font-medium">
+            Good morning,{auth.currentUser.email}
+          </p>
         </div>
         <div class="ml-6 mt-12">
           <p class="text-xl font-medium">Steps to get start</p>
@@ -111,8 +147,6 @@ const HomeTab = () => {
                 </div>
               </div>
             </div>
-            
-            
           </div>
         </div>
       </div>

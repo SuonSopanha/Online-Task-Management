@@ -282,7 +282,7 @@ const TaskBoard = () => {
     <div className="container mx-auto mt-10">
       <h1 className="text-2xl font-semibold mb-8">Task Board</h1>
 
-      <div className="flex space-x-2 flex-col space-y-2 lg:flex-row lg:space-x-2">
+      <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2">
         <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
           <h2 className="text-lg font-semibold mb-4">To Do</h2>
           <div className="flex flex-col space-y-2">
@@ -337,12 +337,11 @@ const TaskBoard = () => {
               ))}
           </div>
         </div>
-
         <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
-          <h2 className="text-lg font-semibold mb-4">Pending</h2>
+          <h2 className="text-lg font-semibold mb-4">To Do</h2>
           <div className="flex flex-col space-y-2">
             {task
-              .filter((task) => task.status === "Pending")
+              .filter((task) => task.status === "On track")
               .map((task) => (
                 <div class="flex justify-center items-center">
                   <div class="flex flex-col bg-blue-400 pt-3 pb-2 px-3 rounded-xl text-white w-full mx-auto my-auto">
@@ -392,12 +391,11 @@ const TaskBoard = () => {
               ))}
           </div>
         </div>
-
-        <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3"> 
-          <h2 className="text-lg font-semibold mb-4">Done</h2>
+        <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
+          <h2 className="text-lg font-semibold mb-4">To Do</h2>
           <div className="flex flex-col space-y-2">
             {task
-              .filter((task) => task.status === "Off track")
+              .filter((task) => task.status === "On track")
               .map((task) => (
                 <div class="flex justify-center items-center">
                   <div class="flex flex-col bg-blue-400 pt-3 pb-2 px-3 rounded-xl text-white w-full mx-auto my-auto">
@@ -441,9 +439,7 @@ const TaskBoard = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.assignee_dates} </div>
-
-
+                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.assignee_dates}</div>
                   </div>
                 </div>
               ))}
