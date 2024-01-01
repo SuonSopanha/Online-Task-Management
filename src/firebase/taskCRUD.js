@@ -7,89 +7,60 @@ import {
   where,
   getDocs,
   deleteDoc,
+  addDoc,
+  onSnapshot
 } from "firebase/firestore";
 
 import { auth, db } from "./config";
 
-const tasksCollectionRef = collection(db, "tasks");
-const usersCollectionRef = collection(db, "users");
-
-//get task by user id
-const getTaskByUserID = async (id) => {
-  const q = query(tasksCollectionRef, where("user_id", "==", id));
-  const querySnapshot = await getDocs(q);
-
-  const tasks = [];
-  querySnapshot.forEach((doc) => {
-    tasks.push(doc.data());
+const getRtTaskByUserID = async (id,setChange) => {
+  const q = query(collection(db, "tasks"), where("user_id", "==", auth.currentUser.uid));
+  onSnapshot(q, (querySnapshot) => {
+    const tasks = [];
+    querySnapshot.forEach((doc) => {
+      tasks.push({ id: doc.id, ...doc.data() });
+    });
+    setChange(tasks);
   });
+}
 
-  console.log(tasks);
-  return tasks;
-};
-
-//get task by asignee id
-const getTaskByAsigneeID = async (id) => {
-  const q = query(tasksCollectionRef, where("assignee_id", "==", id));
-  const querySnapshot = await getDocs(q);
-
-  const tasks = [];
-  querySnapshot.forEach((doc) => {
-    tasks.push(doc.data());
+const getRtTaskByAssigneeID = async (id,setChange) => {
+  const q = query(collection(db, "tasks"), where("assignee_id", "==", auth.currentUser.uid));
+  onSnapshot(q, (querySnapshot) => {
+    const tasks = [];
+    querySnapshot.forEach((doc) => {
+      tasks.push({ id: doc.id, ...doc.data() });
+    });
+    setChange(tasks);
   });
+}
 
-  console.log(tasks);
-  return tasks;
+const getRtTaskByProjectID = async (id,setChange) => {
+  const q = query(collection(db, "tasks"), where("project_id", "==", id));
+  onSnapshot(q, (querySnapshot) => {
+    const tasks = [];
+    querySnapshot.forEach((doc) => {
+      tasks.push({ id: doc.id, ...doc.data() });
+    });
+    setChange(tasks);
+  });
+}
+
+//createRtTask
+const createRtTask = async (data) => {
+  await addDoc(collection(db, "tasks"), data);
 };
 
-//get create task
-const createTask = async (task) => {
-  try {
-    const newField = {
-      title: task.title,
-      description: task.description,
-      user_id: task.user_id,
-      assignee_id: task.assignee_id,
-      status: task.status,
-      priority: task.priority,
-      created_at: task.created_at,
-    };
-
-    const docRef = await setDoc(doc(db, "tasks"), newField);
-    console.log("Document written with ID: ", docRef.id);
-  } catch (error) {
-    console.error("Error adding document: ", error);
-  }
+//updateRtTaskByID
+const updateRtTaskByID = async (id, data) => {
+  const taskDoc = doc(db, "tasks", id);
+  await updateDoc(taskDoc, data);
 };
 
-//update task by id
-const updateTask = async (id, task) => {
-  try {
-    const newField = {
-      title: task.title,
-      description: task.description,
-      user_id: task.user_id,
-      assignee_id: task.assignee_id,
-      status: task.status,
-      priority: task.priority,
-      created_at: task.created_at,
-    };
-    const userRef = doc(tasksCollectionRef, id);
-    await updateDoc(userRef, newField);
-    console.log("Task updated successfully");
-  } catch (error) {
-    console.error("Error updating task:", error);
-  }
+const deleteRtTaskByID = async (id) => {
+  const taskDoc = doc(db, "tasks", id);
+  await deleteDoc(taskDoc);
 };
 
-//delete task by id
-const deleteTask = async (id) => {
-  try {
-    await deleteDoc(doc(tasksCollectionRef, id));
-    console.log("Task deleted successfully");
-  } catch (error) {
-    console.error("Error deleting task:", error);
-  }
-};
 
-export { getTaskByUserID, getTaskByAsigneeID };
+export { getRtTaskByUserID,getRtTaskByAssigneeID,updateRtTaskByID,deleteRtTaskByID,createRtTask,getRtTaskByProjectID };

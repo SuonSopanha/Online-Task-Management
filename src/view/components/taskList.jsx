@@ -1,46 +1,56 @@
 import React from "react";
-import { useState, useContext,useEffect } from "react";
-
+import { useState, useContext, useEffect } from "react";
 
 import axios from "axios";
 import { FaCheckCircle, FaMinusCircle } from "react-icons/fa";
 import TaskModal from "./taskModal";
 import SendMessageModal from "./sendMessageModal";
 
+import { auth } from "../../firebase/config";
+
+import { getRtTaskByUserID,getRtTaskByAssigneeID } from "../../firebase/taskCRUD";
+import LoadingBalls from "../../utils/loading";
+
 import { modalContext } from "../part/test";
 
 const TaskList = () => {
-
-  const [taskList,setTaskList] = useState(null);
+  const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const { openModal, isModalOpen, setModalTask } = useContext(modalContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Replace 'https://api.example.com/data' with your API endpoint
-        const response = await axios.get('https://my.api.mockaroo.com/task_schema.json?key=1483cb70');
-        setTaskList(response.data);
-      } catch (error) {
-        setError(error);
-      } finally {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, you can update the component state or perform other actions.
+        console.log("User is signed in:", user);
+
+        getRtTaskByUserID(auth.currentUser.uid, setTaskList);
+        getRtTaskByAssigneeID(auth.currentUser.uid,setTaskList);
         setLoading(false);
+        console.log(taskList);
+      } else {
+        // User is signed out.
+        setError(true);
+        console.log("User is signed out");
       }
+    });
+
+    return () => {
+      // Unsubscribe the listener when the component unmounts
+      unsubscribe();
     };
-
-    fetchData();
-  }, []);
-
+  }, []); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingBalls />;
   }
 
   if (error) {
     return <p>Error: {error.message}</p>;
   }
+
 
   const priorityColor = (priority) => {
     if (priority === "High") {
@@ -54,7 +64,6 @@ const TaskList = () => {
     }
   };
 
-
   return (
     <>
       <section class="container mx-auto px-6 pb-2 font-mono">
@@ -65,13 +74,13 @@ const TaskList = () => {
                 <tr class="text-md font-semibold tracking-wide text-left text-gray-900 uppercase border-b bg- border-gray-600">
                   <th class="px-4 py-3">Task Name</th>
                   <th class="px-4 py-3 w-1/6">Visibility</th>
-                  <th class="px-4 py-3 w-1/6">Status</th>
+                  <th class="px-4 py-3 w-1/6">Priority</th>
                   <th class="px-4 py-3 w-1/4">Due Date</th>
                 </tr>
               </thead>
               <tbody class="">
                 {taskList.map((task) => (
-                  <tr class="text-gray-700">
+                  <tr key={task.id} class="text-gray-700">
                     <td class="px-4 py-2 border">
                       <button
                         onClick={() => {
@@ -123,9 +132,7 @@ const TaskList = () => {
                         {task.priority}
                       </span>
                     </td>
-                    <td class="px-4 py-2 text-sm border">
-                      {task.assignee_dates}
-                    </td>
+                    <td class="px-4 py-2 text-sm border">{task.due_date}</td>
                   </tr>
                 ))}
               </tbody>

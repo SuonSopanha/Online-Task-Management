@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 
 import { FaPlus } from "react-icons/fa";
 
@@ -7,12 +7,40 @@ import TaskList from "../components/taskList";
 import TaskCalender from "../components/taskCalender";
 import TaskBoard from "../components/taskBoard";
 import Dropdown from "../components/dropDown";
+import { formattedDate } from "../../utils/formatDate";
+
+import { modalContext } from "../part/test";
+
 
 const MyTask = () => {
   const [activeTab, setActiveTab] = useState("List");
 
+  const { setModalTask, openCreateModal } = useContext(modalContext);
+  
+
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+  };
+
+  const taskSample = {
+    project_id: "",
+    user_id: "",
+    task_name: "Name",
+    description:
+      "",
+    due_date: "01/01/2023",
+    task_category: "",
+    tracking: [
+      { date: "", hours: null },
+      { date: "", hours: null },
+    ],
+    work_hour_required: 0,
+    status: "",
+    priority: "",
+    assignee_id: "",
+    assignee_dates: undefined,
+    complete: false,
+    complete_date: "",
   };
 
   return (
@@ -96,6 +124,12 @@ const MyTask = () => {
           </div>
                   
           <button
+            onClick={() => {
+
+              openCreateModal();
+              setModalTask(taskSample);
+
+            }}
             type="button"
             className="px-2 py-2 gap-x-1 md:px-3 md:py-2 md:mr-3 md:gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
           >

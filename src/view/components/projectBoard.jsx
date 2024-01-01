@@ -1,21 +1,21 @@
 // TaskBoard.js
-import React, { useState,useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { FaUser } from "react-icons/fa";
 
 import { auth } from "../../firebase/config";
 
-import { getRtTaskByUserID,getRtTaskByAssigneeID } from "../../firebase/taskCRUD";
+import { getRtTaskByProjectID } from "../../firebase/taskCRUD";
 import LoadingBalls from "../../utils/loading";
 
 import { modalContext } from "../part/test";
 
-const TaskBoard = () => {
+const ProjectBoard = () => {
+  const { tabID, setTabID, openModal, setModalTask } = useContext(modalContext);
+
   const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const { openModal, isModalOpen, setModalTask } = useContext(modalContext);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -23,10 +23,9 @@ const TaskBoard = () => {
         // User is signed in, you can update the component state or perform other actions.
         console.log("User is signed in:", user);
 
-        getRtTaskByUserID(auth.currentUser.uid, setTaskList);
-        getRtTaskByAssigneeID(auth.currentUser.uid,setTaskList);
-
+        getRtTaskByProjectID(tabID, setTaskList);
         setLoading(false);
+        console.log(taskList);
       } else {
         // User is signed out.
         setError(true);
@@ -38,7 +37,7 @@ const TaskBoard = () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
     };
-  }, []); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+  }, [tabID]); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
   if (loading) {
     return <LoadingBalls />;
@@ -59,7 +58,14 @@ const TaskBoard = () => {
             {taskList
               .filter((task) => task.task_category === "To Do")
               .map((task) => (
-                <button key={task.id} class="flex justify-center items-center" onClick={() => {setModalTask(task); openModal()}}>
+                <button
+                  key={task.id}
+                  class="flex justify-center items-center"
+                  onClick={() => {
+                    setModalTask(task);
+                    openModal();
+                  }}
+                >
                   <div class="flex flex-col bg-blue-400 pt-3 pb-2 px-3 rounded-xl text-white w-full mx-auto my-auto">
                     <div class="flex flex-row space-x-1 items-center">
                       <span>
@@ -101,7 +107,9 @@ const TaskBoard = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.assignee_dates}</div>
+                    <div className="text-xs pt-1 items-end flex justify-end">
+                      DueDate: {task.assignee_dates}
+                    </div>
                   </div>
                 </button>
               ))}
@@ -113,7 +121,14 @@ const TaskBoard = () => {
             {taskList
               .filter((task) => task.task_category === "Working")
               .map((task) => (
-                <button key={task.id} class="flex justify-center items-center" onClick={() => {setModalTask(task); openModal()}}>
+                <button
+                  key={task.id}
+                  class="flex justify-center items-center"
+                  onClick={() => {
+                    setModalTask(task);
+                    openModal();
+                  }}
+                >
                   <div class="flex flex-col bg-violet-400 pt-3 pb-2 px-3 rounded-xl text-white w-full mx-auto my-auto">
                     <div class="flex flex-row space-x-1 items-center">
                       <span>
@@ -155,7 +170,9 @@ const TaskBoard = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.assignee_dates}</div>
+                    <div className="text-xs pt-1 items-end flex justify-end">
+                      DueDate: {task.assignee_dates}
+                    </div>
                   </div>
                 </button>
               ))}
@@ -167,7 +184,14 @@ const TaskBoard = () => {
             {taskList
               .filter((task) => task.task_category === "Done")
               .map((task) => (
-                <button key={task.id} class="flex justify-center items-center" onClick={() => {setModalTask(task); openModal()}}>
+                <button
+                  key={task.id}
+                  class="flex justify-center items-center"
+                  onClick={() => {
+                    setModalTask(task);
+                    openModal();
+                  }}
+                >
                   <div class="flex flex-col bg-green-400 pt-3 pb-2 px-3 rounded-xl text-white w-full mx-auto my-auto">
                     <div class="flex flex-row space-x-1 items-center">
                       <span>
@@ -209,7 +233,9 @@ const TaskBoard = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.assignee_dates}</div>
+                    <div className="text-xs pt-1 items-end flex justify-end">
+                      DueDate: {task.assignee_dates}
+                    </div>
                   </div>
                 </button>
               ))}
@@ -220,4 +246,4 @@ const TaskBoard = () => {
   );
 };
 
-export default TaskBoard;
+export default ProjectBoard;

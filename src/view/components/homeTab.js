@@ -2,9 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import { auth } from "../../firebase/config";
-
-import { getTaskByUserID, getTaskByAsigneeID } from "../../firebase/taskCRUD";
 import {formattedDate} from "../../utils/formatDate";
+import { getTaskByUserID } from "../../firebase/taskCRUD";
+import { addAllProjects } from "../../firebase/projectCRUD";
+import { addAllMessages } from "../../firebase/messageCRUD";
 
 import LoadingBalls from "../../utils/loading";
 
@@ -17,8 +18,6 @@ const HomeTab = () => {
         // User is signed in, you can update the component state or perform other actions.
         console.log("User is signed in:", user);
         setLoading(false);
-        getTaskByUserID(auth.currentUser.uid);
-        getTaskByAsigneeID(auth.currentUser.uid);
       } else {
         // User is signed out.
         console.log("User is signed out");

@@ -12,6 +12,7 @@ import TeamHeader from "../components/teamHeader";
 import TeamDashboard from "../components/teamDashboard";
 import MyDashboard from "../components/myDashboard";
 import TaskModal from "../components/taskModal";
+import CreateTaskModal from "../components/createTaskModal";
 import SendMessageModal from "../components/sendMessageModal";
 
 export const modalContext = createContext(null);
@@ -19,24 +20,36 @@ export const modalContext = createContext(null);
 const Main = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [tab, setTab] = useState("HomeTab");
+  const [tabID, setTabID] = useState("");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isSendMessageModalOpen, setIsSendMessageModalOpen] = useState(false);
   const [modalTask, setModalTask] = useState({});
 
   const openModal = () => {
     setIsModalOpen(true);
   };
 
+  const openCreateModal = () => {
+    setIsCreateModalOpen(true);
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const closeCreateModal = () => {
+    setIsCreateModalOpen(false);
   };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const setActiveTab = (tab) => {
+  const setActiveTab = (tab, tabID) => {
     setTab(tab);
+    setTabID(tabID);
   };
 
   return (
@@ -59,11 +72,11 @@ const Main = () => {
 
           {/*<Inbox /> */}
 
-          <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal,modalTask,setModalTask}}>
+          <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal,modalTask,setModalTask,isCreateModalOpen,setIsCreateModalOpen,closeCreateModal,openCreateModal,tabID,setTabID}}>
             {tab === "HomeTab" && <HomeTab />}
             {tab === "Inbox" && <Inbox />}
             {tab === "MyTask" && <MyTask />}
-            {tab === "Project" && <Project />}
+            {tab === "Project" && <Project/>}
             {tab === "Team" && <TeamHeader />}
             {tab === "Dashboard" && <MyDashboard />}
             
@@ -71,6 +84,7 @@ const Main = () => {
 
           <div className="w-full h-full flex justify-center items-center m-8">
             <TaskModal isOpen={isModalOpen} isClose={closeModal} taskData={modalTask}/>
+            <CreateTaskModal isOpen={isCreateModalOpen} isClose={closeCreateModal} taskData={modalTask}/>
           </div>
             
 
