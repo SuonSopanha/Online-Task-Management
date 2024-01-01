@@ -22,11 +22,27 @@ import TaskStatus from "./modalComponents/taskStatus";
 import TaskProjectbox from "./modalComponents/taskProjectbox";
 import NumberInput from "./modalComponents/numberInput";
 
-import { updateRtTaskByID, deleteRtTaskByID } from "../../firebase/taskCRUD";
+import { auth } from "../../firebase/config";
+import { updateRtTaskByID, deleteRtTaskByID ,createRtTask} from "../../firebase/taskCRUD";
 
-const TaskModal = ({ isOpen, isClose, taskData }) => {
+const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
   const [task, setTask] = useState(taskData ? taskData : {});
+
+  const timestamp = Date.now();
+  const formattedDate = new Date(timestamp).toLocaleDateString("en-KH", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "2-digit",
+  });
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-KH", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "2-digit",
+    });
+  };
 
   useEffect(() => {
     setIsModalOpen(isOpen);
@@ -57,7 +73,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
   };
 
   const onDueDateChange = (newDueDate) => {
-    setTask({ ...taskData, due_date: newDueDate });
+    setTask({ ...taskData, due_date: formatDate(newDueDate)});
     console.log(task.due_date);
   };
 
@@ -88,15 +104,26 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
   };
 
   const onSaveButton = () => {
-    console.log(task);
-    updateRtTaskByID(task.id, task);
+    const newFeild = {
+      project_id: task.project_id,
+      user_id: auth.currentUser.uid,
+      task_name: task.task_name,
+      description: task.description,
+      due_date: task.due_date,
+      task_category: task.task_category,
+      tracking: task.tracking,
+      work_hour_required: task.work_hour_required,
+      status: task.status,
+      priority: task.priority,
+      assignee_id: task.assignee_id,
+      assignee_dates: formattedDate,
+      complete: task.complete,
+      complete_date: task.complete_date,
+    };
+    console.log(newFeild);
+    createRtTask(newFeild);
     handleClose();
   };
-
-  const onDeleteButton = () =>{
-    deleteRtTaskByID(task.id);
-    handleClose();
-  }
 
   console.log(taskData.priority, "THIS");
   return (
@@ -140,7 +167,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">DueDate</div>
                 <TaskDueDate
-                  DueDate={taskData.assignee_dates}
+                  DueDate={taskData.due_date}
                   OnChange={onDueDateChange}
                 />
                 <div className="w-28">Hour Required</div>
@@ -170,16 +197,6 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
               </div>
               {/* Footer */}
               <div className="flex items-center justify-end space-x-2 p-6 border-t border-solid border-gray-300 rounded-b">
-                <div className="flex flex-row px-2 py-1 justify-center items-center bg-rose-600 rounded-lg">
-                  <FaTrash className="w-3 h-3 text-white" />
-                  <button
-                    className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={onDeleteButton}
-                  >
-                    Delete
-                  </button>
-                </div>
                 <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 rounded-lg">
                   <FaSave className="w-3 h-3 text-white" />
                   <button
@@ -199,4 +216,4 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
   );
 };
 
-export default TaskModal;
+export default CreateTaskModal;

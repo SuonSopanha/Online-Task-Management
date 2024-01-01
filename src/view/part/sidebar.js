@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import {
   FaInbox,
@@ -13,14 +13,26 @@ import {
   FaChartArea,
 } from "react-icons/fa";
 
+import {auth} from "../../firebase/config";
+import {getRtProjectByMemberID,getRtProjectByOwnerID } from "../../firebase/projectCRUD";
+
+
 function Sidebar({ isOpen, TabNavigate }) {
   const [isOpendrop, setIsOpendrop] = useState(false);
   const [isOpendropInsight, setIsOpendropInsight] = useState(false);
   const [isOpendropProject, setIsOpendropProject] = useState(false);
   const [isOpendropTeam, setIsOpendropTeam] = useState(false);
 
+  const [projectList, setProjectList] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const NavigateTab = (Tab) => {
     TabNavigate(Tab);
+  };
+
+  const NavigateTabwithParam = (Tab, param) => {
+    TabNavigate(Tab, param);
   };
 
   const toggleDropdownInsight = () => {
@@ -34,6 +46,29 @@ function Sidebar({ isOpen, TabNavigate }) {
   const toggleDropdownTeam = () => {
     setIsOpendropTeam(!isOpendropTeam);
   };
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, you can update the component state or perform other actions.
+        console.log("User is signed in:", user);
+
+        getRtProjectByOwnerID(auth.currentUser.uid, setProjectList);
+        getRtProjectByMemberID(auth.currentUser.uid, setProjectList);
+        
+        setLoading(false);
+      } else {
+        // User is signed out.
+        setError(true);
+        console.log("User is signed out");
+      }
+    });
+
+    return () => {
+      // Unsubscribe the listener when the component unmounts
+      unsubscribe();
+    };
+  }, []); 
+
 
   return (
     <>
@@ -147,12 +182,14 @@ function Sidebar({ isOpen, TabNavigate }) {
             {isOpendropProject && (
               <div className="flex flex-col items-center w-full">
                 {/* Dropdown content */}
-                <button className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTab("Project")}>
-                  <FaClipboardList className="w-3 h-3 stroke-current text-blue-900" />
-                  <span className="ml-2 text-sm font-medium text-gray-700">
-                    Project 1
-                  </span>
-                </button>
+                {projectList.map((project) => (
+                  <button key={project.project_id} className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTabwithParam("Project", project.id)}>
+                    <FaProjectDiagram className="w-3 h-3 stroke-current text-blue-900" />
+                    <span className="ml-2 text-sm font-medium text-gray-700">
+                      {project.project_name}
+                    </span>
+                  </button>
+                ))}
                 {/* Add more dropdown items as needed */}
               </div>
             )}

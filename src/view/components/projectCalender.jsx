@@ -13,15 +13,12 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { auth } from "../../firebase/config";
 
-import {
-  getRtTaskByUserID,
-  getRtTaskByAssigneeID,
-} from "../../firebase/taskCRUD";
+import { getRtTaskByProjectID } from "../../firebase/taskCRUD";
 import LoadingBalls from "../../utils/loading";
 
 import { modalContext } from "../part/test";
 
-const TaskCalender = () => {
+const ProjectCalender = () => {
   const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,7 +39,7 @@ const TaskCalender = () => {
     return eachDayOfInterval({ start, end });
   };
 
-  const { openModal, isModalOpen, setModalTask } = useContext(modalContext);
+  const { tabID, setTabID,openModal,setModalTask } = useContext(modalContext);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -50,10 +47,9 @@ const TaskCalender = () => {
         // User is signed in, you can update the component state or perform other actions.
         console.log("User is signed in:", user);
 
-        getRtTaskByUserID(auth.currentUser.uid, setTaskList);
-        getRtTaskByAssigneeID(auth.currentUser.uid, setTaskList);
-
+        getRtTaskByProjectID(tabID, setTaskList);
         setLoading(false);
+        console.log(taskList);
       } else {
         // User is signed out.
         setError(true);
@@ -65,7 +61,8 @@ const TaskCalender = () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
     };
-  }, []); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+  }, [tabID]); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+// Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
   if (loading) {
     return <LoadingBalls />;
@@ -138,4 +135,4 @@ const TaskCalender = () => {
   );
 };
 
-export default TaskCalender;
+export default ProjectCalender;

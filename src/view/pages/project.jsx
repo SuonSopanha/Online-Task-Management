@@ -1,15 +1,27 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext,useEffect } from "react";
 
 import { FaPlus } from "react-icons/fa";
 
 import ProjectList from "../components/projectList";
-import TaskCalender from "../components/taskCalender";
-import TaskBoard from "../components/taskBoard";
+import ProjectCalender from "../components/projectCalender";
+import ProjectBoard from "../components/projectBoard";
 import Dropdown from "../components/dropDown";
 
+import { getprojecByID } from "../../firebase/projectCRUD";
+
+import { modalContext } from "../part/test";
 const Project = () => {
   const [activeTab, setActiveTab] = useState("List");
+  
+  const {tabID} = useContext(modalContext);
+  const [project, setProject] = useState({});
+
+  useEffect(() => {
+    getprojecByID(tabID).then((data) => {
+      setProject(data);
+    });
+  }, [tabID]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -35,7 +47,7 @@ const Project = () => {
         </div>
         <div className="text-sm font-medium text-gray-500 flex flex-col justify-between">
           <h1 className="text-lg font-semibold text-gray-500 pt-3 pb-1 px-1">
-            Project
+            {project.project_name}  
           </h1>
           <div>
             <ul className="flex flex-wrap -mb-px">
@@ -107,8 +119,8 @@ const Project = () => {
 
         
         {activeTab === "List" && <ProjectList/>}
-        {activeTab === "Calender" && <TaskCalender />}
-        {activeTab === "Board" && <TaskBoard />}
+        {activeTab === "Calender" && <ProjectCalender />}
+        {activeTab === "Board" && <ProjectBoard />}
       </div>
     </div>
   );

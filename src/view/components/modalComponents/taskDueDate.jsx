@@ -8,9 +8,18 @@ const TaskDueDate = ({ DueDate,OnChange }) => {
     DueDate !== undefined ? new Date(DueDate) : null
   );
 
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-KH", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "2-digit",
+    });
+  };
+
   const handleDateChange = (date) => {
+    const formattedDate = formatDate(date);
     setSelectedDate(date);
-    OnChange(date);
+    OnChange(formattedDate);
     // Update state or perform other actions as needed
   };
 
@@ -30,7 +39,7 @@ const TaskDueDate = ({ DueDate,OnChange }) => {
         selected={selectedDate}
         onChange={(date) => handleDateChange(date)}
         placeholderText="No Due Date"
-        dateFormat="MMMM d, yyyy"
+        dateFormat="MM/dd/yyyy"
         className="w-full bg-transparent"
       />
     </div>
