@@ -160,6 +160,10 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
                 />
               </div>
               {/* Body */}
+              <div className="flex flex-row justify-start space-x-5 border-b border-gray-500 p-3 items-cente text-sm sm:text-base">
+                <div className="w-24">Assignee</div>
+                <TaskAssignee Assignee={null} OnChange={onAssigneeChange} />
+              </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">DueDate</div>
                 <TaskDueDate
@@ -178,6 +182,10 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
                   PrioritySate={taskData.priority}
                   OnChange={onChangeStatusAndPrority}
                 />
+              </div>
+              <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
+                <div className="w-24">Project</div>
+                <TaskProjectbox Project={null} OnChange={onProjectChange} />
               </div>
               <div className="flex flex-col justify-start space-y-3 border-b text-sm sm:text-base border-gray-500 p-3 items-start">
                 <div className="w-24">Description</div>

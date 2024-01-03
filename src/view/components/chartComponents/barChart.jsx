@@ -2,15 +2,19 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
-const BarChart = () => {
+const BarChart = ({Data}) => {
 
+    const status = Data.map((item) => item.status);
+    const counts = Data.map((item) => item.count);
+
+    console.log(status,counts)
 
     const data = {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: status,
         datasets: [
             {
                 label: "Bar 1",
-                data: [12, 59, 3, 5, 2, 3],
+                data: counts,
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",
                     "rgba(54, 162, 235, 0.2)",
@@ -41,7 +45,7 @@ const BarChart = () => {
             },
             title: {
                 display: true,
-                text: "Chart.js Bar Chart",
+                text: "Task Status",
             },
         },
         scales: {

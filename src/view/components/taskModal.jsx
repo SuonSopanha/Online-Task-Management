@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import {
   FaCheckCircle,
+  FaClipboardList,
   FaClock,
   FaSave,
   FaSortDown,
@@ -11,6 +12,8 @@ import {
   FaTrash,
   FaTrashRestore,
 } from "react-icons/fa";
+
+import { auth } from "../../firebase/config";
 
 import EditableBox from "./editableBox";
 import DropdownButton from "./dropdownState";
@@ -23,14 +26,31 @@ import TaskProjectbox from "./modalComponents/taskProjectbox";
 import NumberInput from "./modalComponents/numberInput";
 
 import { updateRtTaskByID, deleteRtTaskByID } from "../../firebase/taskCRUD";
+import { getprojecByID } from "../../firebase/projectCRUD";
 
 const TaskModal = ({ isOpen, isClose, taskData }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
   const [task, setTask] = useState(taskData ? taskData : {});
+  const [assigneeOption, setAssigneeOption] = useState(null);
+  const [projectOption, setProjectOption] = useState(null);
 
   useEffect(() => {
     setIsModalOpen(isOpen);
   }, [isOpen]);
+
+  useEffect(() => {
+    if (taskData && taskData.project_id !== undefined && taskData.project_id !== null) {
+      if (taskData.project_id.length === 20) {
+        getprojecByID(taskData.project_id).then((project) => {
+          setProjectOption(project);
+        });
+      }else{
+        setProjectOption(null);
+      }
+    }else{
+      setProjectOption(null);
+    }
+  }, [taskData]);
 
   const handleClose = () => {
     setIsModalOpen(false);
@@ -93,10 +113,10 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
     handleClose();
   };
 
-  const onDeleteButton = () =>{
+  const onDeleteButton = () => {
     deleteRtTaskByID(task.id);
     handleClose();
-  }
+  };
 
   console.log(taskData.priority, "THIS");
   return (
@@ -133,10 +153,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
                 />
               </div>
               {/* Body */}
-              <div className="flex flex-row justify-start space-x-5 border-b border-gray-500 p-3 items-cente text-sm sm:text-base">
-                <div className="w-24">Assignee</div>
-                <TaskAssignee Assignee={null} OnChange={onAssigneeChange} />
-              </div>
+
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">DueDate</div>
                 <TaskDueDate
@@ -158,7 +175,13 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">Project</div>
-                <TaskProjectbox Project={null} OnChange={onProjectChange} />
+                <div className="flex flex-row items-center justify-between space-x-2">
+                  <div className="flex w-6 h-6 items-center justify-center rounded-lg bg-sky-600 text-white">
+                    <FaClipboardList className="w-4 h-4" />
+                  </div>
+
+                  <span>{projectOption !== null ? projectOption.project_name : "No Project"}</span>
+                </div>
               </div>
               <div className="flex flex-col justify-start space-y-3 border-b text-sm sm:text-base border-gray-500 p-3 items-start">
                 <div className="w-24">Description</div>

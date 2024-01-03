@@ -1,18 +1,19 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
 
-const PieChart = ({Data}) => {
+const LineAverage = ({Data}) => {
 
-    const category = Data.map((item) => item.category)
-    const counts = Data.map((item) => item.count)
+    const category = Data.map((item) => item.category);
+    const average = Data.map((item) => item.average);
+
+    console.log(category,average)
 
     const data = {
         labels: category,
         datasets: [
             {
-                label: "# of Votes",
-                data: counts,
+                label: "Bar 1",
+                data: average,
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",
                     "rgba(54, 162, 235, 0.2)",
@@ -39,29 +40,30 @@ const PieChart = ({Data}) => {
         maintainAspectRatio: false,
         plugins: {
             legend: {
-                position: "right",
+                display: false,
             },
             title: {
                 display: true,
-                text: "Task Category",
-                fontSize: 16, // Adjust the title font size
+                text: "Average Hour Required",
             },
         },
-        elements: {
-            arc: {
-                borderWidth: 0.5, // Adjust the border width of each segment
+        scales: {
+            y: {
+                beginAtZero: true,
             },
-        },
-        tooltips: {
-            bodyFontSize: 12, // Adjust the tooltip body font size
         },
     };
 
+
     return (
-        <div className="flex justify-center items-center w-full h-[300px]"> {/* Increase the height of the container */}
-            <Pie data={data} options={options} />
+        <div className="flex w-full h-[300px] justify-center items-center">
+            <Bar data={data} options={options} />
         </div>
     );
-};
 
-export default PieChart;
+
+
+
+}
+
+export default LineAverage

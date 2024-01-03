@@ -240,58 +240,58 @@ const getRtTeamsByUserId = async (id, setChange) => {
   };
   
 
-// const getTeamByID = async (id) => {
-//   try {
-//     const docRef = doc(db, "teams", id);
-//     const docSnap = await getDoc(docRef);
-//     if (docSnap.exists()) {
-//       return docSnap.data();
-//     } else {
-//       console.log("No such document!");
-//     }
-//   } catch (error) {
-//     console.error("Error getting document:", error);
-//   }
-// };
-
 const getTeamByID = async (id) => {
   try {
     const docRef = doc(db, "teams", id);
     const docSnap = await getDoc(docRef);
-
     if (docSnap.exists()) {
-      const teamData = docSnap.data();
-      const memberObjects = teamData.members;
-
-      // Extract member IDs from the array of objects
-      const memberIds = memberObjects.map((member) => member.id);
-
-      // Assuming you have a function to get a user by ID
-      const getUsersPromises = memberIds.map((memberId) => getUserByID(memberId));
-
-      // Wait for all user queries to resolve
-      const usersData = await Promise.all(getUsersPromises);
-
-      // Now you can do something with the team data and the user data
-      console.log("Team Data:", teamData);
-      console.log("Users Data:", usersData);
-
-      // For example, you might want to add user data to the team
-      const teamWithUsers = {
-        ...teamData,
-        members: usersData,
-      };
-
-      return teamWithUsers;
+      return docSnap.data();
     } else {
       console.log("No such document!");
-      return {};
     }
   } catch (error) {
     console.error("Error getting document:", error);
-    return {};
   }
 };
+
+// const getTeamByID = async (id) => {
+//   try {
+//     const docRef = doc(db, "teams", id);
+//     const docSnap = await getDoc(docRef);
+
+//     if (docSnap.exists()) {
+//       const teamData = docSnap.data();
+//       const memberObjects = teamData.members;
+
+//       // Extract member IDs from the array of objects
+//       const memberIds = memberObjects.map((member) => member.id);
+
+//       // Assuming you have a function to get a user by ID
+//       const getUsersPromises = memberIds.map((memberId) => getUserByID(memberId));
+
+//       // Wait for all user queries to resolve
+//       const usersData = await Promise.all(getUsersPromises);
+
+//       // Now you can do something with the team data and the user data
+//       console.log("Team Data:", teamData);
+//       console.log("Users Data:", usersData);
+
+//       // For example, you might want to add user data to the team
+//       const teamWithUsers = {
+//         ...teamData,
+//         members: usersData,
+//       };
+
+//       return teamWithUsers;
+//     } else {
+//       console.log("No such document!");
+//       return {};
+//     }
+//   } catch (error) {
+//     console.error("Error getting document:", error);
+//     return {};
+//   }
+// };
 
 
 export {addAllTeam, getRtTeamsByUserId, getTeamByID};
