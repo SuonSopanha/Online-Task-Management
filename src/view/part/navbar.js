@@ -86,7 +86,7 @@ const Navbar = ({ toggleSidebar }) => {
                       alt="User Profile"
                     />
                   ) : (
-                    <UserProfilePic name={auth.currentUser?.email} />
+                    <UserProfilePic name={auth.currentUser?.email} size={6} />
                   )}
                 </div>
               )}

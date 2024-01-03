@@ -2,10 +2,11 @@ import React from "react";
 
 import EditableBox from "./editableBox";
 
-const TeamOverview = () => {
+const TeamOverview = ({team}) => {
   return (
     <>
       <div class="container mx-auto flex flex-col lg:flex-row lg:space-x-4 mt-3">
+        {console.log(team)}
         <div class="w-full lg:w-8/12 flex flex-col">
           <div className="w-full h-fit  bg-glasses backdrop-blur-12 px-4 py-2 space-y-5 rounded-xl mb-4">
             <h1 className="text-2xl font-semibold text-gray-700 pt-2">
@@ -227,13 +228,13 @@ const TeamOverview = () => {
             <div className="text-2xl font-bold">About Us</div>
 
             <div className="p-2">
-              <EditableBox init={""} OnChange={() => {}} />
+              <EditableBox init={team.description} OnChange={() => {}} />
             </div>
           </div>
 
           <div class="flex flex-col  bg-glasses backdrop-blur-12 p-4 rounded-xl text-gray-700 w-full h-fit ">
             <div>
-              <span class="text-xs">Rizky Design Team</span>
+              <span class="text-xs">{team.name}</span>
             </div>
             <div>
               <p class="text-xl font-bold my-1">Cryptoku landing page</p>

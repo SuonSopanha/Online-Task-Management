@@ -89,7 +89,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
 
   const onSaveButton = () => {
     console.log(task);
-    updateRtTaskByID(task.id, task);
+    //updateRtTaskByID(task.id, task);
     handleClose();
   };
 

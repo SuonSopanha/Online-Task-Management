@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Dropdown = ({ parent,children }) => {
+const Dropdown = ({ parent,children,OnChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -10,9 +10,16 @@ const Dropdown = ({ parent,children }) => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
+    OnChange(option);
     setIsOpen(false);
-    
   };
+
+  useEffect(() =>{
+    if(selectedOption == null || selectedOption === "Default"){
+      OnChange(selectedOption)
+    }
+  },[isOpen])
+
 
   return (
     <div className="relative inline-block text-left">

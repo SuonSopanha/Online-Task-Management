@@ -47,5 +47,31 @@ const addAllMessages = async () => {
     }
 };
 
+//getRtMessagesBySenderId
+const getRtMessagesBySenderId = async (id,setChange) => {
+    const q = query(collection(db, "messages"), where("sender_id", "==", id));
+    onSnapshot(q, (querySnapshot) => {
+      const messages = [];
+      querySnapshot.forEach((doc) => {
+        messages.push({ id: doc.id, ...doc.data() });
+      });
+      setChange((prev) => [...prev, ...messages]);
+      console.log(messages);
+    });
+}
 
-export {addAllMessages};
+const getRtMessagesByRecipientId = async (id,setChange) => {
+    console.log(id)
+    const q = query(collection(db, "messages"), where("recipient_id", "==", id));
+    onSnapshot(q, (querySnapshot) => {
+      const messages = [];
+      querySnapshot.forEach((doc) => {
+        messages.push({ id: doc.id, ...doc.data() });
+      });
+      setChange((prev) => [...prev, ...messages]);
+      console.log(messages)
+    });
+}
+
+
+export {addAllMessages,getRtMessagesBySenderId,getRtMessagesByRecipientId};

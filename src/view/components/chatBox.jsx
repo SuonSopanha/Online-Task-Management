@@ -2,7 +2,7 @@ import React from "react";
 
 import { FaPlus } from "react-icons/fa";
 
-const ChatBox = () => {
+const ChatBox = ({team}) => {
   return (
     <div className="flex flex-col justify-center item-center mt-[-16px]">
       <div class="flex justify-center h-full antialiased text-gray-800">

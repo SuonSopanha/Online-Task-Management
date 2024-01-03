@@ -6,6 +6,8 @@ import {formattedDate} from "../../utils/formatDate";
 import { getTaskByUserID } from "../../firebase/taskCRUD";
 import { addAllProjects } from "../../firebase/projectCRUD";
 import { addAllMessages } from "../../firebase/messageCRUD";
+import { addAllNotification } from "../../firebase/notification";
+import { addAllTeam } from "../../firebase/teamCRUD";
 
 import LoadingBalls from "../../utils/loading";
 

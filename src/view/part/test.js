@@ -35,6 +35,14 @@ const Main = () => {
     setIsCreateModalOpen(true);
   };
 
+  const openMessageModal = () => {
+    setIsSendMessageModalOpen(true);
+  }
+
+  const closeModalMessage = () => {
+    setIsSendMessageModalOpen(false);
+  }
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -72,7 +80,7 @@ const Main = () => {
 
           {/*<Inbox /> */}
 
-          <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal,modalTask,setModalTask,isCreateModalOpen,setIsCreateModalOpen,closeCreateModal,openCreateModal,tabID,setTabID}}>
+          <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal,modalTask,setModalTask,isCreateModalOpen,setIsCreateModalOpen,closeCreateModal,openCreateModal,openMessageModal,tabID,setTabID}}>
             {tab === "HomeTab" && <HomeTab />}
             {tab === "Inbox" && <Inbox />}
             {tab === "MyTask" && <MyTask />}
@@ -85,6 +93,7 @@ const Main = () => {
           <div className="w-full h-full flex justify-center items-center m-8">
             <TaskModal isOpen={isModalOpen} isClose={closeModal} taskData={modalTask}/>
             <CreateTaskModal isOpen={isCreateModalOpen} isClose={closeCreateModal} taskData={modalTask}/>
+            <SendMessageModal isOpen={isSendMessageModalOpen} onClose={closeModalMessage} />
           </div>
             
 

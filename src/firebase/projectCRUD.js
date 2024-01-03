@@ -53,7 +53,7 @@ const getRtProjectByOwnerID = async (id,setChange) => {
       querySnapshot.forEach((doc) => {
         projects.push({ id: doc.id, ...doc.data() });
       });
-      setChange(projects);
+      setChange((prev) => [...prev, ...projects]);
       console.log(projects);
     });
     
@@ -74,14 +74,16 @@ const getRtProjectByMemberID = async (id,setChange) => {
 }
 
 const getprojecByID = async (id) => {
-    const docRef = doc(db, "projects", id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      return docSnap.data();
-    } else {
-      console.log("No such document!");
-    }
+  const docRef = doc(db, "projects", id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    console.log("No such document!");
+    return {};
+  }
 }
+
 
 
 

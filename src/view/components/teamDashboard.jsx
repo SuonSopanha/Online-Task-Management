@@ -11,7 +11,7 @@ import LineChartCompare from "./chartComponents/lineChartCompare";
 import RadarChart from "./chartComponents/radarChart";
 
 
-const TeamDashboard = () => {
+const TeamDashboard = ({team}) => {
 
   
     return (

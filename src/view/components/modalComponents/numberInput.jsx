@@ -5,13 +5,13 @@ const NumberInput = ({init,OnChange}) => {
 
   const handleNumberChange = (e) => {
     setNumberValue(e.target.value);
-
+    OnChange(Number(e.target.value));
   };
 
   useEffect(() => {
     // Call OnChange after the component has re-rendered
-    OnChange(numberValue);
-  }, [numberValue]);
+    OnChange(Number(numberValue));
+  }, [init]);
 
 
   return (
