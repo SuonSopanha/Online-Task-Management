@@ -1,17 +1,31 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect, useContext } from "react";
 
 import ChatBox from "../components/chatBox";
 import TeamOverview from "./teamOverview";
 import TeamDashboard from "./teamDashboard";
 
+import { getTeamByID } from "../../firebase/teamCRUD";
+import { modalContext } from "../part/test";
+
 const TeamHeader = () => {
   const [activeTab, setActiveTab] = useState("Overview");
+  const {tabID} = useContext(modalContext);
+
+  const [team,setTeam] = useState({});
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
+  useEffect(() => {
+    getTeamByID(tabID).then((data) => {
+      setTeam(data);
+    });
+  }, [tabID]);
+
+
+  console.log(team);
   return (
     <div className="w-full h-fit bg-glasses backdrop-blur-12 rounded-lg mt-[-35px]">
       {/* Header */}
@@ -32,7 +46,7 @@ const TeamHeader = () => {
         </div>
         <div className="text-sm font-medium text-gray-500 flex flex-col justify-between">
           <h1 className="text-lg font-semibold text-gray-500 pt-3 pb-1 px-1">
-            My Team
+            {team.name}
           </h1>
           <div>
             <ul className="flex flex-wrap -mb-px">
@@ -79,9 +93,9 @@ const TeamHeader = () => {
 
       {/* Body content */}
 
-      {activeTab === "Overview" && <TeamOverview />}
-      {activeTab === "Message" && <ChatBox />}
-      {activeTab === "Dashboard" && <TeamDashboard />}
+      {activeTab === "Overview" && <TeamOverview team={team} />}
+      {activeTab === "Message" && <ChatBox team={team}/>}
+      {activeTab === "Dashboard" && <TeamDashboard team={team}/>}
     </div>
   );
 };

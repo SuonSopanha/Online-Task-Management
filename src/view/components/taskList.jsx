@@ -2,16 +2,24 @@ import React from "react";
 import { useState, useContext, useEffect } from "react";
 
 import axios from "axios";
-import { FaCheckCircle, FaMinusCircle } from "react-icons/fa";
+import { FaCheckCircle, FaMinusCircle, FaUsers, FaUser } from "react-icons/fa";
 import TaskModal from "./taskModal";
 import SendMessageModal from "./sendMessageModal";
 
 import { auth } from "../../firebase/config";
 
-import { getRtTaskByUserID,getRtTaskByAssigneeID } from "../../firebase/taskCRUD";
-import LoadingBalls from "../../utils/loading";
+import {
+  getRtTaskByUserID,
+  getRtTaskByAssigneeID,
+} from "../../firebase/taskCRUD";
 
+import { getprojecByID } from "../../firebase/projectCRUD";
+import LoadingBalls from "../../utils/loading";
+import { sortByPriority,sortByDueDate,sortByStatus,sortByWorkHoursRequired,sortByTaskName,sortByID } from "../../utils/sortTask";
 import { modalContext } from "../part/test";
+import { mytaskContext } from "../pages/myTask";
+
+import UserProfilePic from "../../utils/photoGenerator";
 
 const TaskList = () => {
   const [taskList, setTaskList] = useState([]);
@@ -19,6 +27,31 @@ const TaskList = () => {
   const [error, setError] = useState(null);
 
   const { openModal, isModalOpen, setModalTask } = useContext(modalContext);
+  const {sortCriteria} = useContext(mytaskContext)
+
+  const sortTasks = (tasks, criteria) => {
+    switch (criteria) {
+      case "Due_Date":
+        console.log("Due_Date sort");
+        return sortByDueDate(tasks);
+      case "Priority":
+        console.log("Priority sort");
+        return sortByPriority(tasks);
+      case "Status":
+        console.log("Status sort");
+        return sortByStatus(tasks);
+      case "Name":
+        console.log("naem sort")
+        return sortByTaskName(tasks);
+      // Add more cases for other criteria as needed
+      default:
+        return sortByID(tasks) ;
+    }
+  };
+
+
+
+  let defaultTask = []
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -27,9 +60,8 @@ const TaskList = () => {
         console.log("User is signed in:", user);
 
         getRtTaskByUserID(auth.currentUser.uid, setTaskList);
-        getRtTaskByAssigneeID(auth.currentUser.uid,setTaskList);
+        //getRtTaskByAssigneeID(auth.currentUser.uid, setTaskList)
         setLoading(false);
-        console.log(taskList);
       } else {
         // User is signed out.
         setError(true);
@@ -41,7 +73,18 @@ const TaskList = () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
     };
-  }, []); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+  },[] ); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+
+  let sortTask = []
+
+
+  useEffect(() => {
+
+    sortTask = [...sortTasks(taskList,sortCriteria)]
+    setTaskList(sortTask)
+  },[sortCriteria])
+
+  const Team = "Team"
 
   if (loading) {
     return <LoadingBalls />;
@@ -50,7 +93,6 @@ const TaskList = () => {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
-
 
   const priorityColor = (priority) => {
     if (priority === "High") {
@@ -63,6 +105,10 @@ const TaskList = () => {
       return "red";
     }
   };
+
+
+
+  console.log(taskList);
 
   return (
     <>
@@ -79,6 +125,7 @@ const TaskList = () => {
                 </tr>
               </thead>
               <tbody class="">
+                {console.log(taskList)}
                 {taskList.map((task) => (
                   <tr key={task.id} class="text-gray-700">
                     <td class="px-4 py-2 border">
@@ -106,19 +153,18 @@ const TaskList = () => {
 
                     <td class="px-4 py-2 text-ms font-semibold border">
                       <div class="flex items-center text-sm">
-                        <div class="relative w-4 h-4 mr-3 rounded-full md:block">
-                          <img
-                            class="object-cover w-full h-full rounded-full"
-                            src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            alt=""
-                            loading="lazy"
-                          />
+                        <div class="flex items- center relative w-4 h-4 mr-3 rounded-full md:block">
+                          {task.project_id !== null ? <FaUsers /> : <FaUser />}
                           <div
                             class="absolute inset-0 rounded-full shadow-inner"
                             aria-hidden="true"
                           ></div>
                         </div>
-                        only Me
+                        {task.project_id !== null ? (
+                          <span className="text-x whitespace-nowrap">{task.project ? task.project.project_name : Team }</span>
+                        ) : (
+                          <span className="text-xs">Only Me</span>
+                        )}
                       </div>
                     </td>
                     <td class="px-4 py-2 text-xs border">

@@ -1,14 +1,19 @@
 // TaskBoard.js
-import React, { useState,useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaUsers } from "react-icons/fa";
 
 import { auth } from "../../firebase/config";
 
-import { getRtTaskByUserID,getRtTaskByAssigneeID } from "../../firebase/taskCRUD";
+import {
+  getRtTaskByUserID,
+  getRtTaskByAssigneeID,
+} from "../../firebase/taskCRUD";
 import LoadingBalls from "../../utils/loading";
+import { sortByPriority,sortByDueDate,sortByStatus,sortByWorkHoursRequired,sortByTaskName,sortByID } from "../../utils/sortTask";
 
 import { modalContext } from "../part/test";
+import { mytaskContext } from "../pages/myTask";
 
 const TaskBoard = () => {
   const [taskList, setTaskList] = useState([]);
@@ -16,6 +21,28 @@ const TaskBoard = () => {
   const [error, setError] = useState(null);
 
   const { openModal, isModalOpen, setModalTask } = useContext(modalContext);
+  const {sortCriteria} = useContext(mytaskContext)
+
+  const sortTasks = (tasks, criteria) => {
+    switch (criteria) {
+      case "Due_Date":
+        console.log("Due_Date sort");
+        return sortByDueDate(tasks);
+      case "Priority":
+        console.log("Priority sort");
+        return sortByPriority(tasks);
+      case "Status":
+        console.log("Status sort");
+        return sortByStatus(tasks);
+      case "Name":
+        console.log("naem sort")
+        return sortByTaskName(tasks);
+      // Add more cases for other criteria as needed
+      default:
+        return sortByID(tasks) ;
+    }
+  };
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -24,7 +51,7 @@ const TaskBoard = () => {
         console.log("User is signed in:", user);
 
         getRtTaskByUserID(auth.currentUser.uid, setTaskList);
-        getRtTaskByAssigneeID(auth.currentUser.uid,setTaskList);
+        getRtTaskByAssigneeID(auth.currentUser.uid, setTaskList);
 
         setLoading(false);
       } else {
@@ -40,6 +67,17 @@ const TaskBoard = () => {
     };
   }, []); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
+  let sortTask = []
+
+
+  useEffect(() => {
+
+    sortTask = [...sortTasks(taskList,sortCriteria)]
+    setTaskList(sortTask)
+  },[sortCriteria])
+
+  
+
   if (loading) {
     return <LoadingBalls />;
   }
@@ -47,6 +85,7 @@ const TaskBoard = () => {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
+  const Team = "Team";
 
   return (
     <div className="container mx-auto mt-10">
@@ -59,14 +98,31 @@ const TaskBoard = () => {
             {taskList
               .filter((task) => task.task_category === "To Do")
               .map((task) => (
-                <button key={task.id} class="flex justify-center items-center" onClick={() => {setModalTask(task); openModal()}}>
+                <button
+                  key={task.id}
+                  class="flex justify-center items-center"
+                  onClick={() => {
+                    setModalTask(task);
+                    openModal();
+                  }}
+                >
                   <div class="flex flex-col bg-blue-400 pt-3 pb-2 px-3 rounded-xl text-white w-full mx-auto my-auto">
                     <div class="flex flex-row space-x-1 items-center">
                       <span>
-                        <FaUser class="text-white text-xs" />
+                        {task.project_id !== null ? (
+                          <FaUsers class="text-white text-xs" />
+                        ) : (
+                          <FaUser class="text-white text-xs" />
+                        )}
                       </span>
 
-                      <span class="text-xs">Rizky Design Team</span>
+                      {task.project_id !== null ? (
+                        <span class="text-xs">
+                          {task.project ? task.project.project_name : Team}
+                        </span>
+                      ) : (
+                        <span class="text-xs">Only Me</span>
+                      )}
                     </div>
                     <div>
                       <p class="flex justify-start text-xl font-bold mt-1 mb-2">
@@ -74,23 +130,9 @@ const TaskBoard = () => {
                       </p>
                     </div>
 
-                    <div class="mb-1 flex flex-row justify-start left-0">
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2"
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
+                    <div className="mb-1 flex flex-row justify-start left-0">
+                      <div className="mb-1 flex flex-row justify-start left-0">
+                      </div>
                     </div>
                     <div class="text-xs flex space-x-1">
                       <span class="px-2 py-1 w-fit font-semibold leading-tight text-green-700 bg-green-100 rounded-lg text-sm">
@@ -101,7 +143,9 @@ const TaskBoard = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.assignee_dates}</div>
+                    <div className="text-xs pt-1 items-end flex justify-end">
+                      DueDate: {task.due_date}
+                    </div>
                   </div>
                 </button>
               ))}
@@ -113,14 +157,31 @@ const TaskBoard = () => {
             {taskList
               .filter((task) => task.task_category === "Working")
               .map((task) => (
-                <button key={task.id} class="flex justify-center items-center" onClick={() => {setModalTask(task); openModal()}}>
+                <button
+                  key={task.id}
+                  class="flex justify-center items-center"
+                  onClick={() => {
+                    setModalTask(task);
+                    openModal();
+                  }}
+                >
                   <div class="flex flex-col bg-violet-400 pt-3 pb-2 px-3 rounded-xl text-white w-full mx-auto my-auto">
                     <div class="flex flex-row space-x-1 items-center">
                       <span>
-                        <FaUser class="text-white text-xs" />
+                        {task.project_id !== null ? (
+                          <FaUsers class="text-white text-xs" />
+                        ) : (
+                          <FaUser class="text-white text-xs" />
+                        )}
                       </span>
 
-                      <span class="text-xs">Rizky Design Team</span>
+                      {task.project_id !== null ? (
+                        <span class="text-xs">
+                          {task.project ? task.project.project_name : Team}
+                        </span>
+                      ) : (
+                        <span class="text-xs">Only Me</span>
+                      )}
                     </div>
                     <div>
                       <p class="flex text-xl font-bold mt-1 mb-2 justify-start">
@@ -129,22 +190,6 @@ const TaskBoard = () => {
                     </div>
 
                     <div class="mb-1 flex flex-row justify-start left-0">
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2"
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
                     </div>
                     <div class="text-xs flex space-x-1">
                       <span class="px-2 py-1 w-fit font-semibold leading-tight text-green-700 bg-green-100 rounded-lg text-sm">
@@ -155,7 +200,9 @@ const TaskBoard = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.assignee_dates}</div>
+                    <div className="text-xs pt-1 items-end flex justify-end">
+                      DueDate: {task.due_date}
+                    </div>
                   </div>
                 </button>
               ))}
@@ -167,14 +214,31 @@ const TaskBoard = () => {
             {taskList
               .filter((task) => task.task_category === "Done")
               .map((task) => (
-                <button key={task.id} class="flex justify-center items-center" onClick={() => {setModalTask(task); openModal()}}>
+                <button
+                  key={task.id}
+                  class="flex justify-center items-center"
+                  onClick={() => {
+                    setModalTask(task);
+                    openModal();
+                  }}
+                >
                   <div class="flex flex-col bg-green-400 pt-3 pb-2 px-3 rounded-xl text-white w-full mx-auto my-auto">
                     <div class="flex flex-row space-x-1 items-center">
                       <span>
-                        <FaUser class="text-white text-xs" />
+                        {task.project_id !== null ? (
+                          <FaUsers class="text-white text-xs" />
+                        ) : (
+                          <FaUser class="text-white text-xs" />
+                        )}
                       </span>
 
-                      <span class="text-xs">Rizky Design Team</span>
+                      {task.project_id !== null ? (
+                        <span class="text-xs">
+                          {task.project ? task.project.project_name : Team}
+                        </span>
+                      ) : (
+                        <span class="text-xs">Only Me</span>
+                      )}
                     </div>
                     <div>
                       <p class="flex justify-start text-xl font-bold mt-1 mb-2">
@@ -183,22 +247,6 @@ const TaskBoard = () => {
                     </div>
 
                     <div class="mb-1 flex flex-row justify-start left-0">
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2"
-                      ></img>
-                      <img
-                        src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                        class="w-4 rounded-full border-2 "
-                      ></img>
                     </div>
                     <div class="text-xs flex space-x-1">
                       <span class="px-2 py-1 w-fit font-semibold leading-tight text-green-700 bg-green-100 rounded-lg text-sm">
@@ -209,7 +257,9 @@ const TaskBoard = () => {
                       </span>
                     </div>
 
-                    <div className="text-xs pt-1 items-end flex justify-end">DueDate: {task.assignee_dates}</div>
+                    <div className="text-xs pt-1 items-end flex justify-end">
+                      DueDate: {task.due_date}
+                    </div>
                   </div>
                 </button>
               ))}
