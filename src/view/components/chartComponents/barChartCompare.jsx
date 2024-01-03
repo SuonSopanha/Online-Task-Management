@@ -3,20 +3,26 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
 
-const BarChartCompare = () => {
+const BarChartCompare = ({Data1,Data2}) => {
+
+    const prioritys = Data1.map((item) => item.priority)
+    const count1 = Data1.map((item) => item.count)
+    const count2 = Data2.map((item) => item.count)
+
+
     const data = {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: prioritys,
         datasets: [
             {
-                label: "Bar 1",
-                data: [12, 19, 3, 5, 2, 3],
+                label: "All Task",
+                data: count1,
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
                 borderColor: "rgba(255, 99, 132, 1)",
                 borderWidth: 1,
             },
             {
-                label: "Bar 2",
-                data: [8, 15, 5, 10, 7, 9],
+                label: "Completed",
+                data: count2,
                 backgroundColor: "rgba(54, 162, 235, 0.2)",
                 borderColor: "rgba(54, 162, 235, 1)",
                 borderWidth: 1,
@@ -33,7 +39,7 @@ const BarChartCompare = () => {
             },
             title: {
                 display: true,
-                text: "Chart.js Bar Chart",
+                text: "Task Priority",
             },
         },
         scales: {

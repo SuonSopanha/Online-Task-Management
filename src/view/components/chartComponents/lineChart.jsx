@@ -1,13 +1,16 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-const LineChart = () => {
+const LineChart = ({Data}) => {
+
+    const month = Data.map((item) => item.month)
+    const count = Data.map((item) => item.count)
 
     const data = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: month,
         datasets: [
             {
-                label: "My First dataset",
+                label: "Task Assigned Every Month",
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: "rgba(54, 162, 235, 0.4)",
@@ -25,7 +28,7 @@ const LineChart = () => {
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: count
             }   
         ]
     }

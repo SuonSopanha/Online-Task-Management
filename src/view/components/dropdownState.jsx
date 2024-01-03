@@ -6,7 +6,7 @@ const DropdownButton = ({type,initState,handleChange}) => {
   const [selectedOption, setSelectedOption] = useState(initState);
 
   const options = type === "status"
-  ? ["On Track", "On Hold", "Complete", "Off Track"]
+  ? ["On Track", "On Hold", "Complete", "Off Track","Cancelled"]
   : type === "category"
   ? ["To Do", "Done", "Working"]
   : ["Low", "Medium", "High", "Very High"];

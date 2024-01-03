@@ -1,13 +1,17 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-const LineChartCompare = () => {
+const LineChartCompare = ({Data}) => {
+
+    const month = Data.map((item) => item.month)
+    const work_hour = Data.map((item) => item.work_hour_required)
+    const hour_spend = Data.map((item) => item.hour_spend)
 
     const data = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: month,
         datasets: [
             {
-                label: "My First dataset",
+                label: "Hour_Reqiured",
                 fill: true,
                 lineTension: 0.1,
                 backgroundColor: "rgba(191, 255, 0,0.4)",
@@ -25,10 +29,10 @@ const LineChartCompare = () => {
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: work_hour
             } ,
             {
-                label: "My Second dataset",
+                label: "Hour Spend",
                 fill: true,
                 lineTension: 0.1,
                 backgroundColor: "rgba(255, 165, 0,0.4)",
@@ -46,7 +50,7 @@ const LineChartCompare = () => {
                 pointHoverBorderWidth: 2,
                 pointRadius: 1,
                 pointHitRadius: 10,
-                data: [28, 48, 40, 19, 86, 27, 90]
+                data: hour_spend
             }
         ]
     }
@@ -61,7 +65,7 @@ const LineChartCompare = () => {
             },
             title: {
                 display: true,
-                text: "Chart.js Line Chart"
+                text: "Task Due"
             }
         },
         scales: {

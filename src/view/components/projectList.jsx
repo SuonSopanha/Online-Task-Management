@@ -139,13 +139,13 @@ const ProjectList = () => {
                             ) : (
                               <UserProfilePic
                                 className="w-2 h-2 items-center"
-                                name={task.assignee.fullname}
+                                name={task.assignee.full_name}
                                 size={6}
                               />
                             )}
                           </div>
                           <div className="ml-2">
-                            <span>{task.assignee.fullname}</span>
+                            <span>{task.assignee.full_name}</span>
                           </div>
                         </div>
                       </div>
