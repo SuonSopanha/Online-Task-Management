@@ -11,6 +11,7 @@ import {
   onSnapshot,
   getDoc,
   orWhere,
+  limit
 } from "firebase/firestore";
 
 import { getprojecByID } from "./projectCRUD";
@@ -141,7 +142,7 @@ const getRtTaskByProjectID = async (id, setChange) => {
     }
 
     console.log(tasks);
-    setChange(tasks);
+    setChange([...tasks]);
   });
 };
 
@@ -161,8 +162,34 @@ const deleteRtTaskByID = async (id) => {
   await deleteDoc(taskDoc);
 };
 
-//get task count by id
 
+const getAllTaskByID = async (id) => {
+  try {
+    const taskQuery = query(
+      collection(db, 'tasks'),
+      where('user_id', '==', id),
+    );
+
+    const taskQuerySnapshot = await getDocs(taskQuery);
+
+    const tasks = [];
+
+    taskQuerySnapshot.forEach((doc) => {
+      if(tasks.length<=5){
+        tasks.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      }
+
+    });
+
+    return tasks;
+  } catch (error) {
+    console.error('Error getting tasks:', error);
+    throw error;
+  }
+};
 
 
 
@@ -173,4 +200,5 @@ export {
   deleteRtTaskByID,
   createRtTask,
   getRtTaskByProjectID,
+  getAllTaskByID
 };

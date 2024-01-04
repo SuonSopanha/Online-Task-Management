@@ -116,6 +116,7 @@ const Main = () => {
               openMessageModal,
               tabID,
               setTabID,
+              setTab,
               isProjectModalOpen,
               setIsProjectModalOpen,
               openProjectModal,

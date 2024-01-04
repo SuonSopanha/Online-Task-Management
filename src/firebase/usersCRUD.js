@@ -1,4 +1,4 @@
-import { collection, updateDoc, doc, setDoc, getDoc } from "firebase/firestore";
+import { collection, updateDoc, doc, setDoc, getDoc,getDocs,query,where } from "firebase/firestore";
 
 import { auth, db } from "./config";
 
@@ -15,7 +15,7 @@ const createUser = async (id, email, photoUrl) => {
   try {
     const newField = {
       email: email,
-      photoUrl: photoUrl,
+      photoURL: photoUrl,
     };
     // Create a DocumentReference using doc() with the custom ID
     const customIdDocRef = doc(usersCollectionRef, id);
@@ -36,7 +36,7 @@ const updateUser = async (id, fullName) => {
 
   try {
     const newField = {
-      fullName: fullName,
+      full_Name: fullName,
     };
     const userRef = doc(usersCollectionRef, id);
     await updateDoc(userRef, newField);
@@ -75,4 +75,35 @@ const updateObjective = async (id, objective) => {
   }
 };
 
-export { getUserByID, createUser, updateUser, updateWork, updateObjective };
+
+// Function to get user by email
+const getUserByEmail = async (email) => {
+  try {
+    // Create a query to find the user with the specified email
+    const q = query(usersCollectionRef, where("email", "==", email));
+
+    // Execute the query
+    const querySnapshot = await getDocs(q);
+
+    // Check if any documents were found
+    if (querySnapshot.empty) {
+      console.log("No user found with the specified email");
+      return null;
+    }
+
+    // Assuming there's only one user with the given email, retrieve the first document
+    const userDoc = querySnapshot.docs[0];
+
+    // Return an object containing both user data and user ID
+    return { id: userDoc.id, data: userDoc.data() };
+  } catch (error) {
+    console.error("Error getting user by email:", error);
+    throw error;
+  }
+};
+
+
+
+
+export { getUserByID, createUser, updateUser, updateWork, updateObjective, getUserByEmail };
+

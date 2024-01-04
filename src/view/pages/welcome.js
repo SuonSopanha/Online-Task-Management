@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { updateUser } from "../../firebase/usersCRUD";
 import { auth } from "../../firebase/config";
@@ -9,6 +10,8 @@ import LoadingBalls from "../../utils/loading.jsx";
 const Welcome = () => {
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -32,12 +35,17 @@ const Welcome = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     //call firebase
+    
+    
     try {
       await updateUser(auth.currentUser.uid, fullName);
       console.log("User updated successfully");
+      navigate("/objective");
     } catch (error) {
       console.error("Error updating user:", error);
     }
+
+
   };
 
   if (loading) {

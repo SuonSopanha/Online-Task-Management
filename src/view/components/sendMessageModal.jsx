@@ -4,16 +4,61 @@ import { useState, useEffect } from "react";
 
 import { FaUsers } from "react-icons/fa";
 
+import { getUserByEmail, getUserByID } from "../../firebase/usersCRUD";
+import { auth } from "../../firebase/config";
+import { addMessage } from "../../firebase/messageCRUD";
 const SendMessageModal = ({ isOpen, onClose }) => {
   const [message, setMessage] = useState("");
+  const [reciever, setReciever] = useState("");
 
-  const handleSendMessage = () => {
-    // Perform any logic you need with the message, e.g., send it to a server
-    console.log("Message sent:", message);
+  const currentDate = new Date();
 
-    // Close the modal
-    onClose();
+  // Get the current time in 12-hour format with AM/PM
+  const currentTime = currentDate.toLocaleTimeString("en-KH", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+
+  // Get the current date in MM/DD/YYYY format
+  const currentDateFormatted = currentDate.toLocaleDateString("en-KH", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+  });
+
+  const handleSendMessage = async () => {
+    try {
+
+      console.log("Message:", message);
+      console.log("Reciever:", reciever);
+
+      const recipient = await getUserByEmail(reciever).then((user) => user).catch((error) =>{alert("No User With this email")});
+
+      if (recipient !== null) {
+        console.log("Recipient:", recipient);
+        const recieverID = recipient.id;
+
+        const newMessage = {
+          sender_id: auth.currentUser.uid,
+          recipient_id: recieverID,
+          message_text: message,
+          time: currentTime,
+          date: currentDateFormatted,
+        };
+
+        await addMessage(newMessage);
+        alert("Message Sent");
+      } else {
+        alert("No User With this email");
+      }
+
+      handleClose();
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
+
 
   const handleClose = () => {
     // Close the modal without sending the message
@@ -28,9 +73,14 @@ const SendMessageModal = ({ isOpen, onClose }) => {
             <h2 className="text-2xl font-semibold mb-2">Send Message</h2>
             <div className="flex flex-row justify-start items-center space-x-3">
               <div className="py-2">To :</div>
-              <span class="flex flex-row items-center px-2 py-1 font-semibold leading-tight text-purple-400 bg-purple-200 border border-purple-900 rounded-xl">
+              <span class="flex flex-row items-center px-2 py-1 font-semibold leading-tight text-blue-400 bg-blue-200 border border-purple-900 rounded-xl">
                 <FaUsers className="mr-2" />
-                Acceptable
+                <input
+                  type="text"
+                  value={reciever}
+                  className="border-2 border-blue-400"
+                  onChange={(e) => setReciever(e.target.value)}
+                ></input>
               </span>
             </div>
 

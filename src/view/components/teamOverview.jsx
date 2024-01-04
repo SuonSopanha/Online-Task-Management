@@ -96,10 +96,10 @@ const TeamOverview = ({ team }) => {
               {teamMembers.map((member, index) =>
                 member !== null ? (
                   <div className="flex items-center" key={index}>
-                    {member.photo_URL !== null ? (
+                    {member.photoURL !== null ? (
                       <img
                         className="object-cover w-12 h-12 mr-4 rounded-full shadow"
-                        src={member.photo_URL}
+                        src={member.photoURL}
                         alt="Person"
                       />
                     ) : (

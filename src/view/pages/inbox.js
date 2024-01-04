@@ -70,21 +70,17 @@ const Inbox = () => {
 
   useEffect(() => {
     setMessages(sortDateAndTime(messages))
-    console.log(messages);
+
     setActivity(sortDateAndTime(activity))
-    console.log(activity);
+
     setNotifications(sortDateAndTime(notifications))
-    console.log(notifications);
+
   }, [sort]);
 
   // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
   if (loading) {
     return <LoadingBalls />;
-  }
-
-  if (error) {
-    return <p>Error: {error.message}</p>;
   }
 
   return (
