@@ -104,16 +104,16 @@ export default function HomePage() {
                   company on track.
                 </p>
               </div>
-              <div>
+              <div className="border-8 border-gray-100 rounded-lg shadow-md">
                 {/* <img src="../assets/img/1img/profile.jpg" alt="profile"></img> */}
-                <img src="https://unsplash.it/500/300" alt="profile"></img>
+                <img src="https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="w-[650px] h-[300px]" alt="profile"></img>
               </div>
             </div>
 
             <div className="flex justify-between items-center sm:px-4 md:px-16 lg:px-24 xl:px-24 2xl:px-24 space-x-2 pb-4">
-              <div>
+              <div className="border-8 border-gray-100 rounded-lg shadow-md">
                 {/*<img src="../assets/img/1img/profile.jpg" alt="profile"></img>*/}
-                <img src="https://unsplash.it/500/300" alt="profile"></img>
+                <img src="https://plus.unsplash.com/premium_photo-1684331678124-ff62c82cef7a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGFzayUyMG9yZ2FuaXppbmd8ZW58MHx8MHx8fDA%3D" className="w-[750px] h-[300px]"  alt="profile"></img>
               </div>
               <div className="text-end">
                 <h1 className="text-lg font-semibold">
@@ -134,13 +134,8 @@ export default function HomePage() {
             <div class="md:flex md:justify-between">
               <div class="mb-6 md:mb-0">
                 <a href="https://flowbite.com/" class="flex items-center">
-                  <img
-                    src="https://flowbite.com/docs/images/logo.svg"
-                    class="h-8 me-3"
-                    alt="FlowBite Logo"
-                  />
                   <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                    Flowbite
+                    Online Task Management
                   </span>
                 </a>
               </div>
@@ -183,7 +178,7 @@ export default function HomePage() {
                         href="https://discord.gg/4eeurUVvTy"
                         class="hover:underline"
                       >
-                        Discord
+                        Twitter
                       </a>
                     </li>
                   </ul>

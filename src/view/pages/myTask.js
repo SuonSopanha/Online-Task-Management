@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext, createContext } from "react";
+import { useState,useEffect, useContext, createContext } from "react";
 
 import { FaPlus } from "react-icons/fa";
 
@@ -9,17 +9,38 @@ import TaskBoard from "../components/taskBoard";
 import Dropdown from "../components/dropDown";
 import HomeTab from "../components/homeTab";
 import { formattedDate } from "../../utils/formatDate";
+import {auth} from "../../firebase/config"
+import { getUserByID } from "../../firebase/usersCRUD";
 
 import { modalContext } from "../part/test";
-
+import UserProfilePic from "../../utils/photoGenerator";
 export const mytaskContext = createContext(null);
 
 const MyTask = () => {
   const [activeTab, setActiveTab] = useState("List");
-
+  const [user,setUser] = useState({})
   const { setModalTask, openCreateModal } = useContext(modalContext);
   const [sortCriteria, setSortCriteria] = useState("Defualt");
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userData = await getUserByID(auth.currentUser.uid);
+        setUser(userData);
+      
+      } else {
+        // User is signed out.
+        console.log("User is signed out");
+      }
+    });
+
+    // No need to return an unsubscribe function, as onAuthStateChanged directly returns it
+
+    // Cleanup logic (optional): Unsubscribe when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  }, []); 
 
   const onSortChange = (sort) => {
     setSortCriteria(sort);
@@ -54,16 +75,23 @@ const MyTask = () => {
       <div className="flex flex-row justify-start border-b border-gray-500  ">
         <div className="flex items-center p-3 ml-1">
           <div class="relative w-12 h-12 rounded-full md:block">
-            <img
-              class="object-cover w-full h-full rounded-full"
-              src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-              alt=""
-              loading="lazy"
-            />
-            <div
-              class="absolute inset-0 rounded-full shadow-inner"
-              aria-hidden="true"
-            ></div>
+          {user.photoURL === null ? (
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full">
+                    <UserProfilePic
+                      name={user.full_name}
+                      size={8}
+                    ></UserProfilePic>
+                  </div>
+                ) : (
+                  // You can replace this with the desired content for true condition
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full">
+                    <img
+                      src={user.photoURL}
+                      alt="plus-math"
+                      className="rounded-full"
+                    />
+                  </div>
+                )}
           </div>
         </div>
         <div className="text-sm font-medium text-gray-500 flex flex-col justify-between">

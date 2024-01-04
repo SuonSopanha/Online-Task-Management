@@ -60,8 +60,6 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
     setIsModalOpen(isOpen);
   }, [isOpen]);
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -176,6 +174,10 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
     handleClose();
   };
 
+  const onDeleteButton = () =>{
+    handleClose();
+  }
+
   console.log(taskData.priority, "THIS");
   return (
     <>
@@ -255,6 +257,16 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
               </div>
               {/* Footer */}
               <div className="flex items-center justify-end space-x-2 p-6 border-t border-solid border-gray-300 rounded-b">
+                <div className="flex flex-row px-2 py-1 justify-center items-center bg-rose-600 rounded-lg">
+                  <FaTrash className="w-3 h-3 text-white" />
+                  <button
+                    className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={onDeleteButton}
+                  >
+                    Delete
+                  </button>
+                </div>
                 <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 rounded-lg">
                   <FaSave className="w-3 h-3 text-white" />
                   <button

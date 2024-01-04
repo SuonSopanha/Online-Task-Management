@@ -5,7 +5,7 @@ import EditableBox from "./editableBox";
 import { getUserByID } from "../../firebase/usersCRUD";
 import { getprojecByID } from "../../firebase/projectCRUD";
 import UserProfilePic from "../../utils/photoGenerator";
-import { FaClipboardList } from "react-icons/fa";
+import { FaClipboardList, FaPlusCircle, FaPlusSquare } from "react-icons/fa";
 
 const TeamOverview = ({ team }) => {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -117,6 +117,13 @@ const TeamOverview = ({ team }) => {
                   </div>
                 ) : null
               )}
+              <div className="flex items-center">
+                <div className="object-cover w-12 h-12 mr-4 rounded-full shadow flex items-center justify-center"><FaPlusCircle className="w-full h-full text-gray-400"></FaPlusCircle></div>
+
+                <div className="flex flex-col justify-center">
+                  <p className="text-sm text-gray-700 font-bold">Add member</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -128,13 +135,8 @@ const TeamOverview = ({ team }) => {
             <ul className="flex flex-col space-y-4 ">
               <li>
                 <div class="flex items-center text-sm border-b border-gray-900 px-1 pb-2">
-                  <div class="relative w-10 h-10 mr-3 rounded-full md:block">
-                    <img
-                      class="object-cover w-full h-full rounded-lg"
-                      src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                      alt=""
-                      loading="lazy"
-                    />
+                  <div class="relative w-10 h-10 mr-3 rounded-full md:block flex items-center justify-center text-sky-400">
+                      <FaPlusSquare className="w-full h-full"></FaPlusSquare>
                     <div
                       class="absolute inset-0 rounded-full shadow-inner"
                       aria-hidden="true"

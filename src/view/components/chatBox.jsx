@@ -161,38 +161,6 @@ const ChatBox = ({ team }) => {
                   </button>
                 </div>
               </div>
-
-              <div class="flex flex-row items-center h-16 rounded-xl px-4 mt-1">
-                <div className="flex flex-row justify-between w-full items-center">
-                  <div class="flex items-center text-sm  px-1 pb-2">
-                    <button
-                      type="button"
-                      className="px-3 py-2 mr-3 gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
-                    >
-                      <FaPlus className="w-3 h-3" />
-                      <div className="ml-2">Create Task</div>
-                    </button>
-                  </div>
-                  <div class="flex flex-row relative">
-                    <img
-                      src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                      class="w-7 h-7 rounded-full border-2 "
-                    ></img>
-                    <img
-                      src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                      class="w-7 h-7 rounded-full border-2  "
-                    ></img>
-                    <img
-                      src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                      class="w-7 h-7 rounded-full border-2 "
-                    ></img>
-                    <img
-                      src="https://source.unsplash.com/ILip77SbmOE/900x900"
-                      class="w-7 h-7 rounded-full border-2 "
-                    ></img>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
