@@ -73,5 +73,19 @@ const getRtMessagesByRecipientId = async (id,setChange) => {
     });
 }
 
+const addMessage = async (message) => {
+  try {
+    const messageCollection = collection(db, "messages");
 
-export {addAllMessages,getRtMessagesBySenderId,getRtMessagesByRecipientId};
+    // Use addDoc to add a new document to the "messages" collection
+    const docRef = await addDoc(messageCollection, message);
+
+    console.log("Document written with ID: ", docRef.id);
+    console.log("Message added successfully.");
+  } catch (error) {
+    console.error("Error adding message: ", error);
+  }
+};
+
+
+export {addAllMessages,getRtMessagesBySenderId,getRtMessagesByRecipientId,addMessage};

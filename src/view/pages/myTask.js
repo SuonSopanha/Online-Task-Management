@@ -7,6 +7,7 @@ import TaskList from "../components/taskList";
 import TaskCalender from "../components/taskCalender";
 import TaskBoard from "../components/taskBoard";
 import Dropdown from "../components/dropDown";
+import HomeTab from "../components/homeTab";
 import { formattedDate } from "../../utils/formatDate";
 
 import { modalContext } from "../part/test";

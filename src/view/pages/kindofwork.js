@@ -1,6 +1,20 @@
 import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { auth } from "../../firebase/config";
+import { updateWork } from "../../firebase/usersCRUD";
+
 
 const Kindofwork = () => {
+  const [selectedOption, setSelectedOption] = useState(null);
+  const navigate = useNavigate();
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    updateWork(auth.currentUser.uid, option);
+    navigate("/app");
+  };
+
   return (
     <>
       <div class="p-10">
@@ -20,72 +34,72 @@ const Kindofwork = () => {
           </p>
         </div>
         <div>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Project or Program Management</a>
+          <button onClick={() => {handleOptionClick('Project or Program Management')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Project or Program Management</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Marketing</a>
+          <button onClick={() => {handleOptionClick('Marketing')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Marketing</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Information Technology (IT)</a>
+          <button onClick={() => {handleOptionClick('Information Technology')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Information Technology (IT)</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Operations</a>
+          <button onClick={() => {handleOptionClick('Operations')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Operations</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Engineering</a>
+          <button onClick={() => {handleOptionClick('Engineering')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Engineering</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Product management</a>
+          <button onClick={() => {handleOptionClick('Product management')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Product management</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Design</a>
+          <button onClick={() => {handleOptionClick('Design')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Design</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Comunications</a>
+          <button onClick={() => {handleOptionClick('Comunications')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Comunications</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Finace or Accounting</a>
+          <button onClick={() => {handleOptionClick('Finace or Accounting')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Finace or Accounting</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Atministrative Assistant</a>
+          <button onClick={() => {handleOptionClick('Atministrative Assistant')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Atministrative Assistant</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Human Resources</a>
+          <button onClick={() => {handleOptionClick('Human Resources')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Human Resources</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Customer Experience</a>
+          <button onClick={() => {handleOptionClick('Customer Experience')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Customer Experience</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Research and Development</a>
+          <button onClick={() => {handleOptionClick('Research and Development')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Research and Development</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Data or Analytics</a>
+          <button onClick={() => {handleOptionClick('Data or Analytics')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Data or Analytics</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Sales</a>
+          <button onClick={() => {handleOptionClick('Sales')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Sales</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Legal</a>
+          <button onClick={() => {handleOptionClick('Legal')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Legal</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Education Professional</a>
+          <button onClick={() => {handleOptionClick('Education Professional')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Education Professional</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Healthcare Professional</a>
+          <button onClick={() => {handleOptionClick('Healthcare Professional')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Healthcare Professional</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Fundraising</a>
+          <button onClick={() => {handleOptionClick('Fundraising')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Fundraising</p>
           </button>
-          <button class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
-            <a href="#">Other</a>
+          <button onClick={() => {handleOptionClick('Other')}}class="focus:shadow-outline m-1 rounded-xl border-2 p-2 bg-glasses backdrop-blur-12 bg-opacity-50 border-gray-400 hover:border-sky-500 dark:text-gray-800">
+            <p href="#">Other</p>
           </button>
         </div>
         <button class="mt-8 h-10 w-28 rounded-xl bg-blue-700 font-medium text-white">
-          <a href="#">Continue</a>
+          <p href="#">Continue</p>
         </button>
         <button class="mt-8 h-10 w-28 font-medium dark:text-gray-600">
-          <a href="#">Skip</a>
+          <p href="#">Skip</p>
         </button>
       </div>
     </>

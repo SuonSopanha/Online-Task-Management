@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import {
   FaInbox,
@@ -13,10 +13,12 @@ import {
   FaChartArea,
 } from "react-icons/fa";
 
-import {auth} from "../../firebase/config";
-import {getRtProjectByMemberID,getRtProjectByOwnerID } from "../../firebase/projectCRUD";
+import { auth } from "../../firebase/config";
+import {
+  getRtProjectByMemberID,
+  getRtProjectByOwnerID,
+} from "../../firebase/projectCRUD";
 import { getRtTeamsByUserId } from "../../firebase/teamCRUD";
-
 
 function Sidebar({ isOpen, TabNavigate }) {
   const [isOpendrop, setIsOpendrop] = useState(false);
@@ -25,7 +27,7 @@ function Sidebar({ isOpen, TabNavigate }) {
   const [isOpendropTeam, setIsOpendropTeam] = useState(false);
 
   const [projectList, setProjectList] = useState([]);
-  const [teamList,setTeamList] = useState([]);
+  const [teamList, setTeamList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -55,11 +57,8 @@ function Sidebar({ isOpen, TabNavigate }) {
         console.log("User is signed in:", user);
 
         getRtProjectByOwnerID(auth.currentUser.uid, setProjectList);
-        getRtProjectByMemberID(auth.currentUser.uid, setProjectList);
+        getRtTeamsByUserId(auth.currentUser.uid, setTeamList);
 
-        getRtTeamsByUserId(auth.currentUser.uid,setTeamList)
-        
-        setProjectList([...new Set(projectList)]);
         setLoading(false);
       } else {
         // User is signed out.
@@ -71,8 +70,10 @@ function Sidebar({ isOpen, TabNavigate }) {
     return () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
+      const uniquelist = [...new Set(projectList)];
+      setProjectList(uniquelist);
     };
-  }, []); 
+  }, []);
 
 
   return (
@@ -142,13 +143,19 @@ function Sidebar({ isOpen, TabNavigate }) {
             {isOpendropInsight && (
               <div className="flex flex-col items-center w-full">
                 {/* Dropdown content */}
-                <button className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTab("Reporting")}>
+                <button
+                  className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+                  onClick={() => NavigateTab("Reporting")}
+                >
                   <FaChartArea className="w-3 h-3 stroke-current text-blue-900" />
                   <span className="ml-2 text-sm font-medium text-gray-700">
                     Reporting
                   </span>
                 </button>
-                <button className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTab("Dashboard")}>
+                <button
+                  className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm"
+                  onClick={() => NavigateTab("Dashboard")}
+                >
                   <FaChartPie className="w-3 h-3 stroke-current text-blue-900" />
                   <span className="ml-2 text-sm font-medium text-gray-700">
                     Dashboard
@@ -188,8 +195,12 @@ function Sidebar({ isOpen, TabNavigate }) {
               <div className="flex flex-col items-center w-full ">
                 {/* Dropdown content */}
                 {projectList.map((project) => (
-                  <button key={project.project_id} className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTabwithParam("Project", project.id)}>
-                    <FaProjectDiagram className="w-3 h-3 stroke-current text-blue-900"/>
+                  <button
+                    key={project.project_id}
+                    className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+                    onClick={() => NavigateTabwithParam("Project", project.id)}
+                  >
+                    <FaProjectDiagram className="w-3 h-3 stroke-current text-blue-900" />
                     <span className="ml-2 text-sm font-medium text-gray-700 whitespace-nowrap">
                       {project.project_name}
                     </span>
@@ -230,7 +241,11 @@ function Sidebar({ isOpen, TabNavigate }) {
               <div className="flex flex-col items-center w-full">
                 {/* Dropdown content */}
                 {teamList.map((team) => (
-                  <button key={team.team_id} className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm" onClick={() => NavigateTabwithParam("Team", team.id)}>
+                  <button
+                    key={team.team_id}
+                    className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+                    onClick={() => NavigateTabwithParam("Team", team.id)}
+                  >
                     <FaUsers className="w-3 h-3 stroke-current text-blue-900" />
                     <span className="ml-2 text-sm font-medium text-gray-700">
                       {team.name}
