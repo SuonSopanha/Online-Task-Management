@@ -16,7 +16,7 @@ export const projectTaskContext = createContext(null);
 const Project = () => {
   const [activeTab, setActiveTab] = useState("List");
 
-  const { tabID } = useContext(modalContext);
+  const { tabID,setIsProjectModalOpen,openProjectModal,setModalTask,opentCreateProjectTaskModal } = useContext(modalContext);
   const [project, setProject] = useState({});
   const [sortCriteria, setSortCriteria] = useState("Default");
 
@@ -32,6 +32,23 @@ const Project = () => {
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+  };
+
+  const taskSample = {
+    project_id: tabID,
+    user_id: "",
+    task_name: "Name",
+    description: "",
+    due_date: "01/01/2023",
+    task_category: "To Do",
+    tracking: [],
+    work_hour_required: 0,
+    status: "On Track",
+    priority: "Low",
+    assignee_id: "",
+    assignee_dates: undefined,
+    complete: false,
+    complete_date: "",
   };
 
   return (
@@ -117,6 +134,10 @@ const Project = () => {
           </div>
 
           <button
+            onClick={() => {
+              opentCreateProjectTaskModal();
+              setModalTask(taskSample);
+            }}
             type="button"
             className="px-3 py-2 mr-3 gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
           >
