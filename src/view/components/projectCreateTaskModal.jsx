@@ -10,7 +10,6 @@ import {
   FaTimesCircle,
   FaTrash,
   FaTrashRestore,
-  FaClipboardList,
 } from "react-icons/fa";
 
 import EditableBox from "./editableBox";
@@ -34,12 +33,11 @@ import { getUserByID } from "../../firebase/usersCRUD";
 
 import { modalContext } from "../part/test";
 
-const ProjectModal = ({ isOpen, isClose, taskData }) => {
+const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
   const [task, setTask] = useState(taskData ? taskData : {});
   const { tabID } = useContext(modalContext);
   const [members, setMembers] = useState([]);
-  const [project, setProject] = useState({});
 
   const timestamp = Date.now();
   const formattedDate = new Date(timestamp).toLocaleDateString("en-KH", {
@@ -60,14 +58,11 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
     setIsModalOpen(isOpen);
   }, [isOpen]);
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (task.project_id !== null && task.project_id.length === 20) {
           const project = await getprojecByID(task.project_id);
-          setProject(project);
           const memberIdList = project.members.map((member) => member.id);
           console.log(memberIdList);
           // Fetch user information for each member ID
@@ -156,7 +151,7 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
 
   const onSaveButton = () => {
     const newFeild = {
-      project_id: task.project_id,
+      project_id: tabID,
       user_id: auth.currentUser.uid,
       task_name: task.task_name,
       description: task.description,
@@ -182,7 +177,6 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
       {isModalOpen && (
         <div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
           <div className="w-full sm:w-screen max-h-3xl max-w-3xl mx-auto my-6 mt-48">
-            {console.log(members, "members")}
             {/* Content */}
             <div className="relative flex flex-col w-full bg-sky-200 bg-opacity-75 backdrop-blur-12 border-0 rounded-lg outline-none focus:outline-none">
               {/* Header */}
@@ -214,7 +208,13 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
               {/* Body */}
               <div className="flex flex-row justify-start space-x-5 border-b border-gray-500 p-3 items-cente text-sm sm:text-base">
                 <div className="w-24">Assignee</div>
-                <TaskAssignee Assignee={null} OnChange={onAssigneeChange} />
+                {/* Conditionally render TaskAssignee only when members is available */}
+                {members.length > 0 && (
+                  <TaskAssignee
+                    Assignee={null}
+                    OnChange={onAssigneeChange}
+                  />
+                )}
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">DueDate</div>
@@ -234,16 +234,6 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
                   PrioritySate={taskData.priority}
                   OnChange={onChangeStatusAndPrority}
                 />
-              </div>
-              <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
-                <div className="w-24">Project</div>
-                <div className="flex flex-row items-center justify-between space-x-2">
-                  <div className="flex w-6 h-6 items-center justify-center rounded-lg bg-sky-600 text-white">
-                    <FaClipboardList className="w-4 h-4" />
-                  </div>
-
-                  <span>{project.project_name}</span>
-                </div>
               </div>
               <div className="flex flex-col justify-start space-y-3 border-b text-sm sm:text-base border-gray-500 p-3 items-start">
                 <div className="w-24">Description</div>
@@ -274,4 +264,4 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
   );
 };
 
-export default ProjectModal;
+export default ProjectCreateTaskModal;

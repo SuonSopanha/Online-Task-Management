@@ -15,7 +15,7 @@ import { modalContext } from "../part/test";
 import { projectTaskContext } from "../pages/project";
 
 const ProjectList = () => {
-  const { tabID, setTabID, openModal, setModalTask } = useContext(modalContext);
+  const { tabID, setTabID, openProjectModal, setModalTask } = useContext(modalContext);
 
   const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -106,7 +106,7 @@ const ProjectList = () => {
                     <td class="px-4 py-2 border">
                       <button
                         onClick={() => {
-                          openModal();
+                          openProjectModal();
                           setModalTask(task);
                         }}
                       >

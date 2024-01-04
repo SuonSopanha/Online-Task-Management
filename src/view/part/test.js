@@ -14,6 +14,8 @@ import MyDashboard from "../components/myDashboard";
 import TaskModal from "../components/taskModal";
 import CreateTaskModal from "../components/createTaskModal";
 import SendMessageModal from "../components/sendMessageModal";
+import ProjectModal from "../components/projectModal";
+import ProjectCreateTaskModal from "../components/projectCreateTaskModal";
 
 export const modalContext = createContext(null);
 
@@ -24,8 +26,11 @@ const Main = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+  const [isCreateProjectTaskModalOpen, setIsCreateProjectTaskModalOpen] = useState(false);
   const [isSendMessageModalOpen, setIsSendMessageModalOpen] = useState(false);
   const [modalTask, setModalTask] = useState({});
+
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -37,11 +42,27 @@ const Main = () => {
 
   const openMessageModal = () => {
     setIsSendMessageModalOpen(true);
-  }
+  };
 
   const closeModalMessage = () => {
     setIsSendMessageModalOpen(false);
+  };
+
+  const openProjectModal = () => {
+    setIsProjectModalOpen(true);
+  };
+
+  const opentCreateProjectTaskModal = () =>{
+    setIsCreateProjectTaskModalOpen(true);
   }
+
+  const closeCreateProjectTaskModal = () =>{
+    setIsCreateProjectTaskModalOpen(false);
+  }
+
+  const closeProjectModal = () => {
+    setIsProjectModalOpen(false);
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -80,23 +101,66 @@ const Main = () => {
 
           {/*<Inbox /> */}
 
-          <modalContext.Provider value={{isModalOpen,setIsModalOpen,closeModal,openModal,modalTask,setModalTask,isCreateModalOpen,setIsCreateModalOpen,closeCreateModal,openCreateModal,openMessageModal,tabID,setTabID}}>
+          <modalContext.Provider
+            value={{
+              isModalOpen,
+              setIsModalOpen,
+              closeModal,
+              openModal,
+              modalTask,
+              setModalTask,
+              isCreateModalOpen,
+              setIsCreateModalOpen,
+              closeCreateModal,
+              openCreateModal,
+              openMessageModal,
+              tabID,
+              setTabID,
+              isProjectModalOpen,
+              setIsProjectModalOpen,
+              openProjectModal,
+              closeProjectModal,
+              isCreateProjectTaskModalOpen,
+              setIsCreateProjectTaskModalOpen,
+              opentCreateProjectTaskModal,
+              closeCreateProjectTaskModal
+            }}
+          >
             {tab === "HomeTab" && <HomeTab />}
             {tab === "Inbox" && <Inbox />}
             {tab === "MyTask" && <MyTask />}
-            {tab === "Project" && <Project/>}
+            {tab === "Project" && <Project />}
             {tab === "Team" && <TeamHeader />}
             {tab === "Dashboard" && <MyDashboard />}
-            
+
+            <div className="w-full h-full flex justify-center items-center m-8">
+              <TaskModal
+                isOpen={isModalOpen}
+                isClose={closeModal}
+                taskData={modalTask}
+              />
+              <ProjectModal
+                isOpen={isProjectModalOpen}
+                isClose={closeProjectModal}
+                taskData={modalTask}
+              />
+              <CreateTaskModal
+                isOpen={isCreateModalOpen}
+                isClose={closeCreateModal}
+                taskData={modalTask}
+              />
+              <SendMessageModal
+                isOpen={isSendMessageModalOpen}
+                onClose={closeModalMessage}
+              />
+
+              <ProjectCreateTaskModal
+                isOpen={isCreateProjectTaskModalOpen}
+                isClose={closeCreateProjectTaskModal}
+                taskData={modalTask}
+              />
+            </div>
           </modalContext.Provider>
-
-          <div className="w-full h-full flex justify-center items-center m-8">
-            <TaskModal isOpen={isModalOpen} isClose={closeModal} taskData={modalTask}/>
-            <CreateTaskModal isOpen={isCreateModalOpen} isClose={closeCreateModal} taskData={modalTask}/>
-            <SendMessageModal isOpen={isSendMessageModalOpen} onClose={closeModalMessage} />
-          </div>
-            
-
         </div>
       </div>
     </div>
