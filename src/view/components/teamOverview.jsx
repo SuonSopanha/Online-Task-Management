@@ -118,7 +118,9 @@ const TeamOverview = ({ team }) => {
                 ) : null
               )}
               <div className="flex items-center">
-                <div className="object-cover w-12 h-12 mr-4 rounded-full shadow flex items-center justify-center"><FaPlusCircle className="w-full h-full text-gray-400"></FaPlusCircle></div>
+                <div className="object-cover w-12 h-12 mr-4 rounded-full shadow flex items-center justify-center">
+                  <FaPlusCircle className="w-full h-full text-gray-400"></FaPlusCircle>
+                </div>
 
                 <div className="flex flex-col justify-center">
                   <p className="text-sm text-gray-700 font-bold">Add member</p>
@@ -136,7 +138,7 @@ const TeamOverview = ({ team }) => {
               <li>
                 <div class="flex items-center text-sm border-b border-gray-900 px-1 pb-2">
                   <div class="relative w-10 h-10 mr-3 rounded-full md:block flex items-center justify-center text-sky-400">
-                      <FaPlusSquare className="w-full h-full"></FaPlusSquare>
+                    <FaPlusSquare className="w-full h-full"></FaPlusSquare>
                     <div
                       class="absolute inset-0 rounded-full shadow-inner"
                       aria-hidden="true"
@@ -201,7 +203,10 @@ const TeamOverview = ({ team }) => {
               </div>
             </div>
 
-            <div class="text-xs mb-2">5/12 Task Completed</div>
+            {team && team.milestones && team.milestones.length > 0 && (
+              <div class="text-xs mb-2">Due Date : {team.milestones[0].due_date}</div>
+            )}
+
             <div class="w-full bg-gray-400 p-0">
               <div class="w-[50%] bg-blue-500 h-1"></div>
             </div>

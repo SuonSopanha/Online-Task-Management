@@ -28,7 +28,7 @@ const TaskAssignee = ({ Assignee,Option ,OnChange }) => {
 
   useEffect(() => {
     setAssigneeObj(Assignee);
-  }, [Assignee]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +56,7 @@ const TaskAssignee = ({ Assignee,Option ,OnChange }) => {
     };
 
     fetchData();
-  }, [tabID]);
+  }, []);
 
   const renderAssignee = () => {
     if (assigneeObj !== null) {

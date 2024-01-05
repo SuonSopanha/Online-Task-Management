@@ -21,7 +21,7 @@ const Login = () => {
     const user = await getUserByID(auth.currentUser.uid)
 
 
-    if(user.fullname){
+    if(user.full_name){
       navigate('/app')
     }else{
       navigate('/welcome')
@@ -130,7 +130,7 @@ const googleLogin = async (e) =>{
         </form>
         <p class="text-center mt-3 text-[14px]">
           Don't have an account?
-          <a href="/signup" class="text-gray-600">
+          <a href="/signup" class="text-gray-600" >
             Signup
           </a>
         </p>

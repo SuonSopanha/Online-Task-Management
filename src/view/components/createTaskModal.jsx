@@ -24,6 +24,7 @@ import NumberInput from "./modalComponents/numberInput";
 
 import { auth } from "../../firebase/config";
 import { updateRtTaskByID, deleteRtTaskByID ,createRtTask} from "../../firebase/taskCRUD";
+import { createNotification } from "../../firebase/notification";
 
 const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
@@ -103,8 +104,24 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
     }
   };
 
-  const onSaveButton = () => {
-    const newFeild = {
+  const currentDate = new Date();
+
+  // Get the current time in 12-hour format with AM/PM
+  const currentTime = currentDate.toLocaleTimeString("en-KH", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+
+  // Get the current date in MM/DD/YYYY format
+  const currentDateFormatted = currentDate.toLocaleDateString("en-KH", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+  });
+
+  const onSaveButton = async () => {
+    const newFeild =  {
       project_id: task.project_id,
       user_id: auth.currentUser.uid,
       task_name: task.task_name,
@@ -120,8 +137,24 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
       complete: task.complete,
       complete_date: task.complete_date,
     };
+
+    const newNoti = {
+      Date: formattedDate,
+      time: currentTime,
+      user_id: auth.currentUser.uid,
+      notification_type: "task assign",
+      notification_content: task.task_name + " has been assign",
+      source : {
+        id: auth.currentUser.uid,
+        type: 1
+      }
+
+    }
+    console.log(task)
     console.log(newFeild);
-    createRtTask(newFeild);
+    await createRtTask(newFeild);
+    console.log(newNoti)
+    await createNotification(newNoti)
     handleClose();
   };
 
@@ -189,7 +222,7 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
               </div>
               {/* Footer */}
               <div className="flex items-center justify-end space-x-2 p-6 border-t border-solid border-gray-300 rounded-b">
-                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 rounded-lg">
+                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 hover:bg-blue-800 rounded-lg">
                   <FaSave className="w-3 h-3 text-white" />
                   <button
                     className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"

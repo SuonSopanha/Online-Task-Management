@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { auth } from "../../firebase/config";
 import { formattedDate } from "../../utils/formatDate";
@@ -26,7 +27,7 @@ const HomeTab = () => {
   const [projectList,setProjectList] = useState([]);
 
   const { openModal, isModalOpen, setModalTask,setTab } = useContext(modalContext);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -69,6 +70,10 @@ const HomeTab = () => {
     }
   };
 
+  const handleChangeCreateProject = () => {
+      navigate("/projectCreate")
+  }
+
   const Team = "Team";
   return (
     <div className="w-full flex items-center justify-center">
@@ -106,7 +111,7 @@ const HomeTab = () => {
             </div>
             <div class="col-span-2 mt-10 rounded-lg bg-glasses backdrop-blur-12 bg-opacity-50 pb-4">
               <p class="ml-8 mt-4 text-xl font-medium">Project</p>
-              <div class="ml-12 mt-4 flex items-center">
+              <button onClick={handleChangeCreateProject} class="ml-12 mt-4 flex items-center">
                 <div class="flex h-8 w-8 items-center justify-center rounded-2xl border-2 border-dashed border-sky-500">
                   <img
                     width="40"
@@ -116,7 +121,7 @@ const HomeTab = () => {
                   />
                 </div>
                 <span class="ml-4 text-sm font-medium"> Create projects </span>
-              </div>
+              </button>
               {projectList.map((project) => 
                 <div class="ml-12 mt-4 flex items-center">
                 <div class="flex h-8 w-8 items-center justify-center rounded-2xl">

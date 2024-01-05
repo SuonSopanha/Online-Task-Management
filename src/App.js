@@ -11,7 +11,7 @@ import Signup from './view/pages/signup';
 import Welcome from './view/pages/welcome';
 import Mainobj from './view/pages/mainobj';
 import Kindofwork from './view/pages/kindofwork';
-import Primaryrole from './view/pages/Primaryrole';
+import ProjectCreate from './view/pages/projectCreate';
 import Teamates from './view/pages/teamates';
 
 function App() {
@@ -27,11 +27,11 @@ function App() {
           <Route path='/objective' element={<Mainobj/>}/>
           <Route path='/work' element={<Kindofwork/>}/>
           <Route path='/app' element={<Main/>}/>
-          <Route path='/role' element={<Primaryrole/>}/>
+          <Route path='/projectCreate' element={<ProjectCreate/>}/>
           <Route path='/team' element={<Teamates/>}/>
         </Routes>
       </BrowserRouter>
-    
+      
     </div>
   );
 }

@@ -152,10 +152,18 @@ const createRtTask = async (data) => {
 };
 
 //updateRtTaskByID
+// updateRtTaskByID
 const updateRtTaskByID = async (id, data) => {
-  const taskDoc = doc(db, "tasks", id);
-  await updateDoc(taskDoc, data);
+  try {
+    const taskDocRef = doc(db, "tasks", id);
+    await updateDoc(taskDocRef, data);
+    console.log("Task updated successfully!");
+  } catch (error) {
+    console.error("Error updating task:", error);
+    throw error;
+  }
 };
+
 
 const deleteRtTaskByID = async (id) => {
   const taskDoc = doc(db, "tasks", id);

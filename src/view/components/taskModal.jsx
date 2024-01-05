@@ -108,8 +108,8 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
   };
 
   const onSaveButton = () => {
-    console.log(task);
-    //updateRtTaskByID(task.id, task);
+    console.log(task.id);
+    updateRtTaskByID(task.id,task);
     handleClose();
   };
 
@@ -203,7 +203,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
                     Delete
                   </button>
                 </div>
-                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 rounded-lg">
+                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 hover:bg-blue-800 rounded-lg">
                   <FaSave className="w-3 h-3 text-white" />
                   <button
                     className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"

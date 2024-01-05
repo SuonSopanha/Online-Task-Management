@@ -59,4 +59,14 @@ const getRtNotifcationsByUserID = async (id,setChange) => {
     });
 }
 
-export { addAllNotification, getRtNotifcationsByUserID };
+const createNotification = async (notification) => {
+  try {
+    const notificationCollection = collection(db, "notifications");
+    const docRef = await addDoc(notificationCollection, notification);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
+};
+
+export { addAllNotification, getRtNotifcationsByUserID ,createNotification};

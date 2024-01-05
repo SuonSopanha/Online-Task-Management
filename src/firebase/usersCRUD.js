@@ -36,7 +36,7 @@ const updateUser = async (id, fullName) => {
 
   try {
     const newField = {
-      full_Name: fullName,
+      full_name: fullName,
     };
     const userRef = doc(usersCollectionRef, id);
     await updateDoc(userRef, newField);
@@ -102,8 +102,39 @@ const getUserByEmail = async (email) => {
   }
 };
 
+//get user full_name by id 
+
+
+// Function to get user full_name by id
+const getUserFullNameById = async (id) => {
+  try {
+    const userDoc = await getDoc(doc(usersCollectionRef, id));
+
+    // Check if the document exists
+    if (!userDoc.exists()) {
+      console.log("No user found with the specified ID");
+      return null;
+    }
+
+    // Retrieve the user data
+    const userData = userDoc.data();
+
+    // Check if the user has a full_Name field
+    if (!userData || !userData.full_name) {
+      console.log("User does not have a full name");
+      return null;
+    }
+
+    // Return the full name
+    return userData.full_name;
+  } catch (error) {
+    console.error("Error getting user full name by ID:", error);
+    throw error;
+  }
+};
+
+export { getUserByID, createUser, updateUser, updateWork, updateObjective, getUserByEmail, getUserFullNameById };
 
 
 
-export { getUserByID, createUser, updateUser, updateWork, updateObjective, getUserByEmail };
 
