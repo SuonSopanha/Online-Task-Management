@@ -42,6 +42,8 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
   const [project, setProject] = useState({});
   const [userName,setUserName] = useState("");
 
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
   
   const timestamp = Date.now();
   const formattedDate = new Date(timestamp).toLocaleDateString("en-KH", {
@@ -83,6 +85,8 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
           setMembers(users);
           const name = await getUserFullNameById(taskData.assignee_id)
           setUserName(name);
+          setIsDataLoaded(true);
+ 
         }
       } catch (error) {
         // Handle errors
@@ -92,8 +96,12 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
 
     fetchData();
 
+    return () => {
+      setIsDataLoaded(false); // Reset the flag if the component is unmounted
+    };
+
     // Cleanup function to cancel any ongoing async operations if the component is unmounted
-  }, [taskData]);
+  }, [taskData,isModalOpen,setIsModalOpen,isOpen,task]);
 
   const refresh = () => {
     setInterval(() => {
@@ -156,11 +164,8 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
     }
   };
 
-  const onSaveButton = () => {
-    const assignID =
-    task.assignee_id !== null
-      ? task.assignee_id.assignee_id
-      : null;
+  const onSaveButton = async () => {
+    const assignID = task.assignee_id ? task.assignee_id.assignee_id : null;
     const newFeild = {
       project_id: task.project_id,
       user_id: auth.currentUser.uid,
@@ -178,7 +183,7 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
       complete_date: task.complete_date,
     };
     console.log(newFeild);
-    //updateRtTaskByID(task.id, newFeild);
+    await updateRtTaskByID(task.id, newFeild);
     handleClose();
   };
 
@@ -189,7 +194,7 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
   console.log(taskData.priority, "THIS");
   return (
     <>
-      {isModalOpen && (
+      {isModalOpen &&(
         <div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
           <div className="w-full sm:w-screen max-h-3xl max-w-3xl mx-auto my-6 mt-48">
             {console.log(members, "members")}
@@ -227,7 +232,7 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
                 <TaskAssignee
                   Assignee={{
                     assignee_id: taskData.assignee_id,
-                    name: userName,
+                    name: taskData.assignee_full_name,
                   }}
                   OnChange={onAssigneeChange}
                 />

@@ -5,7 +5,7 @@ import { getprojecByID } from "../../../firebase/projectCRUD";
 import { getUserByID } from "../../../firebase/usersCRUD";
 import { modalContext } from "../../part/test";
 
-const TaskAssignee = ({ Assignee,Option ,OnChange }) => {
+const TaskAssignee = ({ Assignee ,OnChange }) => {
   const {tabID} = useContext(modalContext);
   const [assigneeObj, setAssigneeObj] = useState(Assignee);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -56,7 +56,7 @@ const TaskAssignee = ({ Assignee,Option ,OnChange }) => {
     };
 
     fetchData();
-  }, []);
+  }, [Assignee,tabID]);
 
   const renderAssignee = () => {
     if (assigneeObj !== null) {

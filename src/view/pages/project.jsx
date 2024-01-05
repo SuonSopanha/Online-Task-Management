@@ -6,6 +6,8 @@ import { FaClipboardList, FaPlus } from "react-icons/fa";
 import ProjectList from "../components/projectList";
 import ProjectCalender from "../components/projectCalender";
 import ProjectBoard from "../components/projectBoard";
+import ProjectDashboard from "../components/projectDashboard";
+import ProjectMember from "../components/projectMember";
 import Dropdown from "../components/dropDown";
 
 import { getprojecByID } from "../../firebase/projectCRUD";
@@ -16,7 +18,13 @@ export const projectTaskContext = createContext(null);
 const Project = () => {
   const [activeTab, setActiveTab] = useState("List");
 
-  const { tabID,setIsProjectModalOpen,openProjectModal,setModalTask,opentCreateProjectTaskModal } = useContext(modalContext);
+  const {
+    tabID,
+    setIsProjectModalOpen,
+    openProjectModal,
+    setModalTask,
+    opentCreateProjectTaskModal,
+  } = useContext(modalContext);
   const [project, setProject] = useState({});
   const [sortCriteria, setSortCriteria] = useState("Default");
 
@@ -102,45 +110,66 @@ const Project = () => {
                   Board
                 </a>
               </li>
+              <li className="me-2">
+                <a
+                  href="#"
+                  className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
+                    activeTab === "Board" ? "text-blue-600 border-blue-600" : ""
+                  }`}
+                  onClick={() => handleTabClick("Dashboard")}
+                >
+                  Dashboard
+                </a>
+              </li>
+              <li className="me-2">
+                <a
+                  href="#"
+                  className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
+                    activeTab === "Member" ? "text-blue-600 border-blue-600" : ""
+                  }`}
+                  onClick={() => handleTabClick("Member")}
+                >
+                  Member
+                </a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
 
       {/* Body content */}
-      <div>
-        <div className="flex items-center justify-between m-4">
-          <div className="flex items-center space-x-2">
-            <Dropdown
-              parent={"Sort By"}
-              children={[
-                "Name",
-                "Due_Date",
-                "Priority",
-                "Status",
-                "Default",
-              ]}
-              OnChange={setSortCriteria}
-            />
-          </div>
 
-          <button
-            onClick={() => {
-              opentCreateProjectTaskModal();
-              setModalTask(taskSample);
-            }}
-            type="button"
-            className="px-3 py-2 mr-3 gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
-          >
-            <FaPlus className="w-3 h-3" />
-            <div className="ml-2">Create Task</div>
-          </button>
-        </div>
+      <div>
+        {activeTab !== "Dashboard" && activeTab !== "Member" && (
+          <div className="flex items-center justify-between m-4">
+            <div className="flex items-center space-x-2">
+              <Dropdown
+                parent={"Sort By"}
+                children={["Name", "Due_Date", "Priority", "Status", "Default"]}
+                OnChange={setSortCriteria}
+              />
+            </div>
+
+            <button
+              onClick={() => {
+                opentCreateProjectTaskModal();
+                setModalTask(taskSample);
+              }}
+              type="button"
+              className="px-3 py-2 mr-3 gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
+            >
+              <FaPlus className="w-3 h-3" />
+              <div className="ml-2">Create Task</div>
+            </button>
+          </div>
+        )}
 
         <projectTaskContext.Provider value={{ sortCriteria }}>
           {activeTab === "List" && <ProjectList />}
           {activeTab === "Calender" && <ProjectCalender />}
           {activeTab === "Board" && <ProjectBoard />}
+          {activeTab === "Dashboard" && <ProjectDashboard />}
+          {activeTab === "Member" && <ProjectMember />}
         </projectTaskContext.Provider>
       </div>
     </div>

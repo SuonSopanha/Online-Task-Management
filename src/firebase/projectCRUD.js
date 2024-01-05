@@ -9,7 +9,8 @@ import {
     deleteDoc,
     addDoc,
     onSnapshot,
-    getDoc
+    getDoc,
+    arrayUnion
   } from "firebase/firestore";
   
   import { auth, db } from "./config";
@@ -84,7 +85,52 @@ const getprojecByID = async (id) => {
   }
 }
 
+const createProject = async (project) => {
+  try {
+    const projectCollection = collection(db, "projects");
+    const docRef = await addDoc(projectCollection, project);
+    console.log("Document written with ID: ", docRef.id);
+    return docRef.id
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
+};
+
+const updateProject = async (id, project) => {
+  try {
+    const projectDoc = doc(db, "projects", id);
+    await updateDoc(projectDoc, project);
+    console.log("Project updated successfully");
+  } catch (error) {
+    console.error("Error updating project: ", error);
+  }
+};
+
+// Define a function that mimics Firestore's arrayUnion
+
+
+const updateByPushNewMembers = async (id, newMembers) => {
+  try {
+    const projectDoc = doc(db, "projects", id);
+
+    // Fetch the current state of the 'members' field
+    const projectSnapshot = await getDoc(projectDoc);
+    const currentMembers = projectSnapshot.data().members || [];
+
+    // Combine the current members with the new members
+    const updatedMembers = [...currentMembers, ...newMembers];
+
+    // Update the project with the merged members array
+    await updateDoc(projectDoc, {
+      members: updatedMembers,
+    });
+
+    console.log("Project updated successfully");
+  } catch (error) {
+    console.error("Error updating project: ", error);
+  }
+};
 
 
 
-export {addAllProjects,getRtProjectByOwnerID,getRtProjectByMemberID,getprojecByID};
+export {addAllProjects,getRtProjectByOwnerID,getRtProjectByMemberID,getprojecByID,createProject,updateProject,updateByPushNewMembers};

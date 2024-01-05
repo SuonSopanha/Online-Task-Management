@@ -56,7 +56,7 @@ function Sidebar({ isOpen, TabNavigate }) {
         // User is signed in, you can update the component state or perform other actions.
         console.log("User is signed in:", user);
 
-        getRtProjectByOwnerID(auth.currentUser.uid, setProjectList);
+        getRtProjectByMemberID(auth.currentUser.uid, setProjectList);
         getRtTeamsByUserId(auth.currentUser.uid, setTeamList);
 
         setLoading(false);
