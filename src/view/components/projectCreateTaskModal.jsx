@@ -166,6 +166,7 @@ const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
     });
 
   const onSaveButton = async () => {
+    const assignID = task.assignee_id ? task.assignee_id.assignee_id : null;
     const newFeild = {
       project_id: tabID,
       user_id: auth.currentUser.uid,
@@ -241,7 +242,10 @@ const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
                 {/* Conditionally render TaskAssignee only when members is available */}
                 {members.length > 0 && (
                   <TaskAssignee
-                    Assignee={null}
+                    Assignee={{
+                    assignee_id: "",
+                    name: "User",
+                  }}
                     OnChange={onAssigneeChange}
                   />
                 )}

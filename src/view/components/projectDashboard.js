@@ -25,7 +25,8 @@ import LoadingBalls from "../../utils/loading";
 import { formattedDate } from "../../utils/formatDate";
 import { modalContext } from "../part/test";
 
-const TeamDashboard = () => {
+const ProjectDashboard = () => {
+    const {tabID} = useContext(modalContext);
   const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,7 +42,7 @@ const TeamDashboard = () => {
   const [taskCategoryAverages, setTaskCategoryAverages] = useState([]);
   const [monthlyWorkHours, setMonthlyWorkHours] = useState([]);
 
-  const {tabID} = useContext(modalContext);
+
   const convertMonthNumberToName = (monthNumber) => {
     const months = [
       "Jan",
@@ -107,7 +108,7 @@ const TeamDashboard = () => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [tabID]);
 
   useEffect(() => {
     // Calculate task counts when taskList changes
@@ -297,7 +298,7 @@ const TeamDashboard = () => {
     calculateTaskStatusCounts();
 
     calculateTaskCounts();
-  }, [taskList]);
+  }, [taskList,tabID]);
 
   return (
     <div className="flex flex-col">
@@ -362,4 +363,4 @@ const TeamDashboard = () => {
   );
 };
 
-export default TeamDashboard;
+export default ProjectDashboard;

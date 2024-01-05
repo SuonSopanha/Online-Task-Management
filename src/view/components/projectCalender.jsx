@@ -14,6 +14,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { auth } from "../../firebase/config";
 
 import { getRtTaskByProjectID } from "../../firebase/taskCRUD";
+import { getUserFullNameById } from "../../firebase/usersCRUD";
 import LoadingBalls from "../../utils/loading";
 
 import { modalContext } from "../part/test";
@@ -39,24 +40,38 @@ const ProjectCalender = () => {
     return eachDayOfInterval({ start, end });
   };
 
-  const { tabID, setTabID,openModal,setModalTask } = useContext(modalContext);
+  const { tabID, setTabID,openProjectModal,setModalTask } = useContext(modalContext);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in, you can update the component state or perform other actions.
+        // User is signed in
         console.log("User is signed in:", user);
-
-        getRtTaskByProjectID(tabID, setTaskList);
-        setLoading(false);
-        console.log(taskList);
+  
+        getRtTaskByProjectID(tabID, async (tasks) => {
+          // Fetch additional data for each task
+          const tasksWithFullNames = await Promise.all(
+            tasks.map(async (task) => {
+              // Fetch user's full name based on assignee_id
+              const fullName = await getUserFullNameById(task.assignee_id);
+              return {
+                ...task,
+                assignee_full_name: fullName,
+              };
+            })
+          );
+  
+          // Set the modified taskList with assignee_full_name
+          setTaskList(tasksWithFullNames);
+          setLoading(false);
+        });
       } else {
         // User is signed out.
         setError(true);
         console.log("User is signed out");
       }
     });
-
+  
     return () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
@@ -116,7 +131,7 @@ const ProjectCalender = () => {
                       key={task.id}
                       className="mt-1"
                       onClick={() => {
-                        openModal();
+                        openProjectModal();
                         setModalTask(task);
                       }}
                     >

@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { auth } from "../../firebase/config";
 
 import { getRtTaskByProjectID } from "../../firebase/taskCRUD";
+import { getUserFullNameById } from "../../firebase/usersCRUD";
 import LoadingBalls from "../../utils/loading";
 import UserProfilePic from "../../utils/photoGenerator";
 import { sortByPriority,sortByDueDate,sortByStatus,sortByWorkHoursRequired,sortByTaskName,sortByID } from "../../utils/sortTask";
@@ -48,24 +49,38 @@ const ProjectList = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in, you can update the component state or perform other actions.
+        // User is signed in
         console.log("User is signed in:", user);
-
-        getRtTaskByProjectID(tabID, setTaskList);
-        setLoading(false);
-        console.log(taskList);
+  
+        getRtTaskByProjectID(tabID, async (tasks) => {
+          // Fetch additional data for each task
+          const tasksWithFullNames = await Promise.all(
+            tasks.map(async (task) => {
+              // Fetch user's full name based on assignee_id
+              const fullName = await getUserFullNameById(task.assignee_id);
+              return {
+                ...task,
+                assignee_full_name: fullName,
+              };
+            })
+          );
+  
+          // Set the modified taskList with assignee_full_name
+          setTaskList(tasksWithFullNames);
+          setLoading(false);
+        });
       } else {
         // User is signed out.
         setError(true);
         console.log("User is signed out");
       }
     });
-
+  
     return () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
     };
-  }, [tabID,openProjectModal]); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+  }, [tabID]); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
   let sortTask = []
 
@@ -102,7 +117,7 @@ const ProjectList = () => {
               </thead>
               <tbody class="">
                 {taskList.map((task) => (
-                  <tr class="text-gray-700">
+                  <tr key={task.id} class="text-gray-700">
                     <td class="px-4 py-2 border">
                       <button
                         onClick={() => {
@@ -129,6 +144,7 @@ const ProjectList = () => {
                       <div className="flex items-center text-sm">
                         <div className="flex flex-row items-center space-x-2 justify-center">
                           <div className="flex flex-row items-center justify-center w-6 h-6 rounded-full md:block">
+                            
                             {task.assignee.photoURL != null ? (
                               <img
                                 className="object-cover w-full h-full rounded-full"
@@ -152,7 +168,7 @@ const ProjectList = () => {
                     </td>
 
                     <td class="px-4 py-2 text-xs border">
-                      <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                      <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm whitespace-nowrap">
                         {task.status}
                       </span>
                     </td>
