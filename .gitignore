@@ -7,7 +7,7 @@
 
 #credentail
 /src/firebase/credentail.js
-
+.env
 # testing
 /coverage
 
