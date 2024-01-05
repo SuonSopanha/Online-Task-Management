@@ -30,7 +30,7 @@ import {
   createRtTask,
 } from "../../firebase/taskCRUD";
 import { getprojecByID } from "../../firebase/projectCRUD";
-import { getUserByID } from "../../firebase/usersCRUD";
+import { getUserByID,getUserFullNameById} from "../../firebase/usersCRUD";
 
 import { modalContext } from "../part/test";
 
@@ -40,7 +40,9 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
   const { tabID } = useContext(modalContext);
   const [members, setMembers] = useState([]);
   const [project, setProject] = useState({});
+  const [userName,setUserName] = useState("");
 
+  
   const timestamp = Date.now();
   const formattedDate = new Date(timestamp).toLocaleDateString("en-KH", {
     month: "2-digit",
@@ -59,8 +61,6 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
   useEffect(() => {
     setIsModalOpen(isOpen);
   }, [isOpen]);
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,6 +81,8 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
 
           // Only set the state if the component is still mounted
           setMembers(users);
+          const name = await getUserFullNameById(taskData.assignee_id)
+          setUserName(name);
         }
       } catch (error) {
         // Handle errors
@@ -91,7 +93,7 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
     fetchData();
 
     // Cleanup function to cancel any ongoing async operations if the component is unmounted
-  }, [task.project_id]);
+  }, [taskData]);
 
   const refresh = () => {
     setInterval(() => {
@@ -155,6 +157,10 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
   };
 
   const onSaveButton = () => {
+    const assignID =
+    task.assignee_id !== null
+      ? task.assignee_id.assignee_id
+      : null;
     const newFeild = {
       project_id: task.project_id,
       user_id: auth.currentUser.uid,
@@ -166,13 +172,17 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
       work_hour_required: task.work_hour_required,
       status: task.status,
       priority: task.priority,
-      assignee_id: task.assignee_id.assignee_id,
+      assignee_id: assignID,
       assignee_dates: formattedDate,
       complete: task.complete,
       complete_date: task.complete_date,
     };
     console.log(newFeild);
-    //createRtTask(newFeild);
+    //updateRtTaskByID(task.id, newFeild);
+    handleClose();
+  };
+
+  const onDeleteButton = () => {
     handleClose();
   };
 
@@ -214,7 +224,13 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
               {/* Body */}
               <div className="flex flex-row justify-start space-x-5 border-b border-gray-500 p-3 items-cente text-sm sm:text-base">
                 <div className="w-24">Assignee</div>
-                <TaskAssignee Assignee={null} OnChange={onAssigneeChange} />
+                <TaskAssignee
+                  Assignee={{
+                    assignee_id: taskData.assignee_id,
+                    name: userName,
+                  }}
+                  OnChange={onAssigneeChange}
+                />
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">DueDate</div>
@@ -255,7 +271,17 @@ const ProjectModal = ({ isOpen, isClose, taskData }) => {
               </div>
               {/* Footer */}
               <div className="flex items-center justify-end space-x-2 p-6 border-t border-solid border-gray-300 rounded-b">
-                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 rounded-lg">
+                <div className="flex flex-row px-2 py-1 justify-center items-center bg-rose-600 rounded-lg">
+                  <FaTrash className="w-3 h-3 text-white" />
+                  <button
+                    className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={onDeleteButton}
+                  >
+                    Delete
+                  </button>
+                </div>
+                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 hover:bg-blue-800 rounded-lg">
                   <FaSave className="w-3 h-3 text-white" />
                   <button
                     className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"

@@ -152,7 +152,7 @@ const TaskBoard = () => {
           </div>
         </div>
         <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
-          <h2 className="text-lg font-semibold mb-4">To Do</h2>
+          <h2 className="text-lg font-semibold mb-4">Working</h2>
           <div className="flex flex-col space-y-2">
             {taskList
               .filter((task) => task.task_category === "Working")

@@ -11,6 +11,7 @@ import { getRtNotifcationsByUserID } from "../../firebase/notification";
 import LoadingBalls from "../../utils/loading";
 import { sortDateAndTime } from "../../utils/sortDate";
 import { modalContext } from "../part/test";
+import { getUserFullNameById } from "../../firebase/usersCRUD";
 
 const Inbox = () => {
   const [loading, setLoading] = useState(true);
@@ -22,15 +23,55 @@ const Inbox = () => {
   const [sort, setSort] = useState(true);
 
   const handleSort = () => {
-    setInterval(() => {
+    setTimeout(() => {
       setSort(!sort);
-    }, 2000);
-
+    }, 1000);
   };
 
   const { openMessageModal } = useContext(modalContext);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+  };
+
+  const addFullNameToItems = async (items) => {
+    const itemsWithFullName = [];
+
+    for (const item of items) {
+      let fullName;
+
+      // Check if either sender_id or recipient_id is present
+      if (item.sender_id || item.recipient_id) {
+        try {
+          // Fetch full names asynchronously
+          const senderFullName = await getUserFullNameById(item.sender_id);
+          const recipientFullName = await getUserFullNameById(
+            item.recipient_id
+          );
+
+          // Determine the fullName based on the current user's ID
+          if (item.sender_id === auth.currentUser.uid) {
+            fullName = recipientFullName;
+          } else {
+            fullName = senderFullName;
+          }
+        } catch (error) {
+          console.error("Error fetching full name:", error);
+          // Handle the error or set a default value for fullName
+          fullName = "Unknown";
+        }
+      }
+
+      // Create a new object with the fullName property
+      const itemWithFullName = {
+        ...item,
+        fullName: fullName,
+      };
+
+      // Push the modified item to the array
+      itemsWithFullName.push(itemWithFullName);
+    }
+
+    return itemsWithFullName;
   };
 
   useEffect(() => {
@@ -39,11 +80,10 @@ const Inbox = () => {
         // User is signed in, you can update the component state or perform other actions.
         console.log("User is signed in:", user);
 
-        getRtMessagesBySenderId(auth.currentUser.uid, setMessages)
-        getRtMessagesByRecipientId(auth.currentUser.uid, setMessages)
+        getRtMessagesBySenderId(auth.currentUser.uid, setMessages);
+        getRtMessagesByRecipientId(auth.currentUser.uid, setMessages);
 
-        getRtNotifcationsByUserID(auth.currentUser.uid, setNotifications)
-        
+        getRtNotifcationsByUserID(auth.currentUser.uid, setNotifications);
 
         getRtMessagesBySenderId(auth.currentUser.uid, setActivity);
         getRtMessagesByRecipientId(auth.currentUser.uid, setActivity);
@@ -51,7 +91,6 @@ const Inbox = () => {
 
         //sort activity by time and date
         setLoading(false);
-
       } else {
         // User is signed out.
         setError(true);
@@ -62,19 +101,23 @@ const Inbox = () => {
     return () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
-
     };
   }, []); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
-  
-
   useEffect(() => {
-    setMessages(sortDateAndTime(messages))
+    const fetchData = async () => {
+      // Fetch and add full name to messages
+      const messagesWithFullName = await addFullNameToItems(messages);
+      setMessages(sortDateAndTime(messagesWithFullName));
 
-    setActivity(sortDateAndTime(activity))
+      // Fetch and add full name to activity
+      const activityWithFullName = await addFullNameToItems(activity);
+      setActivity(sortDateAndTime(activityWithFullName));
 
-    setNotifications(sortDateAndTime(notifications))
+      // Fetch and add full name to notifications
+    };
 
+    fetchData();
   }, [sort]);
 
   // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
@@ -84,9 +127,9 @@ const Inbox = () => {
   }
 
   return (
-    
     <div className="w-full h-fit bg-glasses backdrop-blur-12 rounded-sm mt-[-30px] pb-4">
-    {handleSort()}
+      {handleSort()}
+      {console.log(messages)}
       <div>
         <p className="text-2xl font-bold text-gray-500 ml-6 mt-4 pt-2">Inbox</p>
       </div>
@@ -166,12 +209,14 @@ const Inbox = () => {
                       />
                     </svg>
                     <span class="ml-2 text-sm font-medium text-gray-700">
-                      Group
+                      {activity.sender_id === auth.currentUser.uid
+                        ? "inbox"
+                        : "message sent"}
                     </span>
                   </a>
                 </div>
                 <div class="text-sm font-medium text-gray-700 pl-3 py-1 whitespace-nowrap">
-                  <p>Panha</p>
+                  <p>{activity.fullName}</p>
                   <p>
                     {activity.message_text
                       ? activity.message_text
@@ -211,12 +256,14 @@ const Inbox = () => {
                       />
                     </svg>
                     <span class="ml-2 text-sm font-medium text-gray-700">
-                      Group
+                      {messages.sender_id === auth.currentUser.uid
+                        ? "inbox"
+                        : "message sent"}
                     </span>
                   </a>
                 </div>
                 <div class="text-sm font-medium text-gray-700 pl-3 py-1 whitespace-nowrap">
-                  <p>Panha</p>
+                  <p>{messages.fullName}</p>
                   <p>{messages.message_text}</p>
                 </div>
 

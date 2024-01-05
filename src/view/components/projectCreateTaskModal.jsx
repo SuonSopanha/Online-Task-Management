@@ -32,6 +32,7 @@ import { getprojecByID } from "../../firebase/projectCRUD";
 import { getUserByID } from "../../firebase/usersCRUD";
 
 import { modalContext } from "../part/test";
+import { createNotification } from "../../firebase/notification";
 
 const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
@@ -149,7 +150,22 @@ const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
     }
   };
 
-  const onSaveButton = () => {
+    const currentDate = new Date();
+    // Get the current time in 12-hour format with AM/PM
+    const currentTime = currentDate.toLocaleTimeString("en-KH", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
+  
+    // Get the current date in MM/DD/YYYY format
+    const currentDateFormatted = currentDate.toLocaleDateString("en-KH", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+    });
+
+  const onSaveButton = async () => {
     const newFeild = {
       project_id: tabID,
       user_id: auth.currentUser.uid,
@@ -166,8 +182,22 @@ const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
       complete: task.complete,
       complete_date: task.complete_date,
     };
+
+    const newNoti = {
+      Date: formattedDate,
+      time: currentTime,
+      user_id: task.assignee_id.assignee_id,
+      notification_type: "task assign",
+      notification_content: task.task_name + " has been assign",
+      source : {
+        id: task.assignee_id.assignee_id,
+        type: 2
+      }
+
+    }
     console.log(newFeild);
-    //createRtTask(newFeild);
+    await createRtTask(newFeild);
+    await createNotification(newNoti);
     handleClose();
   };
 
@@ -245,7 +275,7 @@ const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
               </div>
               {/* Footer */}
               <div className="flex items-center justify-end space-x-2 p-6 border-t border-solid border-gray-300 rounded-b">
-                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 rounded-lg">
+                <div className="flex flex-row px-2 py-1 justify-center items-center bg-blue-500 hover:bg-blue-800 rounded-lg">
                   <FaSave className="w-3 h-3 text-white" />
                   <button
                     className="text-white background-transparent font-bold uppercase px-1 py-1 text-sm outline-none focus:outline-none  ease-linear transition-all duration-150"

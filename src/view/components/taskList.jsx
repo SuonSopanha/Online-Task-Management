@@ -73,7 +73,7 @@ const TaskList = () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
     };
-  },[] ); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+  },[isModalOpen] ); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
   let sortTask = []
 

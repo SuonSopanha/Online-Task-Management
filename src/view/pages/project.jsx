@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useContext, useEffect, createContext } from "react";
 
-import { FaPlus } from "react-icons/fa";
+import { FaClipboardList, FaPlus } from "react-icons/fa";
 
 import ProjectList from "../components/projectList";
 import ProjectCalender from "../components/projectCalender";
@@ -56,17 +56,8 @@ const Project = () => {
       {/* Header */}
       <div className="flex flex-row justify-start border-b border-gray-500  ">
         <div className="flex items-center p-3 ml-1">
-          <div class="relative w-12 h-12 rounded-full md:block">
-            <img
-              class="object-cover w-full h-full rounded-full"
-              src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-              alt=""
-              loading="lazy"
-            />
-            <div
-              class="absolute inset-0 rounded-full shadow-inner"
-              aria-hidden="true"
-            ></div>
+          <div class="relative w-12 h-12 rounded-md flex items-center justify-center bg-sky-500">
+            <FaClipboardList className="w-8 h-8 text-white"></FaClipboardList>
           </div>
         </div>
         <div className="text-sm font-medium text-gray-500 flex flex-col justify-between">

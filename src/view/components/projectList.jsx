@@ -65,7 +65,7 @@ const ProjectList = () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
     };
-  }, [tabID]); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+  }, [tabID,openProjectModal]); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
   let sortTask = []
 
