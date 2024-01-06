@@ -12,7 +12,6 @@ import {
   FaChartPie,
   FaChartArea,
   FaDoorOpen,
-  FaDoorOpen
 } from "react-icons/fa";
 
 import { auth } from "../../firebase/config";
