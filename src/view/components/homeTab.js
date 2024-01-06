@@ -76,6 +76,11 @@ const HomeTab = () => {
       navigate("/projectCreate")
   }
 
+  const handleCompleteProfile = () => {
+      navigate("/welcome")
+  }
+
+
   const Team = "Team";
   return (
     <div className="w-full flex items-center justify-center">
@@ -91,13 +96,13 @@ const HomeTab = () => {
         <div class="ml-6 mr-2 mt-8 mx-auto flex flex-col lg:flex-row lg:space-x-4 ">
           <div className="w-full lg:w-4/12 flex flex-col mt-0 mb-2 lg:mt-0">
             <div class="col-span-2 row-span-2 flex  flex-col items-center justify-center rounded-2xl bg-glasses backdrop-blur-12 bg-opacity-50 py-4">
-              <button class="flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
+              <button onClick={handleChangeCreateProject}  class="flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
                 <div class="ml-2 h-4 w-4 rounded-full bg-slate-500"></div>
                 <span class="ml-2 text-sm font-medium text-gray-500">
                   Create new project
                 </span>
               </button>
-              <button class="mt-4 flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
+              <button onClick={handleCompleteProfile} class="mt-4 flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
                 <div class="ml-2 h-4 w-4 rounded-full bg-slate-500"></div>
                 <span class="ml-2 text-sm font-medium text-gray-500">
                   Complete your profile
