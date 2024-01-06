@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+// import env from "dotenv/config"
+
 import { auth } from "../../firebase/config";
 import { formattedDate } from "../../utils/formatDate";
 import { getAllTaskByID } from "../../firebase/taskCRUD";
@@ -36,7 +38,7 @@ const HomeTab = () => {
         setUser(userData);
         console.log("User is signed in:", userData);
         
-        getRtProjectByOwnerID(auth.currentUser.uid, setProjectList);
+        getRtProjectByMemberID(auth.currentUser.uid, setProjectList);
         const tasks = await getAllTaskByID(auth.currentUser.uid);
         setTaskList(tasks);
         setLoading(false);
@@ -77,7 +79,6 @@ const HomeTab = () => {
   const Team = "Team";
   return (
     <div className="w-full flex items-center justify-center">
-      {console.log(taskList)}
       <div className="container w-full">
         <div class="mt-8 text-center">
           <p class="font-medium">{formattedDate}</p>

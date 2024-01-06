@@ -7,8 +7,12 @@ import { getDatabase } from "firebase/database";
 // https://firebase.google.com/docs/web/setup#available-libraries
 import { getAuth } from "firebase/auth"
 
+
+
 import firebase_credentail from "./credentail";
 // Your web app's Firebase configuration
+
+
 const firebaseConfig = {
   apiKey: firebase_credentail.FIREBASE_API_KEY,
   authDomain:firebase_credentail.FIREBASE_AUTH_DOMAIN,
