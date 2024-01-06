@@ -11,6 +11,8 @@ import {
   FaUsers,
   FaChartPie,
   FaChartArea,
+  FaDoorOpen,
+  FaDoorOpen
 } from "react-icons/fa";
 
 import { auth } from "../../firebase/config";
@@ -50,6 +52,11 @@ function Sidebar({ isOpen, TabNavigate }) {
   const toggleDropdownTeam = () => {
     setIsOpendropTeam(!isOpendropTeam);
   };
+
+  const handleLogout = () =>{
+    auth.signOut();
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -256,10 +263,10 @@ function Sidebar({ isOpen, TabNavigate }) {
               </div>
             )}
           </div>
-          <a class="flex items-center justify-start w-full h-16 mt-auto mb-10 border-t border-blue-400 hover:bg-glasses hover:backdrop-blur-sm">
-            <FaUser className="w-6 h-6 stroke-current ml-4" />
-            <span class="ml-2 text-sm font-medium text-gray-700">Account</span>
-          </a>
+          <button onClick={handleLogout} class="flex items-center justify-start w-full h-16 mt-auto mb-10 border-t border-blue-400 hover:bg-glasses hover:backdrop-blur-sm">
+            <FaDoorOpen className="w-6 h-6 stroke-current ml-4" />
+            <span class="ml-2 text-sm font-medium text-gray-700">Log Out</span>
+          </button>
         </div>
       </div>
     </>
