@@ -26,7 +26,7 @@ const TaskList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { openModal, isModalOpen, setModalTask } = useContext(modalContext);
+  const { openModal, isModalOpen, setModalTask,closeCreateModal } = useContext(modalContext);
   const {sortCriteria} = useContext(mytaskContext)
 
   const sortTasks = (tasks, criteria) => {
@@ -73,7 +73,7 @@ const TaskList = () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
     };
-  },[isModalOpen] ); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+  },[isModalOpen,closeCreateModal] ); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
   let sortTask = []
 

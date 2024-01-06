@@ -30,6 +30,39 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen);
   const [task, setTask] = useState(taskData ? taskData : {});
 
+  let newData = {}
+
+  useEffect(() =>{
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      // The user object will be null if no user is logged in
+      newData = {
+        project_id: taskData.project_id ? taskData.project_id : "",
+        user_id: auth.currentUser.uid,
+        task_name: taskData.task_name ? taskData.task_name : "",
+        description: taskData.description ? taskData.description : "",
+        due_date: taskData.due_date ? taskData.due_date : "",
+        task_category: taskData.task_category ? taskData.task_category : "To Do",
+        tracking: [],
+        work_hour_required: taskData.work_hour_required
+          ? taskData.work_hour_required
+          : "",
+        status: taskData.status ? taskData.status : "On Track",
+        priority: taskData.priority ? taskData.priority : "Low",
+        assignee_id: taskData.assignee_id ? taskData.assignee_id : "",
+        assignee_dates: taskData.assignee_dates ? taskData.assignee_dates : "",
+        complete: taskData.complete ? taskData.complete : false,
+        complete_date: taskData.complete_date ? taskData.complete_date : "",
+    
+      }
+      setTask(newData);
+    });
+
+    return () => unsubscribe();
+
+  }, [])
+
+
+
   const timestamp = Date.now();
   const formattedDate = new Date(timestamp).toLocaleDateString("en-KH", {
     month: "2-digit",
@@ -55,50 +88,60 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
   };
 
   const handleTaskNameChange = (newName) => {
-    setTask({ ...taskData, task_name: newName });
+    newData.task_name = newName;
+    setTask({ ...task, task_name: newName });
     console.log(task.name);
   };
 
   const onCompletedChange = (complete) => {
-    setTask({ ...taskData, complete: complete });
+    newData.complete = complete;
+    setTask({ ...task, complete: complete });
   };
 
   const onAssigneeChange = (newAssignee) => {
-    setTask({ ...taskData, assignee_id: newAssignee });
+    newData.assignee_id = newAssignee;
+    setTask({ ...task, assignee_id: newAssignee });
     console.log(task.assignee_id);
   };
 
   const onDescriptionChange = (newDescription) => {
-    setTask({ ...taskData, description: newDescription });
+    newData.description = newDescription;
+    setTask({ ...task, description: newDescription });
     console.log(task.description);
   };
 
   const onDueDateChange = (newDueDate) => {
-    setTask({ ...taskData, due_date: formatDate(newDueDate)});
+    newData.due_date = formatDate(newDueDate);
+    setTask({ ...task, due_date: formatDate(newDueDate)});
     console.log(task.due_date);
   };
 
   const onProjectChange = (newProject) => {
-    setTask({ ...taskData, project_id: newProject });
+    newData.project_id = newProject;
+    setTask({ ...task, project_id: newProject });
     console.log(task.project_id);
   };
 
   const onHourRequiredChange = (newHourRequired) => {
-    setTask({ ...taskData, work_hour_required: newHourRequired });
+    newData.work_hour_required = newHourRequired;
+    setTask({ ...task, work_hour_required: newHourRequired });
     console.log(task.work_hour_required);
   };
 
   const onCategoryChange = (newCategory) => {
-    setTask({ ...taskData, task_category: newCategory });
+    newData.task_category = newCategory;
+    setTask({ ...task, task_category: newCategory });
     console.log(task.task_category);
   };
 
   const onChangeStatusAndPrority = (number, state) => {
     if (number === 1) {
+      newData.staus = state;
       setTask({ ...task, status: state });
       console.log(task.status);
     }
     if (number === 2) {
+      newData.priority = state;
       setTask({ ...task, priority: state });
       console.log(task.priority);
     }
@@ -122,20 +165,20 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
 
   const onSaveButton = async () => {
     const newFeild =  {
-      project_id: task.project_id,
+      project_id:task.project_id,
       user_id: auth.currentUser.uid,
-      task_name: task.task_name,
-      description: task.description,
-      due_date: task.due_date,
-      task_category: task.task_category,
-      tracking: task.tracking,
-      work_hour_required: task.work_hour_required,
-      status: task.status,
-      priority: task.priority,
-      assignee_id: task.assignee_id,
+      task_name:task.task_name,
+      description:task.description,
+      due_date:task.due_date,
+      task_category:task.task_category,
+      tracking:task.tracking,
+      work_hour_required:task.work_hour_required,
+      status:task.status,
+      priority:task.priority,
+      assignee_id:task.assignee_id,
       assignee_dates: formattedDate,
-      complete: task.complete,
-      complete_date: task.complete_date,
+      complete:task.complete,
+      complete_date:task.complete_date,
     };
 
     const newNoti = {
@@ -151,14 +194,14 @@ const CreateTaskModal = ({ isOpen, isClose, taskData }) => {
 
     }
     console.log(task)
-    console.log(newFeild);
-    await createRtTask(newFeild);
+    console.log(task);
+    await createRtTask(task);
     console.log(newNoti)
     await createNotification(newNoti)
     handleClose();
   };
 
-  console.log(taskData.priority, "THIS");
+
   return (
     <>
       {isModalOpen && (
