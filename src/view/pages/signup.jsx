@@ -117,7 +117,7 @@ const Signup = () => {
             onChange={(e) => setConfirm(e.target.value)}
           />
           <button type="submit" class="bg-slate-500 hover:bg-slate-700 text-white text-base rounded-lg py-2.5 px-5 transition-colors w-full text-[19px]">
-            Log In
+            Sign Up
           </button>
         </form>
         <p class="text-center mt-3 text-[14px]">
