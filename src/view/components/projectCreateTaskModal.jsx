@@ -59,35 +59,36 @@ const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
     setIsModalOpen(isOpen);
   }, [isOpen]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (task.project_id !== null && task.project_id.length === 20) {
-          const project = await getprojecByID(task.project_id);
-          const memberIdList = project.members.map((member) => member.id);
-          console.log(memberIdList);
-          // Fetch user information for each member ID
-          const users = await Promise.all(
-            memberIdList.map(async (memberId) => {
-              // Assuming you have a function to get user information by ID
-              const user = await getUserByID(memberId);
-              return user;
-            })
-          );
+  let newData = {}
 
-          // Only set the state if the component is still mounted
-          setMembers(users);
-        }
-      } catch (error) {
-        // Handle errors
-        console.error("Error fetching data:", error);
+  useEffect(() =>{
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      // The user object will be null if no user is logged in
+      newData = {
+        project_id: taskData.project_id ? taskData.project_id : "",
+        user_id: auth.currentUser.uid,
+        task_name: taskData.task_name ? taskData.task_name : "",
+        description: taskData.description ? taskData.description : "",
+        due_date: taskData.due_date ? taskData.due_date : "",
+        task_category: taskData.task_category ? taskData.task_category : "To Do",
+        tracking: [],
+        work_hour_required: taskData.work_hour_required
+          ? taskData.work_hour_required
+          : "",
+        status: taskData.status ? taskData.status : "On Track",
+        priority: taskData.priority ? taskData.priority : "Low",
+        assignee_id: taskData.assignee_id ? taskData.assignee_id : "",
+        assignee_dates: taskData.assignee_dates ? taskData.assignee_dates : "",
+        complete: taskData.complete ? taskData.complete : false,
+        complete_date: taskData.complete_date ? taskData.complete_date : "",
+    
       }
-    };
+      setTask(newData);
+    });
 
-    fetchData();
+    return () => unsubscribe();
 
-    // Cleanup function to cancel any ongoing async operations if the component is unmounted
-  }, [task.project_id]);
+  }, [])
 
   const refresh = () => {
     setInterval(() => {
@@ -101,54 +102,65 @@ const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
   };
 
   const handleTaskNameChange = (newName) => {
-    setTask({ ...taskData, task_name: newName });
+    newData.task_name = newName;
+    setTask({ ...task, task_name: newName });
     console.log(task.name);
   };
 
   const onCompletedChange = (complete) => {
-    setTask({ ...taskData, complete: complete });
+    newData.complete = complete;
+    setTask({ ...task, complete: complete });
   };
 
   const onAssigneeChange = (newAssignee) => {
-    setTask({ ...taskData, assignee_id: newAssignee });
+    newData.assignee_id = newAssignee;
+    setTask({ ...task, assignee_id: newAssignee });
     console.log(task.assignee_id);
   };
 
   const onDescriptionChange = (newDescription) => {
-    setTask({ ...taskData, description: newDescription });
+    newData.description = newDescription;
+    setTask({ ...task, description: newDescription });
     console.log(task.description);
   };
 
   const onDueDateChange = (newDueDate) => {
-    setTask({ ...taskData, due_date: formatDate(newDueDate) });
+    newData.due_date = formatDate(newDueDate);
+    setTask({ ...task, due_date: formatDate(newDueDate)});
     console.log(task.due_date);
   };
 
   const onProjectChange = (newProject) => {
-    setTask({ ...taskData, project_id: newProject });
+    newData.project_id = newProject;
+    setTask({ ...task, project_id: newProject });
     console.log(task.project_id);
   };
 
   const onHourRequiredChange = (newHourRequired) => {
-    setTask({ ...taskData, work_hour_required: newHourRequired });
+    newData.work_hour_required = newHourRequired;
+    setTask({ ...task, work_hour_required: newHourRequired });
     console.log(task.work_hour_required);
   };
 
   const onCategoryChange = (newCategory) => {
-    setTask({ ...taskData, task_category: newCategory });
+    newData.task_category = newCategory;
+    setTask({ ...task, task_category: newCategory });
     console.log(task.task_category);
   };
 
   const onChangeStatusAndPrority = (number, state) => {
     if (number === 1) {
+      newData.staus = state;
       setTask({ ...task, status: state });
       console.log(task.status);
     }
     if (number === 2) {
+      newData.priority = state;
       setTask({ ...task, priority: state });
       console.log(task.priority);
     }
   };
+
 
     const currentDate = new Date();
     // Get the current time in 12-hour format with AM/PM
@@ -196,8 +208,8 @@ const ProjectCreateTaskModal = ({ isOpen, isClose, taskData }) => {
       }
 
     }
-    console.log(newFeild);
-    await createRtTask(newFeild);
+    console.log(task);
+    await createRtTask(task);
     await createNotification(newNoti);
     handleClose();
   };

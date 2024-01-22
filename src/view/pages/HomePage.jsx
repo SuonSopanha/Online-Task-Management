@@ -1,9 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState,useEffect } from "react";
 
+import {auth} from "../../firebase/config";
 import { FaBars, FaSearch, FaUser } from "react-icons/fa";
 
 export default function HomePage() {
+
+  const [isSignIn, setIsSignIn] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        
+        setIsSignIn(true);
+      } else {
+        // User is signed out.
+        console.log("User is signed out");
+      }
+    });
+
+    // No need to return an unsubscribe function, as onAuthStateChanged directly returns it
+
+    // Cleanup logic (optional): Unsubscribe when the component unmounts
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <div className="w-full h-fit bg-gradient-to-r from-[#65A0FD] via-[#E8CCCC] to-[#FFA9F1B5]">
       <header className="fixed top-0 left-0 right-0 z-50">
@@ -86,7 +110,7 @@ export default function HomePage() {
                 <Link to="/login">Get Started</Link>
               </button>
               <button className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-2 px-4 round-sm border-3 border-black">
-              <Link to="/app">Continue Work</Link>
+              <Link to={isSignIn ? "/app" : "/login"}>Continue Work</Link>
               </button>
             </div>
           </div>
