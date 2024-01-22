@@ -9,7 +9,7 @@ import { getAuth } from "firebase/auth"
 
 
 
-import firebase_credentail from "../../credentail";
+import firebase_credentail from "./credentail";
 // Your web app's Firebase configuration
 
 
