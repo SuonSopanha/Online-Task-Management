@@ -4,15 +4,20 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FaClock } from "react-icons/fa";
 
 const TaskDueDate = ({ DueDate,OnChange }) => {
+
+
+
+
   const [selectedDate, setSelectedDate] = useState(
     DueDate !== undefined ? new Date(DueDate) : null
   );
 
+  
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-KH", {
       month: "2-digit",
       day: "2-digit",
-      year: "2-digit",
+      year: "4-digit",
     });
   };
 
