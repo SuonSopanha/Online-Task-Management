@@ -39,6 +39,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
   }, [isOpen]);
 
   useEffect(() => {
+    setTask(taskData);
     if (taskData && taskData.project_id !== undefined && taskData.project_id !== null) {
       if (taskData.project_id.length === 20) {
         getprojecByID(taskData.project_id).then((project) => {
@@ -58,41 +59,41 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
   };
 
   const handleTaskNameChange = (newName) => {
-    setTask({ ...taskData, task_name: newName });
+    setTask({ ...task, task_name: newName });
     console.log(task.name);
   };
 
   const onCompletedChange = (complete) => {
-    setTask({ ...taskData, complete: complete });
+    setTask({ ...task, complete: complete });
   };
 
   const onAssigneeChange = (newAssignee) => {
-    setTask({ ...taskData, assignee_id: newAssignee });
+    setTask({ ...task, assignee_id: newAssignee });
     console.log(task.assignee_id);
   };
 
   const onDescriptionChange = (newDescription) => {
-    setTask({ ...taskData, description: newDescription });
+    setTask({ ...task, description: newDescription });
     console.log(task.description);
   };
 
   const onDueDateChange = (newDueDate) => {
-    setTask({ ...taskData, due_date: newDueDate });
+    setTask({ ...task, due_date: newDueDate });
     console.log(task.due_date);
   };
 
   const onProjectChange = (newProject) => {
-    setTask({ ...taskData, project_id: newProject });
+    setTask({ ...task, project_id: newProject });
     console.log(task.project_id);
   };
 
   const onHourRequiredChange = (newHourRequired) => {
-    setTask({ ...taskData, work_hour_required: newHourRequired });
+    setTask({ ...task, work_hour_required: newHourRequired });
     console.log(task.work_hour_required);
   };
 
   const onCategoryChange = (newCategory) => {
-    setTask({ ...taskData, task_category: newCategory });
+    setTask({ ...task, task_category: newCategory });
     console.log(task.task_category);
   };
 
@@ -118,18 +119,19 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
     handleClose();
   };
 
-  console.log(taskData.priority, "THIS");
+  
   return (
     <>
       {isModalOpen && (
         <div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
           <div className="w-full sm:w-screen max-h-3xl max-w-3xl mx-auto my-6 mt-48">
             {/* Content */}
+            {console.log(task)}
             <div className="relative flex flex-col w-full bg-sky-200 bg-opacity-75 backdrop-blur-12 border-0 rounded-lg outline-none focus:outline-none">
               {/* Header */}
               <div className="flex items-center justify-between p-2 border-b border-solid border-gray-500 rounded-t">
                 <CompleteBox
-                  IsComplete={taskData.complete}
+                  IsComplete={task.complete}
                   OnChange={onCompletedChange}
                   className="ml-2"
                 />
@@ -142,13 +144,13 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
               </div>
               <div className="flex items-center justify-start px-2 py-3 border-b border-solid border-gray-500 rounded-t">
                 <TaskName
-                  name={taskData.task_name}
+                  name={task.task_name}
                   onNameChange={handleTaskNameChange}
                 />
 
                 <DropdownButton
                   type={"category"}
-                  initState={taskData.task_category}
+                  initState={task.task_category}
                   handleChange={onCategoryChange}
                 />
               </div>
@@ -157,19 +159,19 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <div className="w-24">DueDate</div>
                 <TaskDueDate
-                  DueDate={taskData.assignee_dates}
+                  DueDate={task.due_date}
                   OnChange={onDueDateChange}
                 />
                 <div className="w-28">Hour Required</div>
                 <NumberInput
-                  init={taskData.work_hour_required}
+                  init={task.work_hour_required}
                   OnChange={onHourRequiredChange}
                 />
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
                 <TaskStatus
-                  StatusState={taskData.status}
-                  PrioritySate={taskData.priority}
+                  StatusState={task.status}
+                  PrioritySate={task.priority}
                   OnChange={onChangeStatusAndPrority}
                 />
               </div>
@@ -186,7 +188,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
               <div className="flex flex-col justify-start space-y-3 border-b text-sm sm:text-base border-gray-500 p-3 items-start">
                 <div className="w-24">Description</div>
                 <EditableBox
-                  init={taskData.description}
+                  init={task.description}
                   OnChange={onDescriptionChange}
                   className="w-full"
                 ></EditableBox>
