@@ -13,6 +13,9 @@ import Mainobj from './view/pages/mainobj';
 import Kindofwork from './view/pages/kindofwork';
 import ProjectCreate from './view/pages/projectCreate';
 import Teamates from './view/pages/teamates';
+import TeamCreate from './view/pages/teamCreate';
+import TeamMember from './view/pages/teamMember';
+import TeamMilestone from './view/pages/teamMilestone';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
           <Route path='/app' element={<Main/>}/>
           <Route path='/projectCreate' element={<ProjectCreate/>}/>
           <Route path='/team' element={<Teamates/>}/>
+          <Route path='/teamCreate' element={<TeamCreate/>}/>
+          <Route path='/teamMember' element={<TeamMember/>}/>
+          <Route path='/teamMilestone' element={<TeamMilestone/>}/>
         </Routes>
       </BrowserRouter>
       
