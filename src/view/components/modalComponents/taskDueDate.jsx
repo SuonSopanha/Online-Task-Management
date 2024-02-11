@@ -17,7 +17,7 @@ const TaskDueDate = ({ DueDate,OnChange }) => {
     return new Date(date).toLocaleDateString("en-KH", {
       month: "2-digit",
       day: "2-digit",
-      year: "4-digit",
+      year: "2-digit",
     });
   };
 
