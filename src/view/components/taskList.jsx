@@ -49,8 +49,6 @@ const TaskList = () => {
     }
   };
 
-
-
   let defaultTask = []
 
   useEffect(() => {
@@ -58,7 +56,7 @@ const TaskList = () => {
       if (user) {
         // User is signed in, you can update the component state or perform other actions.
         console.log("User is signed in:", user);
-
+        setTaskList([]);
         getRtTaskByUserID(auth.currentUser.uid, setTaskList);
         //getRtTaskByAssigneeID(auth.currentUser.uid, setTaskList)
         setLoading(false);
