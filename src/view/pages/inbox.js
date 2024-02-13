@@ -7,6 +7,8 @@ import {
   getRtMessagesByRecipientId,
 } from "../../firebase/messageCRUD";
 
+import MessageDetail from "../components/messageDetail";
+
 import { getRtNotifcationsByUserID } from "../../firebase/notification";
 import LoadingBalls from "../../utils/loading";
 import { sortDateAndTime } from "../../utils/sortDate";
@@ -208,11 +210,13 @@ const Inbox = () => {
                         d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
                       />
                     </svg>
-                    <span class="ml-2 text-sm font-medium text-gray-700">
-                      {activity.sender_id === auth.currentUser.uid
-                        ? "inbox"
-                        : "message sent"}
-                    </span>
+                    <button onClick={() => handleTabClick("detail")}>
+                      <span class="ml-2 text-sm font-medium text-gray-700">
+                        {activity.sender_id === auth.currentUser.uid
+                          ? "inbox"
+                          : "message sent"}
+                      </span>
+                    </button>
                   </a>
                 </div>
                 <div class="text-sm font-medium text-gray-700 pl-3 py-1 whitespace-nowrap">
@@ -318,6 +322,7 @@ const Inbox = () => {
           </ul>
         </div>
       )}
+      {activeTab === "detail" && <MessageDetail/>}
     </div>
   );
 };

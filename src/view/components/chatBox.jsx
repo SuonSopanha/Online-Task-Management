@@ -44,7 +44,7 @@ const ChatBox = ({ team }) => {
     <div className="flex flex-col justify-center item-center mt-[-16px]">
       {console.log(yourMessage, " dfsda", otherMessage)}
       <div class="flex justify-center h-full antialiased text-gray-800">
-        <div class="flex flex-row h-[460px] w-[680px] overflow-x-hidden">
+        <div class="flex flex-row h-[460px] w-full overflow-x-hidden">
           <div class="flex flex-col flex-auto h-full p-6">
             <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-glasses backdrop-blur-12 h-full px-3 pt-3 pb-1">
               <div className="sticky top-0 pb-2 border-b border-gray-400 z-10">
