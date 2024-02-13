@@ -114,9 +114,6 @@ const Main = () => {
               closeCreateModal,
               openCreateModal,
               openMessageModal,
-              tabID,
-              setTabID,
-              setTab,
               isProjectModalOpen,
               setIsProjectModalOpen,
               openProjectModal,
@@ -124,7 +121,10 @@ const Main = () => {
               isCreateProjectTaskModalOpen,
               setIsCreateProjectTaskModalOpen,
               opentCreateProjectTaskModal,
-              closeCreateProjectTaskModal
+              closeCreateProjectTaskModal,
+              tabID,
+              setTabID,
+              setTab,
             }}
           >
             {tab === "HomeTab" && <HomeTab />}
