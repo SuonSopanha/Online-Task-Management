@@ -7,7 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/config";
 import { formattedDate } from "../../utils/formatDate";
 import { getAllTaskByID } from "../../firebase/taskCRUD";
-import { getRtProjectByMemberID,getRtProjectByOwnerID } from "../../firebase/projectCRUD";
+import {
+  getRtProjectByMemberID,
+  getRtProjectByOwnerID,
+} from "../../firebase/projectCRUD";
 import { addAllMessages } from "../../firebase/messageCRUD";
 import { addAllNotification } from "../../firebase/notification";
 import { addAllTeam } from "../../firebase/teamCRUD";
@@ -26,9 +29,10 @@ const HomeTab = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [taskList, setTaskList] = useState([]);
-  const [projectList,setProjectList] = useState([]);
+  const [projectList, setProjectList] = useState([]);
 
-  const { openModal, isModalOpen, setModalTask,setTab } = useContext(modalContext);
+  const { openModal, isModalOpen, setModalTask, setTab } =
+    useContext(modalContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +41,7 @@ const HomeTab = () => {
         const userData = await getUserByID(auth.currentUser.uid);
         setUser(userData);
         console.log("User is signed in:", userData);
-        
+
         getRtProjectByMemberID(auth.currentUser.uid, setProjectList);
         const tasks = await getAllTaskByID(auth.currentUser.uid);
         setTaskList(tasks);
@@ -73,17 +77,34 @@ const HomeTab = () => {
   };
 
   const handleChangeCreateProject = () => {
-      navigate("/projectCreate")
-  }
+    navigate("/projectCreate");
+  };
 
   const handleCompleteProfile = () => {
-      navigate("/welcome")
-  }
-
+    navigate("/welcome");
+  };
 
   const Team = "Team";
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center">
+      <div
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative w-full"
+        role="alert"
+      >
+        <strong class="font-bold">Holy smokes!</strong>
+        <span class="block sm:inline">Something seriously bad happened.</span>
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+          <svg
+            class="fill-current h-6 w-6 text-red-500"
+            role="button"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <title>Close</title>
+            <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+          </svg>
+        </span>
+      </div>
       <div className="container w-full">
         <div class="mt-8 text-center">
           <p class="font-medium">{formattedDate}</p>
@@ -96,13 +117,19 @@ const HomeTab = () => {
         <div class="ml-6 mr-2 mt-8 mx-auto flex flex-col lg:flex-row lg:space-x-4 ">
           <div className="w-full lg:w-4/12 flex flex-col mt-0 mb-2 lg:mt-0">
             <div class="col-span-2 row-span-2 flex  flex-col items-center justify-center rounded-2xl bg-glasses backdrop-blur-12 bg-opacity-50 py-4">
-              <button onClick={handleChangeCreateProject}  class="flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
+              <button
+                onClick={handleChangeCreateProject}
+                class="flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1"
+              >
                 <div class="ml-2 h-4 w-4 rounded-full bg-slate-500"></div>
                 <span class="ml-2 text-sm font-medium text-gray-500">
                   Create new project
                 </span>
               </button>
-              <button onClick={handleCompleteProfile} class="mt-4 flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1">
+              <button
+                onClick={handleCompleteProfile}
+                class="mt-4 flex w-4/5 items-center rounded-2xl border-2 border-sky-600 bg-blue-100 p-1"
+              >
                 <div class="ml-2 h-4 w-4 rounded-full bg-slate-500"></div>
                 <span class="ml-2 text-sm font-medium text-gray-500">
                   Complete your profile
@@ -117,7 +144,10 @@ const HomeTab = () => {
             </div>
             <div class="col-span-2 mt-10 rounded-lg bg-glasses backdrop-blur-12 bg-opacity-50 pb-4">
               <p class="ml-8 mt-4 text-xl font-medium">Project</p>
-              <button onClick={handleChangeCreateProject} class="ml-12 mt-4 flex items-center">
+              <button
+                onClick={handleChangeCreateProject}
+                class="ml-12 mt-4 flex items-center"
+              >
                 <div class="flex h-8 w-8 items-center justify-center rounded-2xl border-2 border-dashed border-sky-500">
                   <img
                     width="40"
@@ -128,20 +158,22 @@ const HomeTab = () => {
                 </div>
                 <span class="ml-4 text-sm font-medium"> Create projects </span>
               </button>
-              {projectList.map((project) => 
+              {projectList.map((project) => (
                 <div class="ml-12 mt-4 flex items-center">
-                <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
-                  <img
-                    width="96"
-                    height="96"
-                    src="https://img.icons8.com/fluency/96/personal-video-recorder-menu.png"
-                    alt="personal-video-recorder-menu"
-                  />
+                  <div class="flex h-8 w-8 items-center justify-center rounded-2xl">
+                    <img
+                      width="96"
+                      height="96"
+                      src="https://img.icons8.com/fluency/96/personal-video-recorder-menu.png"
+                      alt="personal-video-recorder-menu"
+                    />
+                  </div>
+                  <span class="ml-4 text-sm font-medium">
+                    {" "}
+                    {project.project_name}{" "}
+                  </span>
                 </div>
-                <span class="ml-4 text-sm font-medium"> {project.project_name} </span>
-              </div>
-              )}
-
+              ))}
             </div>
           </div>
 
@@ -288,7 +320,13 @@ const HomeTab = () => {
               </div>
             </section>
             <div className="w-full flex items-center justify-center -mt-6 mb-4">
-                <button onClick={() =>{setTab("MyTask")}}>See More...</button>
+              <button
+                onClick={() => {
+                  setTab("MyTask");
+                }}
+              >
+                See More...
+              </button>
             </div>
           </div>
         </div>
