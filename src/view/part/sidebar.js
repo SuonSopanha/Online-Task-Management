@@ -57,6 +57,10 @@ function Sidebar({ isOpen, TabNavigate }) {
     setIsOpendropTeam(!isOpendropTeam);
   };
 
+  const handleCreateTeam = () => {
+    navigate("/teamCreate");
+  };
+
   const handleLogout = () =>{
     auth.signOut();
     navigate("/");
@@ -267,7 +271,7 @@ function Sidebar({ isOpen, TabNavigate }) {
                 ))}
                 <button
                     className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
-                    
+                    onClick={handleCreateTeam}
                   >
                     <FaPlus className="w-3 h-3 stroke-current text-blue-900" />
                     <span className="ml-2 text-sm font-medium text-gray-700">
