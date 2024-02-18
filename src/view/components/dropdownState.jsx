@@ -11,7 +11,6 @@ const DropdownButton = ({type,initState,handleChange}) => {
   ? ["To Do", "Done", "Working"]
   : ["Low", "Medium", "High", "Very High"];
 
-
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     handleChange(option);
@@ -22,15 +21,15 @@ const DropdownButton = ({type,initState,handleChange}) => {
     <div className="relative inline-block text-left">
       <button
         type="button"
-        className="inline-flex items-center px-2 py-0.5 text-sm whitespace-nowrap font-medium text-green-700 bg-green-100 border border-green-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-100 focus:ring-green-500"
+        className="inline-flex items-center px-2 py-0.5 text-sm whitespace-nowrap font-medium text-green-700 bg-green-100 border border-green-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-100 focus:ring-green-500 transition duration-300"
         onClick={() => setIsOpen(!isOpen)}
       >
         {type !== "category" && <FaCheckCircle className="mr-2" />}
         {selectedOption}
       </button>
 
-      {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-32 rounded-lg shadow-lg bg-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none">
+      <div className={`origin-top-right absolute right-0 mt-2 w-32 rounded-lg shadow-lg bg-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+        {isOpen && (
           <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             {options.map((option) => (
               <button
@@ -43,8 +42,8 @@ const DropdownButton = ({type,initState,handleChange}) => {
               </button>
             ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

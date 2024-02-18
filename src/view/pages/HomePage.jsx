@@ -107,7 +107,7 @@ export default function HomePage() {
               <button className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 round-sm border-3 border-black transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
                 <Link to="/login">Get Started</Link>
               </button>
-              <button className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-2 px-4 round-sm border-3 border-black transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+              <button className="bg-gray-100 hover:bg-black hover:text-white text-black font-bold py-2 px-4 round-sm border-3 border-black transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
                 <Link to={isSignIn ? "/app" : "/login"}>Continue Work</Link>
               </button>
             </div>

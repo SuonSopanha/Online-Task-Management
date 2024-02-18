@@ -10,7 +10,14 @@ import {
   getRtTaskByAssigneeID,
 } from "../../firebase/taskCRUD";
 import LoadingBalls from "../../utils/loading";
-import { sortByPriority,sortByDueDate,sortByStatus,sortByWorkHoursRequired,sortByTaskName,sortByID } from "../../utils/sortTask";
+import {
+  sortByPriority,
+  sortByDueDate,
+  sortByStatus,
+  sortByWorkHoursRequired,
+  sortByTaskName,
+  sortByID,
+} from "../../utils/sortTask";
 
 import { modalContext } from "../part/test";
 import { mytaskContext } from "../pages/myTask";
@@ -21,7 +28,7 @@ const TaskBoard = () => {
   const [error, setError] = useState(null);
 
   const { openModal, isModalOpen, setModalTask } = useContext(modalContext);
-  const {sortCriteria} = useContext(mytaskContext)
+  const { sortCriteria } = useContext(mytaskContext);
 
   const sortTasks = (tasks, criteria) => {
     switch (criteria) {
@@ -35,14 +42,13 @@ const TaskBoard = () => {
         console.log("Status sort");
         return sortByStatus(tasks);
       case "Name":
-        console.log("naem sort")
+        console.log("naem sort");
         return sortByTaskName(tasks);
       // Add more cases for other criteria as needed
       default:
-        return sortByID(tasks) ;
+        return sortByID(tasks);
     }
   };
-
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -67,16 +73,12 @@ const TaskBoard = () => {
     };
   }, []); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
-  let sortTask = []
-
+  let sortTask = [];
 
   useEffect(() => {
-
-    sortTask = [...sortTasks(taskList,sortCriteria)]
-    setTaskList(sortTask)
-  },[sortCriteria])
-
-  
+    sortTask = [...sortTasks(taskList, sortCriteria)];
+    setTaskList(sortTask);
+  }, [sortCriteria]);
 
   if (loading) {
     return <LoadingBalls />;
@@ -88,8 +90,8 @@ const TaskBoard = () => {
   const Team = "Team";
 
   return (
-    <div className="container mx-auto mt-10">
-      <h1 className="text-2xl font-semibold mb-8">Task Board</h1>
+    <div className="container mx-auto mt-6">
+      <h1 className="text-2xl ml-4 font-semibold mb-4">Task Board</h1>
 
       <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2">
         <div className="w-full lg:w-1/3 bg-glasses backdrop-blur-12 rounded-xl p-3">
@@ -100,7 +102,7 @@ const TaskBoard = () => {
               .map((task) => (
                 <button
                   key={task.id}
-                  class="flex justify-center items-center"
+                  class="flex justify-center items-center transition duration-300 transform hover:scale-105"
                   onClick={() => {
                     setModalTask(task);
                     openModal();
@@ -130,10 +132,7 @@ const TaskBoard = () => {
                       </p>
                     </div>
 
-                    <div className="mb-1 flex flex-row justify-start left-0">
-                      <div className="mb-1 flex flex-row justify-start left-0">
-                      </div>
-                    </div>
+                    <div className="mb-1 flex flex-row justify-start left-0"></div>
                     <div class="text-xs flex space-x-1">
                       <span class="px-2 py-1 w-fit font-semibold leading-tight text-green-700 bg-green-100 rounded-lg text-sm">
                         {task.priority}
@@ -159,7 +158,7 @@ const TaskBoard = () => {
               .map((task) => (
                 <button
                   key={task.id}
-                  class="flex justify-center items-center"
+                  class="flex justify-center items-center transition duration-300 transform hover:scale-105"
                   onClick={() => {
                     setModalTask(task);
                     openModal();
@@ -189,8 +188,7 @@ const TaskBoard = () => {
                       </p>
                     </div>
 
-                    <div class="mb-1 flex flex-row justify-start left-0">
-                    </div>
+                    <div class="mb-1 flex flex-row justify-start left-0"></div>
                     <div class="text-xs flex space-x-1">
                       <span class="px-2 py-1 w-fit font-semibold leading-tight text-green-700 bg-green-100 rounded-lg text-sm">
                         {task.priority}
@@ -216,7 +214,7 @@ const TaskBoard = () => {
               .map((task) => (
                 <button
                   key={task.id}
-                  class="flex justify-center items-center"
+                  class="flex justify-center items-center transition duration-300 transform hover:scale-105"
                   onClick={() => {
                     setModalTask(task);
                     openModal();
@@ -246,8 +244,7 @@ const TaskBoard = () => {
                       </p>
                     </div>
 
-                    <div class="mb-1 flex flex-row justify-start left-0">
-                    </div>
+                    <div class="mb-1 flex flex-row justify-start left-0"></div>
                     <div class="text-xs flex space-x-1">
                       <span class="px-2 py-1 w-fit font-semibold leading-tight text-green-700 bg-green-100 rounded-lg text-sm">
                         {task.priority}
