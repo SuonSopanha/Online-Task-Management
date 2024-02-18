@@ -15,7 +15,14 @@ import {
 
 import { getprojecByID } from "../../firebase/projectCRUD";
 import LoadingBalls from "../../utils/loading";
-import { sortByPriority,sortByDueDate,sortByStatus,sortByWorkHoursRequired,sortByTaskName,sortByID } from "../../utils/sortTask";
+import {
+  sortByPriority,
+  sortByDueDate,
+  sortByStatus,
+  sortByWorkHoursRequired,
+  sortByTaskName,
+  sortByID,
+} from "../../utils/sortTask";
 import { modalContext } from "../part/test";
 import { mytaskContext } from "../pages/myTask";
 
@@ -26,8 +33,9 @@ const TaskList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { openModal, isModalOpen, setModalTask,closeCreateModal } = useContext(modalContext);
-  const {sortCriteria} = useContext(mytaskContext)
+  const { openModal, isModalOpen, setModalTask, closeCreateModal } =
+    useContext(modalContext);
+  const { sortCriteria } = useContext(mytaskContext);
 
   const sortTasks = (tasks, criteria) => {
     switch (criteria) {
@@ -41,15 +49,15 @@ const TaskList = () => {
         console.log("Status sort");
         return sortByStatus(tasks);
       case "Name":
-        console.log("naem sort")
+        console.log("naem sort");
         return sortByTaskName(tasks);
       // Add more cases for other criteria as needed
       default:
-        return sortByID(tasks) ;
+        return sortByID(tasks);
     }
   };
 
-  let defaultTask = []
+  let defaultTask = [];
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -71,18 +79,16 @@ const TaskList = () => {
       // Unsubscribe the listener when the component unmounts
       unsubscribe();
     };
-  },[isModalOpen,closeCreateModal] ); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
+  }, [isModalOpen, closeCreateModal]); // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount // Empty dependency array to run the effect only once on component mount
 
-  let sortTask = []
-
+  let sortTask = [];
 
   useEffect(() => {
+    sortTask = [...sortTasks(taskList, sortCriteria)];
+    setTaskList(sortTask);
+  }, [sortCriteria]);
 
-    sortTask = [...sortTasks(taskList,sortCriteria)]
-    setTaskList(sortTask)
-  },[sortCriteria])
-
-  const Team = "Team"
+  const Team = "Team";
 
   if (loading) {
     return <LoadingBalls />;
@@ -103,8 +109,6 @@ const TaskList = () => {
       return "red";
     }
   };
-
-
 
   console.log(taskList);
 
@@ -141,7 +145,7 @@ const TaskList = () => {
                           )}
 
                           <div className="flex flex-col justify-center items-center">
-                            <p class="font-semibold text-black whitespace-nowrap">
+                            <p class="font-semibold text-black whitespace-nowrap transform transition-transform hover:scale-105">
                               {task.task_name}
                             </p>
                           </div>
@@ -159,7 +163,9 @@ const TaskList = () => {
                           ></div>
                         </div>
                         {task.project_id !== null ? (
-                          <span className="text-x whitespace-nowrap">{task.project ? task.project.project_name : Team }</span>
+                          <span className="text-x whitespace-nowrap">
+                            {task.project ? task.project.project_name : Team}
+                          </span>
                         ) : (
                           <span className="text-xs">Only Me</span>
                         )}

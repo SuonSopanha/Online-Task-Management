@@ -44,7 +44,7 @@ const EditableTaskName = ({ initialName, onNameChange }) => {
         </div>
       ) : (
         <h3
-          className="w-full pl-4 text-2xl sm:text-3xl font-semibold cursor-pointer"
+          className="w-full pl-4 text-2xl sm:text-3xl font-semibold cursor-pointer transform transition-transform hover:scale-105"
           onClick={handleEditClick}
         >
           {editedName}

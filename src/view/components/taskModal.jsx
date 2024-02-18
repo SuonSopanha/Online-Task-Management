@@ -157,12 +157,12 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
               {/* Body */}
 
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
-                <div className="w-24">DueDate</div>
+                <div className="w-24 font-semibold">DueDate</div>
                 <TaskDueDate
                   DueDate={task.due_date}
                   OnChange={onDueDateChange}
                 />
-                <div className="w-28">Hour Required</div>
+                <div className="w-28 font-semibold">Hour Required</div>
                 <NumberInput
                   init={task.work_hour_required}
                   OnChange={onHourRequiredChange}
@@ -176,7 +176,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
                 />
               </div>
               <div className="flex flex-row justify-start space-x-5 border-b text-sm sm:text-base border-gray-500 p-3 items-center">
-                <div className="w-24">Project</div>
+                <div className="w-24 font-semibold">Project</div>
                 <div className="flex flex-row items-center justify-between space-x-2">
                   <div className="flex w-6 h-6 items-center justify-center rounded-lg bg-sky-600 text-white">
                     <FaClipboardList className="w-4 h-4" />
@@ -186,7 +186,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
                 </div>
               </div>
               <div className="flex flex-col justify-start space-y-3 border-b text-sm sm:text-base border-gray-500 p-3 items-start">
-                <div className="w-24">Description</div>
+                <div className="w-24 font-semibold">Description</div>
                 <EditableBox
                   init={task.description}
                   OnChange={onDescriptionChange}

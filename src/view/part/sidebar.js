@@ -104,7 +104,7 @@ function Sidebar({ isOpen, TabNavigate }) {
         <div class="flex flex-col items-start w-full h-full overflow-hidden text-blue-500 rounded">
           <div class="flex flex-col items-center w-full mt-3  border-gray-300">
             <button
-              class="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+              class="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105"
               onClick={() => NavigateTab("HomeTab")}
             >
               <FaHome class="w-3 h-3 stroke-current" />
@@ -112,7 +112,7 @@ function Sidebar({ isOpen, TabNavigate }) {
             </button>
 
             <button
-              class="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+              class="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105"
               onClick={() => NavigateTab("MyTask")}
             >
               <FaClipboardList class="w-3 h-3 stroke-current" />
@@ -121,7 +121,7 @@ function Sidebar({ isOpen, TabNavigate }) {
             </button>
 
             <button
-              class="flex items-center w-full h-8 px-3 mt-1 hover:bg-glasses hover:backdrop-blur-sm rounded"
+              class="flex items-center w-full h-8 px-3 mt-1 hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105 rounded"
               onClick={() => NavigateTab("Inbox")}
             >
               <FaInbox class="w-3 h-3 stroke-current" />
@@ -131,7 +131,7 @@ function Sidebar({ isOpen, TabNavigate }) {
           </div>
           <div class="flex flex-col items-center w-full mt-1 border-t border-blue-400">
             <button
-              className="flex justify-between items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm focus:outline-none"
+              className="flex justify-between items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105 focus:outline-none"
               onClick={toggleDropdownInsight}
             >
               <div className="flex items-center">
@@ -161,7 +161,7 @@ function Sidebar({ isOpen, TabNavigate }) {
               <div className="flex flex-col items-center w-full">
                 {/* Dropdown content */}
                 <button
-                  className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+                  className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105"
                   onClick={() => NavigateTab("Reporting")}
                 >
                   <FaChartArea className="w-3 h-3 stroke-current text-blue-900" />
@@ -170,7 +170,7 @@ function Sidebar({ isOpen, TabNavigate }) {
                   </span>
                 </button>
                 <button
-                  className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm"
+                  className="flex items-center w-full h-8 px-3 mt-1 rounded hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105"
                   onClick={() => NavigateTab("Dashboard")}
                 >
                   <FaChartPie className="w-3 h-3 stroke-current text-blue-900" />
@@ -182,7 +182,7 @@ function Sidebar({ isOpen, TabNavigate }) {
               </div>
             )}
             <button
-              className="flex justify-between items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm focus:outline-none"
+              className="flex justify-between items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105 focus:outline-none"
               onClick={toggleDropdownProject}
             >
               <div className="flex items-center">
@@ -214,7 +214,7 @@ function Sidebar({ isOpen, TabNavigate }) {
                 {projectList.map((project) => (
                   <button
                     key={project.project_id}
-                    className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+                    className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105"
                     onClick={() => NavigateTabwithParam("Project", project.id)}
                   >
                     <FaProjectDiagram className="w-3 h-3 stroke-current text-blue-900" />
@@ -228,7 +228,7 @@ function Sidebar({ isOpen, TabNavigate }) {
             )}
 
             <button
-              className="flex justify-between items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm focus:outline-none"
+              className="flex justify-between items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105 focus:outline-none"
               onClick={toggleDropdownTeam}
             >
               <div className="flex items-center">
@@ -260,7 +260,7 @@ function Sidebar({ isOpen, TabNavigate }) {
                 {teamList.map((team) => (
                   <button
                     key={team.team_id}
-                    className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+                    className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105"
                     onClick={() => NavigateTabwithParam("Team", team.id)}
                   >
                     <FaUsers className="w-3 h-3 stroke-current text-blue-900" />
@@ -270,7 +270,7 @@ function Sidebar({ isOpen, TabNavigate }) {
                   </button>
                 ))}
                 <button
-                    className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm"
+                    className="flex items-center w-full h-8 px-3 mt-1 rounded  hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105"
                     onClick={handleCreateTeam}
                   >
                     <FaPlus className="w-3 h-3 stroke-current text-blue-900" />
@@ -282,7 +282,7 @@ function Sidebar({ isOpen, TabNavigate }) {
               </div>
             )}
           </div>
-          <button onClick={handleLogout} class="flex items-center justify-start w-full h-16 mt-auto mb-10 border-t border-blue-400 hover:bg-glasses hover:backdrop-blur-sm">
+          <button onClick={handleLogout} class="flex items-center justify-start w-full h-16 mt-auto mb-10 border-t border-blue-400 hover:bg-glasses hover:backdrop-blur-sm transform transition-transform hover:scale-105">
             <FaDoorOpen className="w-6 h-6 stroke-current ml-4" />
             <span class="ml-2 text-sm font-medium text-gray-700">Log Out</span>
           </button>

@@ -103,7 +103,7 @@ const MyTask = () => {
               <li className="me-2">
                 <a
                   href="#"
-                  className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
+                  className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:bg-blue-300 hover:text-blue-600 hover:border-blue-300 dark:hover:text-gray-300 ${
                     activeTab === "List" ? "text-blue-600 border-blue-600" : ""
                   }`}
                   onClick={() => handleTabClick("List")}
@@ -114,7 +114,7 @@ const MyTask = () => {
               <li className="me-2">
                 <a
                   href="#"
-                  className={`inline-block px-3  py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
+                  className={`inline-block px-3  py-2 border-b-2 border-transparent rounded-t-lg hover:bg-blue-300 hover:text-blue-600 hover:border-blue-300 dark:hover:text-gray-300 ${
                     activeTab === "Calender"
                       ? "text-blue-600 border-blue-600"
                       : ""
@@ -128,7 +128,7 @@ const MyTask = () => {
               <li className="me-2">
                 <a
                   href="#"
-                  className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
+                  className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:bg-blue-300 hover:text-blue-600 hover:border-blue-300 dark:hover:text-gray-300 ${
                     activeTab === "Board" ? "text-blue-600 border-blue-600" : ""
                   }`}
                   onClick={() => handleTabClick("Board")}
