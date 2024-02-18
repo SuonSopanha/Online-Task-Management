@@ -164,7 +164,7 @@ export default function HomePage() {
             <h1 class="text-3xl font-bold mb-4">Task Management Q&A</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md ">
+              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <h2 class="text-xl font-bold mb-2">
                   How do I create a new task?
                 </h2>
@@ -173,7 +173,7 @@ export default function HomePage() {
                   fill out the required information, and click "Save".
                 </p>
               </div>
-              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md">
+              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <h2 class="text-xl font-bold mb-2">
                   Can I assign tasks to other team members?
                 </h2>
@@ -182,7 +182,7 @@ export default function HomePage() {
                   their name from the dropdown menu in the task creation form.
                 </p>
               </div>
-              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md">
+              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <h2 class="text-xl font-bold mb-2">
                   How do I mark a task as complete?
                 </h2>
@@ -192,7 +192,7 @@ export default function HomePage() {
                   status.
                 </p>
               </div>
-              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md">
+              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <h2 class="text-xl font-bold mb-2">
                   Can I set deadlines for tasks?
                 </h2>
@@ -208,7 +208,7 @@ export default function HomePage() {
             <h1 class="text-3xl font-bold mb-4">What Our Users Are Saying</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6 transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <p class="text-gray-700 mb-4">
                   "I've tried several task management tools, but this one is by
                   far the best! It's intuitive, easy to use, and has helped me
@@ -217,7 +217,7 @@ export default function HomePage() {
                 <p class="text-gray-600">- John Doe</p>
               </div>
 
-              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6 transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <p class="text-gray-700 mb-4">
                   "I love how customizable this task management tool is. I can
                   easily create tasks, set deadlines, and collaborate with my
@@ -226,7 +226,7 @@ export default function HomePage() {
                 <p class="text-gray-600">- Jane Smith</p>
               </div>
 
-              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6 transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <p class="text-gray-700 mb-4">
                   "As a freelancer, staying organized is crucial. This task
                   management platform has helped me streamline my workflow and
@@ -235,7 +235,7 @@ export default function HomePage() {
                 <p class="text-gray-600">- Alex Johnson</p>
               </div>
 
-              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6 transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <p class="text-gray-700 mb-4">
                   "I'm a big fan of the clean and simple interface of this task
                   management platform. It's not cluttered with unnecessary
@@ -244,7 +244,7 @@ export default function HomePage() {
                 </p>
                 <p class="text-gray-600">- Laura Garcia</p>
               </div>
-              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6 transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <p class="text-gray-700 mb-4">
                   "This task management tool has saved me so much time and
                   effort. I used to spend hours trying to stay organized, but
@@ -254,7 +254,7 @@ export default function HomePage() {
                 <p class="text-gray-600">- Daniel Clark</p>
               </div>
 
-              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6 transform transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <p class="text-gray-700 mb-4">
                   "I'm impressed by the level of customer support provided by
                   this task management platform. Anytime I've had a question or
