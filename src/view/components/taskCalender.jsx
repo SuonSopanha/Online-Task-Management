@@ -123,7 +123,7 @@ const TaskCalender = () => {
                         setModalTask(task);
                       }}
                     >
-                      <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm whitespace-nowrap">
+                      <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm whitespace-nowrap transition duration-300 transform hover:scale-105">
                         {task.task_name}
                       </span>
                     </button>
