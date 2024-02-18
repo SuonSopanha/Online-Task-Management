@@ -1,18 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import {auth} from "../../firebase/config";
+import { auth } from "../../firebase/config";
 import { FaBars, FaSearch, FaUser } from "react-icons/fa";
 
 export default function HomePage() {
-
   const [isSignIn, setIsSignIn] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        
         setIsSignIn(true);
       } else {
         // User is signed out.
@@ -97,27 +95,30 @@ export default function HomePage() {
       <body className="bg-transparent">
         <div className="text-center w-full">
           <div className="pt-40 pb-32">
-            <h1 className="text-3xl font-bold p-4">
+            <h1 className="text-3xl font-bold p-4 animate-fadeIn">
               The best platform for<br></br> cross-functional work
             </h1>
-            <p className="text-lg pb-4 ">
+            <p className="text-lg pb-4 animate-slideInRight">
               Want more efficiency in your organization?<br></br> Asana is easy
               for all teams to use,<br></br> so you can deliver quality work
               faster.
             </p>
-            <div className="flex justify-center space-x-3">
-              <button className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 round-sm border-3 border-black">
+            <div className="flex justify-center space-x-3 animate-bounce">
+              <button className="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 round-sm border-3 border-black transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
                 <Link to="/login">Get Started</Link>
               </button>
-              <button className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-2 px-4 round-sm border-3 border-black">
-              <Link to={isSignIn ? "/app" : "/login"}>Continue Work</Link>
+              <button className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-2 px-4 round-sm border-3 border-black transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                <Link to={isSignIn ? "/app" : "/login"}>Continue Work</Link>
               </button>
             </div>
           </div>
+
           <div className="p-8">
-            <h1 className="text-3xl font-bold py-3">What Set Our Web</h1>
-            <div className="flex justify-between items-center  sm:px-4 md:px-16 lg:px-24 xl:px-24 2xl:px-24 space-x-2 pb-4">
-              <div className="text-start">
+            <h1 className="text-3xl font-bold py-3 animate-fadeIn">
+              What Set Our Web
+            </h1>
+            <div className="flex justify-between items-center sm:px-4 md:px-16 lg:px-24 xl:px-24 2xl:px-24 space-x-2 pb-4">
+              <div className="text-start animate-slideInLeft">
                 <h1 className="text-lg font-semibold">
                   More clarity and accountability
                 </h1>
@@ -128,18 +129,24 @@ export default function HomePage() {
                   company on track.
                 </p>
               </div>
-              <div className="border-8 border-gray-100 rounded-lg shadow-md">
-                {/* <img src="../assets/img/1img/profile.jpg" alt="profile"></img> */}
-                <img src="https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="w-[650px] h-[300px]" alt="profile"></img>
+              <div className="border-8 border-gray-100 rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105">
+                <img
+                  src="https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  className="w-[650px] h-[300px]"
+                  alt="profile"
+                ></img>
               </div>
             </div>
 
             <div className="flex justify-between items-center sm:px-4 md:px-16 lg:px-24 xl:px-24 2xl:px-24 space-x-2 pb-4">
-              <div className="border-8 border-gray-100 rounded-lg shadow-md">
-                {/*<img src="../assets/img/1img/profile.jpg" alt="profile"></img>*/}
-                <img src="https://plus.unsplash.com/premium_photo-1684331678124-ff62c82cef7a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGFzayUyMG9yZ2FuaXppbmd8ZW58MHx8MHx8fDA%3D" className="w-[750px] h-[300px]"  alt="profile"></img>
+              <div className="border-8 border-gray-100 rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105">
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1684331678124-ff62c82cef7a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGFzayUyMG9yZ2FuaXppbmd8ZW58MHx8MHx8fDA%3D"
+                  className="w-[750px] h-[300px]"
+                  alt="profile"
+                ></img>
               </div>
-              <div className="text-end">
+              <div className="text-end animate-slideInRight">
                 <h1 className="text-lg font-semibold">
                   More clarity and accountability
                 </h1>
@@ -149,6 +156,112 @@ export default function HomePage() {
                   See progress in real time, update stakeholders, and keep the
                   company on track.
                 </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="container mx-auto py-8">
+            <h1 class="text-3xl font-bold mb-4">Task Management Q&A</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md ">
+                <h2 class="text-xl font-bold mb-2">
+                  How do I create a new task?
+                </h2>
+                <p class="text-gray-700">
+                  To create a new task, simply click on the "Add Task" button,
+                  fill out the required information, and click "Save".
+                </p>
+              </div>
+              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold mb-2">
+                  Can I assign tasks to other team members?
+                </h2>
+                <p class="text-gray-700">
+                  Yes, you can assign tasks to other team members by selecting
+                  their name from the dropdown menu in the task creation form.
+                </p>
+              </div>
+              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold mb-2">
+                  How do I mark a task as complete?
+                </h2>
+                <p class="text-gray-700">
+                  To mark a task as complete, simply click on the checkbox next
+                  to the task name. This will automatically update the task
+                  status.
+                </p>
+              </div>
+              <div class="bg-glasses bg-opacity-50 p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-bold mb-2">
+                  Can I set deadlines for tasks?
+                </h2>
+                <p class="text-gray-700">
+                  Yes, you can set deadlines for tasks by entering the desired
+                  due date in the task creation form. You'll receive
+                  notifications as the deadline approaches.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="container mx-auto py-8">
+            <h1 class="text-3xl font-bold mb-4">What Our Users Are Saying</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+                <p class="text-gray-700 mb-4">
+                  "I've tried several task management tools, but this one is by
+                  far the best! It's intuitive, easy to use, and has helped me
+                  stay organized and productive."
+                </p>
+                <p class="text-gray-600">- John Doe</p>
+              </div>
+
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+                <p class="text-gray-700 mb-4">
+                  "I love how customizable this task management tool is. I can
+                  easily create tasks, set deadlines, and collaborate with my
+                  team. It's been a game-changer for us!"
+                </p>
+                <p class="text-gray-600">- Jane Smith</p>
+              </div>
+
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+                <p class="text-gray-700 mb-4">
+                  "As a freelancer, staying organized is crucial. This task
+                  management platform has helped me streamline my workflow and
+                  prioritize tasks effectively. Highly recommend!"
+                </p>
+                <p class="text-gray-600">- Alex Johnson</p>
+              </div>
+
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+                <p class="text-gray-700 mb-4">
+                  "I'm a big fan of the clean and simple interface of this task
+                  management platform. It's not cluttered with unnecessary
+                  features, yet it still provides everything I need to stay
+                  organized and on track."
+                </p>
+                <p class="text-gray-600">- Laura Garcia</p>
+              </div>
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+                <p class="text-gray-700 mb-4">
+                  "This task management tool has saved me so much time and
+                  effort. I used to spend hours trying to stay organized, but
+                  now I can easily manage my tasks and focus on what really
+                  matters."
+                </p>
+                <p class="text-gray-600">- Daniel Clark</p>
+              </div>
+
+              <div class="bg-glasses bg-opacity-50 rounded-lg shadow-md p-6">
+                <p class="text-gray-700 mb-4">
+                  "I'm impressed by the level of customer support provided by
+                  this task management platform. Anytime I've had a question or
+                  issue, the team has been quick to respond and incredibly
+                  helpful."
+                </p>
+                <p class="text-gray-600">- Amanda White</p>
               </div>
             </div>
           </div>
