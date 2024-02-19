@@ -27,7 +27,7 @@ const TeamHeader = () => {
 
   console.log(team);
   return (
-    <div className="w-full h-fit bg-glasses backdrop-blur-12 rounded-lg mt-[-35px]">
+    <div className="w-full h-fit bg-glasses backdrop-blur-12 rounded-lg mt-[-24px]">
       {/* Header */}
       <div className="flex flex-row justify-start border-b border-gray-500">
         <div className="flex items-center p-3 ml-1">
