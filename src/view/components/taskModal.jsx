@@ -127,7 +127,7 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
           <div className="w-full sm:w-screen max-h-3xl max-w-3xl mx-auto my-6 mt-48">
             {/* Content */}
             {console.log(task)}
-            <div className="relative flex flex-col w-full bg-sky-200 bg-opacity-75 backdrop-blur-12 border-0 rounded-lg outline-none focus:outline-none">
+            <div className="relative flex flex-col w-full bg-white border-0 rounded-lg outline-none focus:outline-none">
               {/* Header */}
               <div className="flex items-center justify-between p-2 border-b border-solid border-gray-500 rounded-t">
                 <CompleteBox
@@ -139,10 +139,10 @@ const TaskModal = ({ isOpen, isClose, taskData }) => {
                   className="p-1 ml-auto bg-transparent border-0 text-gray-600 text-lg leading-none font-semibold items-center"
                   onClick={handleClose}
                 >
-                  <FaTimesCircle className="w-6 h-6" />
+                  <FaTimesCircle className="w-6 h-6 hover:text-black" />
                 </button>
               </div>
-              <div className="flex items-center justify-start px-2 py-3 border-b border-solid border-gray-500 rounded-t">
+              <div className="flex items-center justify-between px-2 py-3 border-b border-solid border-gray-500 rounded-t">
                 <TaskName
                   name={task.task_name}
                   onNameChange={handleTaskNameChange}

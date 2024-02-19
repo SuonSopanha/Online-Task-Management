@@ -20,7 +20,7 @@ const CompleteBox = ({IsComplete,OnChange}) => {
         isComplete
           ? "text-green-700 bg-green-100 border-green-700"
           : "text-yellow-700 bg-yellow-100 border-yellow-900"
-      } rounded-xl cursor-pointer`}
+      } rounded-xl cursor-pointer hover:bg-opacity-80`}
       onClick={handleCompleteClick}
     >
       {isComplete ? <FaCheckCircle className="mr-2" /> : <FaMinusCircle className="mr-2" />}

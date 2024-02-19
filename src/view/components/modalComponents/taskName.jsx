@@ -39,7 +39,7 @@ const EditableTaskName = ({ initialName, onNameChange }) => {
             onBlur={handleSave}
             onKeyDown={handleKeyDown}
             autoFocus
-            className={`w-full h-full text-xl sm:text-3xl font-semibold bg-blue-300 bg-opacity-75 backdrop-blur-12`}
+            className={`w-full h-full text-xl sm:text-3xl font-semibold cursor-pointer focus:outline-none`}
           />
         </div>
       ) : (
