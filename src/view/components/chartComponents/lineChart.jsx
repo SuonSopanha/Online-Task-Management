@@ -13,7 +13,7 @@ const LineChart = ({Data}) => {
                 label: "Task Assigned Every Month",
                 fill: false,
                 lineTension: 0.1,
-                backgroundColor: "rgba(54, 162, 235, 0.4)",
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
                 borderColor: "rgba(54, 162, 235, 1)",
                 borderCapStyle: 'butt',
                 borderDash: [],

@@ -24,6 +24,7 @@ import LoadingBalls from "../../utils/loading";
 import { formattedDate } from "../../utils/formatDate";
 
 const MyDashboard = () => {
+  const [userName, setUserName] = useState("");
   const [taskList, setTaskList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -92,7 +93,7 @@ const MyDashboard = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("User is signed in:", user);
+        setUserName(user.displayName);
 
         getRtTaskByUserID(auth.currentUser.uid, setTaskList);
         setLoading(false);
@@ -315,7 +316,7 @@ const MyDashboard = () => {
             ></div>
           </div>
           <div>
-            <p className="ml-2">Oliver Aguilerra</p>
+            <p className="ml-2">{userName}</p>
             <p className="ml-2">Dashboard</p>
           </div>
         </div>
@@ -327,28 +328,28 @@ const MyDashboard = () => {
 
       <div className=" m-1 p-1 rounded">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-2">
-          <li className="bg-glasses backdrop-blur-12 px-2 py-6 rounded flex justify-center items-center">
+          <li className="bg-glasses backdrop-blur-12 px-2 py-6 rounded flex justify-center items-center transition duration-300 transform hover:scale-105">
             <span className="mr-2">
               <FaCheckCircle />
             </span>
             <span className="text-sm m-1">Completed Tasks :</span>
-            <span className="text-3xl font-semibold mx-3">
+            <span className="text-3xl font-semibold mx-3 transition duration-300 transform hover:scale-125 hover:text-blue-600">
               {completedTaskCount}
             </span>
           </li>
-          <li className="bg-glasses backdrop-blur-12 px-2 py-6  rounded flex justify-center items-center">
+          <li className="bg-glasses backdrop-blur-12 px-2 py-6  rounded flex justify-center items-center transition duration-300 transform hover:scale-105">
             <span className="mr-2">
               <FaClipboard />
             </span>
             <span className="text-sm m-1">All Tasks :</span>
-            <span className="text-3xl font-semibold mx-3">{taskCount}</span>
+            <span className="text-3xl font-semibold mx-3 transition duration-300 transform hover:scale-125 hover:text-blue-600">{taskCount}</span>
           </li>
-          <li className="bg-glasses backdrop-blur-12 px-2 py-6  rounded flex justify-center items-center">
+          <li className="bg-glasses backdrop-blur-12 px-2 py-6  rounded flex justify-center items-center transition duration-300 transform hover:scale-105">
             <span className="mr-2">
               <FaClipboardList />
             </span>
             <span className="text-sm m-1">Uncompleted Tasks :</span>
-            <span className="text-3xl font-semibold mx-3">
+            <span className="text-3xl font-semibold mx-3 transition duration-300 transform hover:scale-125 hover:text-blue-600">
               {uncompletedTaskCount}
             </span>
           </li>
@@ -356,26 +357,26 @@ const MyDashboard = () => {
 
         {/* Chart */}
 
-        <ul className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3">
-          <li className=" bg-glasses backdrop-blur-lg p-2 rounded">
+        <ul className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+          <li className=" bg-glasses backdrop-blur-lg p-2 rounded transition duration-300 transform hover:scale-105">
             <BarChart Data={taskStatusCounts} />
           </li>
-          <li className="bg-glasses backdrop-blur-lg p-2 rounded">
+          <li className="bg-glasses backdrop-blur-lg p-2 rounded transition duration-300 transform hover:scale-105">
             <BarChartCompare
               Data1={taskPriorityCounts}
               Data2={completedTaskCountsInPriority}
             />
           </li>
-          <li className="bg-glasses backdrop-blur-lg p-2 rounded">
+          <li className="bg-glasses backdrop-blur-lg p-2 rounded transition duration-300 transform hover:scale-105">
             <PieChart Data={taskCategoryCounts} />
           </li>
-          <li className="bg-glasses backdrop-blur-lg p-2 rounded">
+          <li className="bg-glasses backdrop-blur-lg p-2 rounded transition duration-300 transform hover:scale-105">
             <LineChart Data={taskassignee_dateCounts} />
           </li>
-          <li className="bg-glasses backdrop-blur-lg p-2 rounded">
+          <li className="bg-glasses backdrop-blur-lg p-2 rounded transition duration-300 transform hover:scale-105">
             <LineChartCompare Data={monthlyWorkHours}/>
           </li>
-          <li className="bg-glasses backdrop-blur-lg p-2 rounded">
+          <li className="bg-glasses backdrop-blur-lg p-2 rounded transition duration-300 transform hover:scale-105">
             <LineAverage Data={taskCategoryAverages}/>
           </li>
         </ul>
