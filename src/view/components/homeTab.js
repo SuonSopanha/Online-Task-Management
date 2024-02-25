@@ -266,7 +266,7 @@ const HomeTab = () => {
                                 )}
 
                                 <div className="flex flex-col justify-center items-center">
-                                  <p class="font-semibold text-black whitespace-nowrap">
+                                  <p class="font-semibold text-black whitespace-nowrap transform transition-transform hover:scale-105">
                                     {task.task_name}
                                   </p>
                                 </div>
