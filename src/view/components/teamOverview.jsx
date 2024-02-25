@@ -14,6 +14,7 @@ const TeamOverview = ({ team }) => {
   const [teamName, setTeamName] = useState(team.name);
   const [teamProjects, setTeamProjects] = useState(team.projects);
 
+
   useEffect(() => {
     const fetchTeamMembers = async () => {
       if (!team.members || team.members.length === 0) {
@@ -204,13 +205,17 @@ const TeamOverview = ({ team }) => {
             </div>
 
             {team && team.milestones && team.milestones.length > 0 && (
-              <div class="text-xs mb-2">Due Date : {team.milestones[0].due_date}</div>
+              <div class="text-xs mb-2">
+                Due Date : {team.milestones[0].due_date}
+              </div>
             )}
 
             <div class="w-full bg-gray-400 p-0">
               <div class="w-[50%] bg-blue-500 h-1"></div>
             </div>
           </div>
+
+
         </div>
       </div>
     </>

@@ -28,6 +28,18 @@ export default function HomePage() {
 
   return (
     <div className="w-full h-fit bg-gradient-to-r from-[#65A0FD] via-[#E8CCCC] to-[#FFA9F1B5]">
+      <ul class="circles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
       <header className="fixed top-0 left-0 right-0 z-50">
         <nav className="flex justify-between w-screen  h-12 bg-transparent">
           <div className="flex flex-row ml-[-30px] sm:space-x-3 px-5 xl:px-10 py-3 justify-between items-center">
