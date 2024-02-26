@@ -125,7 +125,9 @@ const Project = () => {
                 <a
                   href="#"
                   className={`inline-block px-3 py-2 border-b-2 border-transparent rounded-t-lg hover:bg-blue-300 hover:text-blue-600 hover:border-blue-300 dark:hover:text-gray-300 ${
-                    activeTab === "Member" ? "text-blue-600 border-blue-600" : ""
+                    activeTab === "Member"
+                      ? "text-blue-600 border-blue-600"
+                      : ""
                   }`}
                   onClick={() => handleTabClick("Member")}
                 >
@@ -150,17 +152,34 @@ const Project = () => {
               />
             </div>
 
-            <button
-              onClick={() => {
-                opentCreateProjectTaskModal();
-                setModalTask(taskSample);
-              }}
-              type="button"
-              className="px-3 py-2 mr-3 gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80  hover:bg-blue-600 flex items-center text-sm font-semibold shadow-sm ring-1 ring-inset ring-gray-300"
-            >
-              <FaPlus className="w-3 h-3" />
-              <div className="ml-2">Create Task</div>
-            </button>
+            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+              <button
+                onClick={() => {
+                  opentCreateProjectTaskModal();
+                  setModalTask(taskSample);
+                }}
+                type="button"
+                className="px-2 py-2 gap-x-1 md:px-3 md:py-2 md:gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80 hover:bg-blue-600 flex items-center text-sm font-semibold md:text-base shadow-sm ring-1 ring-inset ring-gray-300"
+              >
+                <FaPlus className="w-3 h-3 md:w-4 md:h-4" />{" "}
+                {/* Adjust icon size */}
+                <div className="ml-1 md:ml-2">Add Milestone</div>{" "}
+                {/* Adjust margin */}
+              </button>
+              <button
+                onClick={() => {
+                  opentCreateProjectTaskModal();
+                  setModalTask(taskSample);
+                }}
+                type="button"
+                className="px-2 py-2 gap-x-1 md:px-3 md:py-2 md:gap-x-1.5 rounded-md text-white bg-blue-500 bg-opacity-80 hover:bg-blue-600 flex items-center text-sm font-semibold md:text-base shadow-sm ring-1 ring-inset ring-gray-300"
+              >
+                <FaPlus className="w-3 h-3 md:w-4 md:h-4" />{" "}
+                {/* Adjust icon size */}
+                <div className="ml-1 md:ml-2">Add Task</div>{" "}
+                {/* Adjust margin */}
+              </button>
+            </div>
           </div>
         )}
 
