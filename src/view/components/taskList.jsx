@@ -2,7 +2,13 @@ import React from "react";
 import { useState, useContext, useEffect } from "react";
 
 import axios from "axios";
-import { FaCheckCircle, FaMinusCircle, FaUsers, FaUser } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaMinusCircle,
+  FaUsers,
+  FaUser,
+  FaSortDown,
+} from "react-icons/fa";
 import TaskModal from "./taskModal";
 import SendMessageModal from "./sendMessageModal";
 
@@ -127,7 +133,92 @@ const TaskList = () => {
                 </tr>
               </thead>
               <tbody class="">
-                {console.log(taskList)}
+                {taskList.map((task) => (
+                  <tr class="text-gray-700">
+                    <td class="px-4 py-2 border">
+                      <button
+                        onClick={() => {
+                          openModal();
+                          setModalTask(task);
+                        }}
+                      >
+                        <div class="flex justify-center items-center text-sm">
+                          {task.complete ? (
+                            <FaCheckCircle className="text-emerald-500 mr-2" />
+                          ) : (
+                            <FaMinusCircle className=" text-violet-600 mr-2" />
+                          )}
+
+                          <div className="flex flex-col justify-center items-center">
+                            <p class="font-semibold text-black whitespace-nowrap transform transition-transform hover:scale-105">
+                              {task.task_name}
+                            </p>
+                          </div>
+                        </div>
+                      </button>
+                    </td>
+
+                    <td class="px-4 py-2 text-ms font-semibold border">
+                      <div class="flex items-center text-sm">
+                        <div class="flex items- center relative w-4 h-4 mr-3 rounded-full md:block">
+                          {task.project_id !== null ? <FaUsers /> : <FaUser />}
+                          <div
+                            class="absolute inset-0 rounded-full shadow-inner"
+                            aria-hidden="true"
+                          ></div>
+                        </div>
+                        {task.project_id !== null ? (
+                          <span className="text-x whitespace-nowrap">
+                            {task.project ? task.project.project_name : Team}
+                          </span>
+                        ) : (
+                          <span className="text-xs">Only Me</span>
+                        )}
+                      </div>
+                    </td>
+                    <td class="px-4 py-2 text-xs border">
+                      <span
+                        class={`px-2 py-1 whitespace-nowrap font-semibold leading-tight text-${priorityColor(
+                          task.priority
+                        )}-700 rounded-sm bg-${priorityColor(
+                          task.priority
+                        )}-100`}
+                      >
+                        {task.priority}
+                      </span>
+                    </td>
+                    <td class="px-4 py-2 text-sm border">{task.due_date}</td>
+                  </tr>
+                ))}
+
+                <tr className="text-gray-700">
+                  <td colSpan="4">
+                    <div className="flex justify-between items-center">
+                      <h1 className="px-4 py-2 text-xxl font-semibold">
+                        To do
+                      </h1>
+                      <div className="px-4 py-2">
+                        <button className="">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6 text-gray-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+
                 {taskList.map((task) => (
                   <tr class="text-gray-700">
                     <td class="px-4 py-2 border">
